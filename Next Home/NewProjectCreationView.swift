@@ -31,6 +31,11 @@ class NewProjectCreationView: UIView {
         
     }
     
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        
+        self.removeFromSuperview()
+        
+    }
     
 
     /*

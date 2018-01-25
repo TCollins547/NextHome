@@ -142,6 +142,9 @@
                         <constraint firstAttribute="height" constant="30" id="j4f-ed-8yN"/>
                     </constraints>
                     <state key="normal" backgroundImage="icons8-cancel_filled"/>
+                    <connections>
+                        <action selector="cancelButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="KgB-QE-cts"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -102,27 +102,44 @@ class MainViewController: UIViewController, UITableViewDataSource {
     
     @IBAction func addButtonPressed(_ sender: Any) {
         
-        let newProjectCreationView: NewProjectCreationView = Bundle.main.loadNibNamed("NewProjectCreationView", owner: self, options: nil)?.first as! NewProjectCreationView
-        
-        newProjectCreationView.projectNameTextField.becomeFirstResponder()
-        
-        newProjectCreationView.frame = CGRect(x: 10, y: -367, width: Int(self.view.frame.width) - 20, height: 367)
-        newProjectCreationView.layer.cornerRadius = 8
-        
-        blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
-        blurEffectView.frame = self.view.bounds
-        blurEffectView.alpha = 0
-        
-        self.view.addSubview(blurEffectView)
-        self.view.addSubview(newProjectCreationView)
-        
-        UIView.animate(withDuration: 0.5, animations: {
-            self.blurEffectView.alpha = 1
-            newProjectCreationView.frame.origin = CGPoint(x: 10, y: UIApplication.shared.statusBarFrame.height + 10)
+        if !searchbar.isHidden {
             
-        }, completion: nil)
-        
-        
+            UIView.animate(withDuration: 0.25, animations: {
+                self.addButton.transform = CGAffineTransform(rotationAngle: (0 * .pi) / 180.0)
+                
+                self.searchbar.alpha = 0
+                self.blurEffectView.alpha = 0
+                
+            }, completion: { finished in
+                self.searchbar.isHidden = true
+                self.blurEffectView.isHidden = true
+            })
+            
+            self.searchButton.isEnabled = true
+            
+        } else {
+            
+            let newProjectCreationView: NewProjectCreationView = Bundle.main.loadNibNamed("NewProjectCreationView", owner: self, options: nil)?.first as! NewProjectCreationView
+            
+            newProjectCreationView.projectNameTextField.becomeFirstResponder()
+            
+            newProjectCreationView.frame = CGRect(x: 10, y: -367, width: Int(self.view.frame.width) - 20, height: 367)
+            newProjectCreationView.layer.cornerRadius = 8
+            
+            blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
+            blurEffectView.frame = self.view.bounds
+            blurEffectView.alpha = 0
+            
+            self.view.addSubview(blurEffectView)
+            self.view.addSubview(newProjectCreationView)
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                self.blurEffectView.alpha = 1
+                newProjectCreationView.frame.origin = CGPoint(x: 10, y: UIApplication.shared.statusBarFrame.height + 10)
+                
+            }, completion: nil)
+            
+        }
         
     }
     
