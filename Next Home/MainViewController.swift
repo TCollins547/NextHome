@@ -26,10 +26,14 @@ class MainViewController: UIViewController, UITableViewDataSource {
     
     var blurEffectView: UIVisualEffectView!
     
+    @IBOutlet weak var searchAddConstraint: NSLayoutConstraint!
+    @IBOutlet weak var menuEdgeConstraint: NSLayoutConstraint!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Used to call method that triggers when keyboard shows
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShown), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         
         projectNames = ["West Hills", "Valley", "Coolage", "Arington"]
@@ -45,23 +49,27 @@ class MainViewController: UIViewController, UITableViewDataSource {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    //Returns the amount rows in the project table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return projectNames.count + 1
     }
     
-    // create a cell for each table view row
+    // Creates a cell for each table view row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        //This places the create new project at the end of the table
         if indexPath.row == projectNames.count {
             
+            //Creates a cell and a create project view
             let cell: ProjectCell = self.tableView.dequeueReusableCell(withIdentifier: "ProjectCellReuseID")! as! ProjectCell
             let newProjectCellView = Bundle.main.loadNibNamed("CreateNewProjectSubView", owner: self, options: nil)?.first as! UIView
             
+            //Sizes and places create project view in cell
             newProjectCellView.frame = cell.referenceView.frame
             newProjectCellView.center = cell.referenceView.center
             newProjectCellView.layer.cornerRadius = 8
             
+            //Removes cell background to only show view
             cell.backgroundColor = UIColor.clear
             cell.contentView.addSubview(newProjectCellView)
             cell.selectionStyle = .none
@@ -70,19 +78,22 @@ class MainViewController: UIViewController, UITableViewDataSource {
             
         }
         
+        //Creates a cell and a project view
         let cell: ProjectCell = self.tableView.dequeueReusableCell(withIdentifier: "ProjectCellReuseID") as! ProjectCell!
-        
         let projectView: ProjectSubView = Bundle.main.loadNibNamed("ProjectSubView", owner: self, options: nil)?.first as! ProjectSubView
         
+        //Fills info of project view
         projectView.projectNameLabel.text = projectNames[indexPath.row]
         projectView.addressLabel.text = projectAddresses[indexPath.row]
         projectView.budgetLabel.text = "$" + projectBudgets[indexPath.row]
         projectView.projectImage.image = #imageLiteral(resourceName: "Unique-Spanish-Style-House-Colors")
         
+        //Sizes and places project view in cell
         projectView.frame = cell.referenceView.frame
         projectView.center = cell.referenceView.center
         projectView.layer.cornerRadius = 8
         
+        //Removes cell background to only show view
         cell.backgroundColor = UIColor.clear
         cell.contentView.addSubview(projectView)
         cell.selectionStyle = .none
@@ -90,21 +101,25 @@ class MainViewController: UIViewController, UITableViewDataSource {
         return cell
     }
     
-    // method to run when table view cell is tapped
+    // Method to run when table view cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
     }
     
     
-    
+    //Handles menu button tap
     @IBAction func menuButtonPressed(_ sender: Any) {
     }
     
+    //Handles add button press and also handles search cancel when applicable
     @IBAction func addButtonPressed(_ sender: Any) {
         
+        //Triggers when the search is in use
         if !searchbar.isHidden {
             
+            //Animates the search button back and rotates itself back
             UIView.animate(withDuration: 0.25, animations: {
+                self.searchAddConstraint.constant = 5
                 self.addButton.transform = CGAffineTransform(rotationAngle: (0 * .pi) / 180.0)
                 
                 self.searchbar.alpha = 0
@@ -119,20 +134,26 @@ class MainViewController: UIViewController, UITableViewDataSource {
             
         } else {
             
+            //Creates a create new project view
             let newProjectCreationView: NewProjectCreationView = Bundle.main.loadNibNamed("NewProjectCreationView", owner: self, options: nil)?.first as! NewProjectCreationView
             
+            //Summons keyboard when view is added
             newProjectCreationView.projectNameTextField.becomeFirstResponder()
             
+            //Sizes view
             newProjectCreationView.frame = CGRect(x: 10, y: -367, width: Int(self.view.frame.width) - 20, height: 367)
             newProjectCreationView.layer.cornerRadius = 8
             
+            //Generates and sizes blur view
             blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
             blurEffectView.frame = self.view.bounds
             blurEffectView.alpha = 0
             
+            //Adds blur and view
             self.view.addSubview(blurEffectView)
             self.view.addSubview(newProjectCreationView)
             
+            //Animates view and blur coming in
             UIView.animate(withDuration: 0.5, animations: {
                 self.blurEffectView.alpha = 1
                 newProjectCreationView.frame.origin = CGPoint(x: 10, y: UIApplication.shared.statusBarFrame.height + 10)
@@ -143,24 +164,29 @@ class MainViewController: UIViewController, UITableViewDataSource {
         
     }
     
+    //Handles search button press
     @IBAction func searchButtonPressed(_ sender: Any) {
         
         searchButton.isEnabled = false
+        self.searchButton.adjustsImageWhenDisabled = false
         
+        //Creates and adds blur effect
         blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
         blurEffectView.frame = self.view.bounds
         view.addSubview(blurEffectView)
         
+        //Makes searchbar and blur opaque
         searchbar.alpha = 0
         searchbar.isHidden = true
         blurEffectView.isHidden = true
         blurEffectView.alpha = 0
         
-        
+        //Brings subviews to front
         self.view.bringSubview(toFront: searchbar); self.view.bringSubview(toFront: searchButton); self.view.bringSubview(toFront: addButton)
         
-        UIView.animate(withDuration: 0.5, animations: {
-            self.searchButton.frame.origin = CGPoint(x: CGFloat(5), y: self.searchButton.frame.origin.y)
+        //Animates searchbar and blur fade + search button to edge
+        UIView.animate(withDuration: 0.25, animations: {
+            self.searchAddConstraint.constant = self.view.frame.width - 80
             self.addButton.transform = CGAffineTransform(rotationAngle: (45.0 * .pi) / 180.0)
             
             self.searchbar.isHidden = false
@@ -172,6 +198,7 @@ class MainViewController: UIViewController, UITableViewDataSource {
         
     }
     
+    //Called when keyboard is shown
     @objc func keyboardShown(notification: NSNotification) {
         let info  = notification.userInfo!
         let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]! as AnyObject

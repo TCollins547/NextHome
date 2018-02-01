@@ -52,7 +52,7 @@
                                     <action selector="addButtonPressed:" destination="Kod-4M-ZHF" eventType="touchUpInside" id="Abh-Iz-Zj1"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1od-Ox-ZmO">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1od-Ox-ZmO">
                                 <rect key="frame" x="295" y="44" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="2vl-PO-AbQ"/>
@@ -107,7 +107,7 @@
                                 </connections>
                             </tableView>
                             <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vpI-CE-Haj">
-                                <rect key="frame" x="42" y="47.666666666666664" width="288" height="29.999999999999993"/>
+                                <rect key="frame" x="42" y="48" width="288" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -118,16 +118,15 @@
                             <constraint firstItem="htP-Qj-9uf" firstAttribute="trailing" secondItem="t10-Y4-87x" secondAttribute="trailing" id="1UX-iJ-ETa"/>
                             <constraint firstItem="m4n-xg-rO1" firstAttribute="bottom" secondItem="t10-Y4-87x" secondAttribute="bottom" id="2ia-Y4-lzI"/>
                             <constraint firstItem="y5X-ir-VMp" firstAttribute="leading" secondItem="t10-Y4-87x" secondAttribute="leading" id="Dn0-7z-nzF"/>
+                            <constraint firstItem="4ZH-Wo-DEY" firstAttribute="leading" secondItem="puL-RY-QMe" secondAttribute="trailing" constant="42" id="DvO-IC-dG1"/>
                             <constraint firstItem="1od-Ox-ZmO" firstAttribute="top" secondItem="t10-Y4-87x" secondAttribute="top" id="G4R-Xw-rpW"/>
                             <constraint firstItem="puL-RY-QMe" firstAttribute="top" secondItem="htP-Qj-9uf" secondAttribute="bottom" constant="-44" id="JwQ-31-113"/>
-                            <constraint firstItem="4ZH-Wo-DEY" firstAttribute="leading" secondItem="1od-Ox-ZmO" secondAttribute="trailing" constant="5" id="LfY-DH-LHr"/>
+                            <constraint firstItem="4ZH-Wo-DEY" firstAttribute="leading" secondItem="vpI-CE-Haj" secondAttribute="trailing" constant="5" id="MeJ-oe-GNA"/>
                             <constraint firstItem="vpI-CE-Haj" firstAttribute="leading" secondItem="Atg-OZ-h4e" secondAttribute="trailing" constant="2" id="Mk2-3M-I3p"/>
                             <constraint firstItem="puL-RY-QMe" firstAttribute="leading" secondItem="Atg-OZ-h4e" secondAttribute="trailing" constant="2" id="Nl7-my-ror"/>
                             <constraint firstItem="puL-RY-QMe" firstAttribute="top" secondItem="t10-Y4-87x" secondAttribute="top" id="PJ5-uR-fwO"/>
                             <constraint firstItem="y5X-ir-VMp" firstAttribute="trailing" secondItem="t10-Y4-87x" secondAttribute="trailing" id="QO4-P0-VBG"/>
                             <constraint firstAttribute="bottom" secondItem="y5X-ir-VMp" secondAttribute="bottom" id="S7b-nL-5li"/>
-                            <constraint firstItem="1od-Ox-ZmO" firstAttribute="leading" secondItem="puL-RY-QMe" secondAttribute="trailing" constant="2" id="WZM-Hw-LF3"/>
-                            <constraint firstItem="4ZH-Wo-DEY" firstAttribute="leading" secondItem="vpI-CE-Haj" secondAttribute="trailing" constant="5" id="ZgY-eM-cpG"/>
                             <constraint firstItem="Atg-OZ-h4e" firstAttribute="top" secondItem="t10-Y4-87x" secondAttribute="top" id="ao1-Sv-77y"/>
                             <constraint firstItem="t10-Y4-87x" firstAttribute="trailing" secondItem="4ZH-Wo-DEY" secondAttribute="trailing" constant="5" id="az4-Bm-A9C"/>
                             <constraint firstItem="m4n-xg-rO1" firstAttribute="top" secondItem="htP-Qj-9uf" secondAttribute="bottom" constant="-1" id="f9B-Jg-Y4M"/>
@@ -138,6 +137,7 @@
                             <constraint firstItem="vpI-CE-Haj" firstAttribute="centerY" secondItem="puL-RY-QMe" secondAttribute="centerY" id="sGx-xk-saE"/>
                             <constraint firstItem="m4n-xg-rO1" firstAttribute="leading" secondItem="t10-Y4-87x" secondAttribute="leading" id="vlE-g2-LkH"/>
                             <constraint firstItem="y5X-ir-VMp" firstAttribute="top" secondItem="aOO-M2-2Nt" secondAttribute="top" id="vor-t4-CW6"/>
+                            <constraint firstItem="4ZH-Wo-DEY" firstAttribute="leading" secondItem="1od-Ox-ZmO" secondAttribute="trailing" constant="5" id="wdj-YO-67F"/>
                             <constraint firstItem="m4n-xg-rO1" firstAttribute="trailing" secondItem="t10-Y4-87x" secondAttribute="trailing" id="zJK-jw-mOo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="t10-Y4-87x"/>
@@ -145,6 +145,8 @@
                     <connections>
                         <outlet property="addButton" destination="4ZH-Wo-DEY" id="ulF-i9-xcr"/>
                         <outlet property="menuButton" destination="Atg-OZ-h4e" id="FAo-AZ-Eff"/>
+                        <outlet property="menuEdgeConstraint" destination="l6k-TJ-h0X" id="Iff-27-5n2"/>
+                        <outlet property="searchAddConstraint" destination="wdj-YO-67F" id="gu5-w3-c18"/>
                         <outlet property="searchButton" destination="1od-Ox-ZmO" id="bou-5p-BQU"/>
                         <outlet property="searchbar" destination="vpI-CE-Haj" id="zgK-yB-kJj"/>
                         <outlet property="tableView" destination="m4n-xg-rO1" id="EP5-Uv-a5y"/>
