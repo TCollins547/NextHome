@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProjectCell: UITableViewCell {
+@IBDesignable class ProjectCell: UITableViewCell {
     
     @IBOutlet weak var referenceView: UIView!
     

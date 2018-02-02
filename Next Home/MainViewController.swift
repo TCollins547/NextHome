@@ -26,6 +26,8 @@ class MainViewController: UIViewController, UITableViewDataSource {
     
     var blurEffectView: UIVisualEffectView!
     
+    
+    
     @IBOutlet weak var searchAddConstraint: NSLayoutConstraint!
     @IBOutlet weak var menuEdgeConstraint: NSLayoutConstraint!
     
@@ -61,18 +63,18 @@ class MainViewController: UIViewController, UITableViewDataSource {
         if indexPath.row == projectNames.count {
             
             //Creates a cell and a create project view
-            let cell: ProjectCell = self.tableView.dequeueReusableCell(withIdentifier: "ProjectCellReuseID")! as! ProjectCell
-            let newProjectCellView = Bundle.main.loadNibNamed("CreateNewProjectSubView", owner: self, options: nil)?.first as! UIView
+            let cell: ProjectCell = self.tableView.dequeueReusableCell(withIdentifier: "ProjectCellCreateReuseID")! as! ProjectCell
+            //let newProjectCellView = Bundle.main.loadNibNamed("CreateNewProjectSubView", owner: self, options: nil)?.first as! CreateNewProjectSubView
             
             //Sizes and places create project view in cell
-            newProjectCellView.frame = cell.referenceView.frame
-            newProjectCellView.center = cell.referenceView.center
-            newProjectCellView.layer.cornerRadius = 8
+//            newProjectCellView.frame = cell.referenceView.frame
+//            newProjectCellView.center = cell.referenceView.center
+//            newProjectCellView.layer.cornerRadius = 8
             
             //Removes cell background to only show view
             cell.backgroundColor = UIColor.clear
-            cell.contentView.addSubview(newProjectCellView)
-            cell.selectionStyle = .none
+            //cell.contentView.addSubview(newProjectCellView)
+            //cell.selectionStyle = .none
             
             return cell
             
@@ -80,22 +82,22 @@ class MainViewController: UIViewController, UITableViewDataSource {
         
         //Creates a cell and a project view
         let cell: ProjectCell = self.tableView.dequeueReusableCell(withIdentifier: "ProjectCellReuseID") as! ProjectCell!
-        let projectView: ProjectSubView = Bundle.main.loadNibNamed("ProjectSubView", owner: self, options: nil)?.first as! ProjectSubView
+        //let projectView: ProjectSubView = cell.referenceView as! ProjectSubView
         
         //Fills info of project view
-        projectView.projectNameLabel.text = projectNames[indexPath.row]
-        projectView.addressLabel.text = projectAddresses[indexPath.row]
-        projectView.budgetLabel.text = "$" + projectBudgets[indexPath.row]
-        projectView.projectImage.image = #imageLiteral(resourceName: "Unique-Spanish-Style-House-Colors")
+//        projectView.projectNameLabel.text = projectNames[indexPath.row]
+//        projectView.addressLabel.text = projectAddresses[indexPath.row]
+//        projectView.budgetLabel.text = "$" + projectBudgets[indexPath.row]
+//        projectView.projectImage.image = #imageLiteral(resourceName: "Unique-Spanish-Style-House-Colors")
         
         //Sizes and places project view in cell
-        projectView.frame = cell.referenceView.frame
-        projectView.center = cell.referenceView.center
-        projectView.layer.cornerRadius = 8
+//        projectView.frame = cell.referenceView.frame
+//        projectView.center = cell.referenceView.center
+//        projectView.layer.cornerRadius = 8
         
         //Removes cell background to only show view
         cell.backgroundColor = UIColor.clear
-        cell.contentView.addSubview(projectView)
+        //cell.contentView.addSubview(projectView)
         cell.selectionStyle = .none
         
         return cell
@@ -136,10 +138,10 @@ class MainViewController: UIViewController, UITableViewDataSource {
             
             //Creates a create new project view
             let newProjectCreationView: NewProjectCreationView = Bundle.main.loadNibNamed("NewProjectCreationView", owner: self, options: nil)?.first as! NewProjectCreationView
-            
+
             //Summons keyboard when view is added
             newProjectCreationView.projectNameTextField.becomeFirstResponder()
-            
+
             //Sizes view
             newProjectCreationView.frame = CGRect(x: 10, y: -367, width: Int(self.view.frame.width) - 20, height: 367)
             newProjectCreationView.layer.cornerRadius = 8
@@ -155,6 +157,7 @@ class MainViewController: UIViewController, UITableViewDataSource {
             
             //Animates view and blur coming in
             UIView.animate(withDuration: 0.5, animations: {
+                
                 self.blurEffectView.alpha = 1
                 newProjectCreationView.frame.origin = CGPoint(x: 10, y: UIApplication.shared.statusBarFrame.height + 10)
                 
@@ -200,13 +203,12 @@ class MainViewController: UIViewController, UITableViewDataSource {
     
     //Called when keyboard is shown
     @objc func keyboardShown(notification: NSNotification) {
-        let info  = notification.userInfo!
-        let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]! as AnyObject
-        
+        let value = notification.userInfo![UIKeyboardFrameEndUserInfoKey]! as AnyObject
         let rawFrame = value.cgRectValue
         let keyboardFrame = view.convert(rawFrame!, from: nil)
         
-        print("keyboardFrame: \(keyboardFrame)")
+        //scrollViewBottomConstraint.constant = keyboardFrame.height + 5
+        
     }
     
 

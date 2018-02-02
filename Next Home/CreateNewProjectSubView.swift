@@ -1,26 +1,20 @@
 //
-//  ProjectSubView.swift
+//  CreateNewProjectSubView.swift
 //  Next Home
 //
-//  Created by Tyler Collins on 1/22/18.
+//  Created by Tyler Collins on 2/1/18.
 //  Copyright © 2018 Tyler Collins. All rights reserved.
 //
 
 import UIKit
 
-@IBDesignable class ProjectSubView: UIView {
+@IBDesignable class CreateNewProjectSubView: UIView {
+
     
     var contentView : UIView?
     @IBInspectable var nibName : String?
     
     @IBInspectable var viewCornerRadius : CGFloat = 0
-    
-    @IBOutlet weak var projectNameLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var budgetLabel: UILabel!
-    @IBOutlet weak var projectImage: UIImageView!
-    @IBOutlet weak var favoriteButton: UIButton!
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,7 +32,8 @@ import UIKit
     func xibSetup() {
         guard let view = loadViewFromNib() else { return }
         view.frame = bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.autoresizingMask =
+            [.flexibleWidth, .flexibleHeight]
         addSubview(view)
         contentView = view
     }
@@ -55,11 +50,6 @@ import UIKit
     func styleView() {
         layer.cornerRadius = viewCornerRadius
     }
-    
-    
-    @IBAction func favoriteButtonPressed(_ sender: Any) {
-    }
-    
     
     /*
     // Only override draw() if you perform custom drawing.

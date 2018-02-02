@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewProjectCreationView: UIView {
+@IBDesignable class NewProjectCreationView: UIView {
     
     @IBOutlet weak var projectNameTextField: UITextField!
     @IBOutlet weak var projectAddressTextField: UITextField!

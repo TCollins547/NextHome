@@ -20,6 +20,7 @@
 		C7E59B0A2016C40F007761D3 /* ProjectSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E59B092016C40F007761D3 /* ProjectSubView.xib */; };
 		C7E59B0C2016C69B007761D3 /* ProjectSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E59B0B2016C69B007761D3 /* ProjectSubView.swift */; };
 		C7E59B0E2016DA5D007761D3 /* ProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E59B0D2016DA5D007761D3 /* ProjectCell.swift */; };
+		C7FEFDCA2024009D00BDEE3B /* CreateNewProjectSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FEFDC92024009D00BDEE3B /* CreateNewProjectSubView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		C7E59B092016C40F007761D3 /* ProjectSubView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectSubView.xib; sourceTree = "<group>"; };
 		C7E59B0B2016C69B007761D3 /* ProjectSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSubView.swift; sourceTree = "<group>"; };
 		C7E59B0D2016DA5D007761D3 /* ProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCell.swift; sourceTree = "<group>"; };
+		C7FEFDC92024009D00BDEE3B /* CreateNewProjectSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewProjectSubView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +79,9 @@
 				C7405EBB2019542F00296870 /* NewProjectCreationView.swift */,
 				C7E59B0D2016DA5D007761D3 /* ProjectCell.swift */,
 				C7E59B092016C40F007761D3 /* ProjectSubView.xib */,
-				C79A2B14201811E60006DFDC /* CreateNewProjectSubView.xib */,
 				C7E59B0B2016C69B007761D3 /* ProjectSubView.swift */,
+				C79A2B14201811E60006DFDC /* CreateNewProjectSubView.xib */,
+				C7FEFDC92024009D00BDEE3B /* CreateNewProjectSubView.swift */,
 				C7E59AF62016B59C007761D3 /* Main.storyboard */,
 				C7E59AFC2016B59C007761D3 /* Assets.xcassets */,
 				C7E59AFE2016B59C007761D3 /* LaunchScreen.storyboard */,
@@ -165,6 +168,7 @@
 			files = (
 				C7405EBC2019542F00296870 /* NewProjectCreationView.swift in Sources */,
 				C7E59B082016C1E8007761D3 /* MainViewController.swift in Sources */,
+				C7FEFDCA2024009D00BDEE3B /* CreateNewProjectSubView.swift in Sources */,
 				C7E59AFB2016B59C007761D3 /* Next_Home.xcdatamodeld in Sources */,
 				C7E59AF32016B59C007761D3 /* AppDelegate.swift in Sources */,
 				C7E59B0E2016DA5D007761D3 /* ProjectCell.swift in Sources */,

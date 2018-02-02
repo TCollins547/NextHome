@@ -76,16 +76,22 @@
                                 <rect key="frame" x="0.0" y="87" width="375" height="691"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProjectCellReuseID" rowHeight="180" id="3hs-cS-hWW" customClass="ProjectCell" customModule="Next_Home" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="180"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProjectCellReuseID" rowHeight="278" id="3hs-cS-hWW" customClass="ProjectCell" customModule="Next_Home" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="278"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3hs-cS-hWW" id="CWw-x9-xoy">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="278"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="99b-H6-qxm">
-                                                    <rect key="frame" x="7" y="11" width="360" height="158"/>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="99b-H6-qxm" customClass="ProjectSubView" customModule="Next_Home" customModuleProvider="target">
+                                                    <rect key="frame" x="7" y="11" width="360" height="256"/>
                                                     <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="viewCornerRadius">
+                                                            <real key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="nibName" value="ProjectSubView"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -99,6 +105,40 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="referenceView" destination="99b-H6-qxm" id="IZq-go-vIF"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProjectCellCreateReuseID" rowHeight="250" id="L6I-KE-A8T" customClass="ProjectCell" customModule="Next_Home" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="306" width="375" height="250"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L6I-KE-A8T" id="8HG-fW-cRd">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q4b-EG-tx7" customClass="CreateNewProjectSubView" customModule="Next_Home" customModuleProvider="target">
+                                                    <rect key="frame" x="7" y="11" width="360" height="228"/>
+                                                    <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="228" id="qwb-lA-FWc"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="viewCornerRadius">
+                                                            <real key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="nibName" value="CreateNewProjectSubView"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="q4b-EG-tx7" firstAttribute="top" secondItem="8HG-fW-cRd" secondAttribute="top" constant="11" id="8my-CO-tu6"/>
+                                                <constraint firstItem="q4b-EG-tx7" firstAttribute="centerX" secondItem="8HG-fW-cRd" secondAttribute="centerX" id="GIT-ir-Ltx"/>
+                                                <constraint firstAttribute="trailing" secondItem="q4b-EG-tx7" secondAttribute="trailing" constant="8" id="h6l-h7-DoD"/>
+                                                <constraint firstItem="q4b-EG-tx7" firstAttribute="centerY" secondItem="8HG-fW-cRd" secondAttribute="centerY" id="ogb-Hc-rrt"/>
+                                                <constraint firstItem="q4b-EG-tx7" firstAttribute="leading" secondItem="8HG-fW-cRd" secondAttribute="leading" constant="7" id="qPK-Sf-sKr"/>
+                                                <constraint firstAttribute="bottom" secondItem="q4b-EG-tx7" secondAttribute="bottom" constant="11" id="t3o-fQ-Kxh"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="referenceView" destination="q4b-EG-tx7" id="9Bu-Hx-h3g"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
