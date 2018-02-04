@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UITableViewDataSource {
+class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -19,7 +19,7 @@ class MainViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var userProjects: [Project]!
+    var userProjects: [Project] = []
     
     var blurEffectView: UIVisualEffectView!
     
@@ -32,20 +32,8 @@ class MainViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let nc = NotificationCenter.default
-//        nc.addObserver(self, selector: #selector(printValue), name: NSNotification.Name(rawValue: "printValue"), object: nil)
-        
         //Used to call method that triggers when keyboard shows
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShown), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
-        
-        let testImage = UIImage(named: "Unique-Spanish-Style-House-Colors")!
-            
-        let project1 = Project(id: 0, name: "West Hills", address: "23850 West Hills Ln", tab: "84,297", image: testImage)
-        let project2 = Project(id: 1, name: "Valley", address: "98439 Lake View Rd", tab: "28,297", image: testImage)
-        let project3 = Project(id: 2, name: "Coolage", address: "59487 Harrington St", tab: "83,298", image: testImage)
-        let project4 = Project(id: 3, name: "Arington", address: "12043 Arington Ct", tab: "34,297", image: testImage)
-        
-        userProjects = [project1, project2, project3, project4]
         
         // Do any additional setup after loading the view.
     }
@@ -89,7 +77,7 @@ class MainViewController: UIViewController, UITableViewDataSource {
     
     // Method to run when table view cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You tapped cell number \(indexPath.row).")
+        print(indexPath.row)
     }
     
     
@@ -214,7 +202,12 @@ class MainViewController: UIViewController, UITableViewDataSource {
     
     func addProject() {
         
+        let newProject = Project(id: userProjects.count, name: newProjectCreationView.projectTitleTextField.text!, address: newProjectCreationView.projectAddressTextField.text!, tab: newProjectCreationView.projectBudgetTextField.text!, image: #imageLiteral(resourceName: "Unique-Spanish-Style-House-Colors"))
+        userProjects.insert(newProject, at: 0)
         
+        cancelProjectCreate()
+        
+        tableView.reloadData()
         
     }
     

@@ -218,6 +218,7 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Kod-4M-ZHF" id="2NL-j4-yVO"/>
+                                    <outlet property="delegate" destination="Kod-4M-ZHF" id="EIk-ZG-ee4"/>
                                 </connections>
                             </tableView>
                             <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vpI-CE-Haj">
