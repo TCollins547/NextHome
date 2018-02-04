@@ -14,7 +14,19 @@ import UIKit
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.backgroundColor = UIColor.clear
+        self.selectionStyle = .none
+        
         // Initialization code
+    }
+    
+    func setupProjectSubView(cellProject: Project) {
+        let projectView = referenceView as! ProjectSubView
+        projectView.budgetLabel.text = "$" + cellProject.projectRunningTab
+        projectView.projectNameLabel.text = cellProject.projectName
+        projectView.addressLabel.text = cellProject.projectAddress
+        projectView.projectImage.image = cellProject.projectImage
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
