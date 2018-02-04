@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C703205A20269C9D00E57FCC /* ProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703205920269C9D00E57FCC /* ProjectTableViewCell.swift */; };
-		C703205C2026AB3100E57FCC /* CreateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703205B2026AB3100E57FCC /* CreateTableViewCell.swift */; };
-		C703205E2026B80100E57FCC /* NewProjectCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703205D2026B80100E57FCC /* NewProjectCreationView.swift */; };
 		C7405EBA20194F2300296870 /* NewProjectCreationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7405EB920194F2300296870 /* NewProjectCreationView.xib */; };
+		C7405EBC2019542F00296870 /* NewProjectCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7405EBB2019542F00296870 /* NewProjectCreationView.swift */; };
+		C79A2B15201811E60006DFDC /* CreateNewProjectSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C79A2B14201811E60006DFDC /* CreateNewProjectSubView.xib */; };
 		C79A2B1720182B7A0006DFDC /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A2B1620182B7A0006DFDC /* Project.swift */; };
 		C7E59AF32016B59C007761D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E59AF22016B59C007761D3 /* AppDelegate.swift */; };
 		C7E59AF82016B59C007761D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7E59AF62016B59C007761D3 /* Main.storyboard */; };
@@ -18,13 +17,16 @@
 		C7E59AFD2016B59C007761D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7E59AFC2016B59C007761D3 /* Assets.xcassets */; };
 		C7E59B002016B59C007761D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7E59AFE2016B59C007761D3 /* LaunchScreen.storyboard */; };
 		C7E59B082016C1E8007761D3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E59B072016C1E8007761D3 /* MainViewController.swift */; };
+		C7E59B0A2016C40F007761D3 /* ProjectSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E59B092016C40F007761D3 /* ProjectSubView.xib */; };
+		C7E59B0C2016C69B007761D3 /* ProjectSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E59B0B2016C69B007761D3 /* ProjectSubView.swift */; };
+		C7E59B0E2016DA5D007761D3 /* ProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E59B0D2016DA5D007761D3 /* ProjectCell.swift */; };
+		C7FEFDCA2024009D00BDEE3B /* CreateNewProjectSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FEFDC92024009D00BDEE3B /* CreateNewProjectSubView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C703205920269C9D00E57FCC /* ProjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTableViewCell.swift; sourceTree = "<group>"; };
-		C703205B2026AB3100E57FCC /* CreateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTableViewCell.swift; sourceTree = "<group>"; };
-		C703205D2026B80100E57FCC /* NewProjectCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectCreationView.swift; sourceTree = "<group>"; };
 		C7405EB920194F2300296870 /* NewProjectCreationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewProjectCreationView.xib; sourceTree = "<group>"; };
+		C7405EBB2019542F00296870 /* NewProjectCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectCreationView.swift; sourceTree = "<group>"; };
+		C79A2B14201811E60006DFDC /* CreateNewProjectSubView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateNewProjectSubView.xib; sourceTree = "<group>"; };
 		C79A2B1620182B7A0006DFDC /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		C7E59AEF2016B59C007761D3 /* Next Home.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Next Home.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7E59AF22016B59C007761D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -34,6 +36,10 @@
 		C7E59AFF2016B59C007761D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C7E59B012016B59C007761D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7E59B072016C1E8007761D3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		C7E59B092016C40F007761D3 /* ProjectSubView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectSubView.xib; sourceTree = "<group>"; };
+		C7E59B0B2016C69B007761D3 /* ProjectSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSubView.swift; sourceTree = "<group>"; };
+		C7E59B0D2016DA5D007761D3 /* ProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCell.swift; sourceTree = "<group>"; };
+		C7FEFDC92024009D00BDEE3B /* CreateNewProjectSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewProjectSubView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,9 +76,12 @@
 				C7E59B072016C1E8007761D3 /* MainViewController.swift */,
 				C79A2B1620182B7A0006DFDC /* Project.swift */,
 				C7405EB920194F2300296870 /* NewProjectCreationView.xib */,
-				C703205D2026B80100E57FCC /* NewProjectCreationView.swift */,
-				C703205920269C9D00E57FCC /* ProjectTableViewCell.swift */,
-				C703205B2026AB3100E57FCC /* CreateTableViewCell.swift */,
+				C7405EBB2019542F00296870 /* NewProjectCreationView.swift */,
+				C7E59B0D2016DA5D007761D3 /* ProjectCell.swift */,
+				C7E59B092016C40F007761D3 /* ProjectSubView.xib */,
+				C7E59B0B2016C69B007761D3 /* ProjectSubView.swift */,
+				C79A2B14201811E60006DFDC /* CreateNewProjectSubView.xib */,
+				C7FEFDC92024009D00BDEE3B /* CreateNewProjectSubView.swift */,
 				C7E59AF62016B59C007761D3 /* Main.storyboard */,
 				C7E59AFC2016B59C007761D3 /* Assets.xcassets */,
 				C7E59AFE2016B59C007761D3 /* LaunchScreen.storyboard */,
@@ -109,7 +118,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Tyler Collins";
 				TargetAttributes = {
 					C7E59AEE2016B59C007761D3 = {
@@ -144,7 +153,9 @@
 				C7E59B002016B59C007761D3 /* LaunchScreen.storyboard in Resources */,
 				C7E59AFD2016B59C007761D3 /* Assets.xcassets in Resources */,
 				C7E59AF82016B59C007761D3 /* Main.storyboard in Resources */,
+				C79A2B15201811E60006DFDC /* CreateNewProjectSubView.xib in Resources */,
 				C7405EBA20194F2300296870 /* NewProjectCreationView.xib in Resources */,
+				C7E59B0A2016C40F007761D3 /* ProjectSubView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,12 +166,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C703205E2026B80100E57FCC /* NewProjectCreationView.swift in Sources */,
-				C703205A20269C9D00E57FCC /* ProjectTableViewCell.swift in Sources */,
+				C7405EBC2019542F00296870 /* NewProjectCreationView.swift in Sources */,
 				C7E59B082016C1E8007761D3 /* MainViewController.swift in Sources */,
+				C7FEFDCA2024009D00BDEE3B /* CreateNewProjectSubView.swift in Sources */,
 				C7E59AFB2016B59C007761D3 /* Next_Home.xcdatamodeld in Sources */,
-				C703205C2026AB3100E57FCC /* CreateTableViewCell.swift in Sources */,
 				C7E59AF32016B59C007761D3 /* AppDelegate.swift in Sources */,
+				C7E59B0E2016DA5D007761D3 /* ProjectCell.swift in Sources */,
+				C7E59B0C2016C69B007761D3 /* ProjectSubView.swift in Sources */,
 				C79A2B1720182B7A0006DFDC /* Project.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,7 +213,6 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -209,7 +220,6 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -260,7 +270,6 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -268,7 +277,6 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -293,7 +301,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -303,7 +310,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q2R256NHT6;
 				INFOPLIST_FILE = "Next Home/Info.plist";
@@ -319,7 +325,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q2R256NHT6;
 				INFOPLIST_FILE = "Next Home/Info.plist";
