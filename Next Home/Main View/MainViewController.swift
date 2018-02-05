@@ -33,7 +33,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         
         //Used to call method that triggers when keyboard shows
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShown), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(keyboardShown), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         
         // Do any additional setup after loading the view.
     }
@@ -84,6 +84,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.cellForRow(at: indexPath) is CreateTableViewCell {
             addButtonPressed((Any).self)
+        } else {
+            performSegue(withIdentifier: "showProjectDetail", sender: self)
         }
     }
     
@@ -180,14 +182,14 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
-    //Called when keyboard is shown
-    @objc func keyboardShown(notification: NSNotification) {
-        let value = notification.userInfo![UIKeyboardFrameEndUserInfoKey]! as AnyObject
-        let rawFrame = value.cgRectValue
-        let keyboardFrame = view.convert(rawFrame!, from: nil)
-        
-        
-    }
+//    //Called when keyboard is shown
+//    @objc func keyboardShown(notification: NSNotification) {
+//        let value = notification.userInfo![UIKeyboardFrameEndUserInfoKey]! as AnyObject
+//        let rawFrame = value.cgRectValue
+//        let keyboardFrame = view.convert(rawFrame!, from: nil)
+//
+//
+//    }
     
     func cancelProjectCreate() {
         
@@ -207,7 +209,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func addProject() {
         
-        let newProject = Project(id: userProjects.count, name: newProjectCreationView.projectTitleTextField.text!, address: newProjectCreationView.projectAddressTextField.text!, budget: newProjectCreationView.projectBudgetTextField.text!, image: #imageLiteral(resourceName: "Unique-Spanish-Style-House-Colors"))
+        let newProject = Project(id: userProjects.count, name: newProjectCreationView.projectTitleTextField.text!, address: newProjectCreationView.projectAddressTextField.text!, budget: newProjectCreationView.projectBudgetTextField.text!, image: newProjectCreationView.projectImage.currentBackgroundImage!)
         userProjects.insert(newProject, at: 0)
         
         cancelProjectCreate()

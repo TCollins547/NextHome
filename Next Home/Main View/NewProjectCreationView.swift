@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewProjectCreationView: UIView, UITextFieldDelegate {
+class NewProjectCreationView: UIView, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var projectTitleTextField: UITextField!
     @IBOutlet weak var projectAddressTextField: UITextField!
@@ -51,6 +51,27 @@ class NewProjectCreationView: UIView, UITextFieldDelegate {
     
     
     @IBAction func addImageButtonPressed(_ sender: Any) {
+        
+        let image = UIImagePickerController()
+        image.delegate = self
+        image.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        image.allowsEditing = false
+        
+        parentView.present(image, animated: true) {
+            
+        }
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            projectImage.setBackgroundImage(image, for: UIControlState.normal)
+        } else {
+            //Write error message
+        }
+        
+        parentView.dismiss(animated: true, completion: nil)
+        
     }
     
     @IBAction func addProjectButtonPressed(_ sender: Any) {
@@ -73,9 +94,13 @@ class NewProjectCreationView: UIView, UITextFieldDelegate {
             canAddProject = false
             startDateTextField.backgroundColor = UIColor(red: 253/255, green: 129/255, blue: 138/255, alpha: 1)
         }
-//        if projectImage.currentBackgroundImage == #imageLiteral(resourceName: "AddImage") {
-//            //projectTitleTextField.backgroundColor = UIColor.red
-//        }
+        if projectImage.currentBackgroundImage == #imageLiteral(resourceName: "AddImage") {
+            canAddProject = false
+            
+            let image = #imageLiteral(resourceName: "AddImage").withRenderingMode(.alwaysTemplate)
+            projectImage.setBackgroundImage(image, for: .normal)
+            projectImage.tintColor = UIColor(red: 253/255, green: 129/255, blue: 138/255, alpha: 1)
+        }
         
         if canAddProject {parentView.addProject()}
         
