@@ -57,27 +57,34 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             //Creates a cell and a create project view
             let cell: CreateTableViewCell = (self.tableView.dequeueReusableCell(withIdentifier: "ProjectCellCreateReuseID") as! CreateTableViewCell?)!
             
+            cell.selectionStyle = .none
             cell.createView.layer.cornerRadius = 8
             
             return cell
             
+        } else {
+        
+            //Creates a cell and a project view
+            let cell: ProjectTableViewCell = (self.tableView.dequeueReusableCell(withIdentifier: "ProjectCellReuseID") as! ProjectTableViewCell?)!
+            
+            //Fills info of project view
+            cell.projectTitleLabel.text = userProjects[indexPath.row].projectName
+            cell.projectAddressLabel.text = userProjects[indexPath.row].projectAddress
+            cell.projectBudgetLabel.text = "$" + userProjects[indexPath.row].projectRunningTab
+            cell.projectImage.image = userProjects[indexPath.row].projectImage
+            
+            cell.selectionStyle = .none
+            
+            return cell
         }
         
-        //Creates a cell and a project view
-        let cell: ProjectTableViewCell = (self.tableView.dequeueReusableCell(withIdentifier: "ProjectCellReuseID") as! ProjectTableViewCell?)!
-        
-        //Fills info of project view
-        cell.projectTitleLabel.text = userProjects[indexPath.row].projectName
-        cell.projectAddressLabel.text = userProjects[indexPath.row].projectAddress
-        cell.projectBudgetLabel.text = "$" + userProjects[indexPath.row].projectRunningTab
-        cell.projectImage.image = userProjects[indexPath.row].projectImage
-        
-        return cell
     }
     
     // Method to run when table view cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        if tableView.cellForRow(at: indexPath) is CreateTableViewCell {
+            addButtonPressed((Any).self)
+        }
     }
     
     
@@ -179,8 +186,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let rawFrame = value.cgRectValue
         let keyboardFrame = view.convert(rawFrame!, from: nil)
         
-        print(keyboardFrame.height)
-        
         
     }
     
@@ -202,7 +207,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func addProject() {
         
-        let newProject = Project(id: userProjects.count, name: newProjectCreationView.projectTitleTextField.text!, address: newProjectCreationView.projectAddressTextField.text!, tab: newProjectCreationView.projectBudgetTextField.text!, image: #imageLiteral(resourceName: "Unique-Spanish-Style-House-Colors"))
+        let newProject = Project(id: userProjects.count, name: newProjectCreationView.projectTitleTextField.text!, address: newProjectCreationView.projectAddressTextField.text!, budget: newProjectCreationView.projectBudgetTextField.text!, image: #imageLiteral(resourceName: "Unique-Spanish-Style-House-Colors"))
         userProjects.insert(newProject, at: 0)
         
         cancelProjectCreate()

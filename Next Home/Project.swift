@@ -14,18 +14,20 @@ class Project {
     var projectName: String
     var projectAddress: String
     var projectRunningTab: String
+    var projectBudget: String
     var projectImage: UIImage
     
     var projectIdentifier: Int!
     
-    init(id: Int, name: String, address: String, tab: String, image: UIImage) {
+    init(id: Int, name: String, address: String, budget: String, image: UIImage) {
         
         projectIdentifier = id
         
         projectName = name
         projectAddress = address
-        projectRunningTab = tab
+        projectBudget = budget
         projectImage = image
+        projectRunningTab = "0"
     }
     
 }

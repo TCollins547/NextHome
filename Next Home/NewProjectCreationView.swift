@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewProjectCreationView: UIView {
+class NewProjectCreationView: UIView, UITextFieldDelegate {
     
     @IBOutlet weak var projectTitleTextField: UITextField!
     @IBOutlet weak var projectAddressTextField: UITextField!
@@ -18,16 +18,37 @@ class NewProjectCreationView: UIView {
     @IBOutlet weak var endDateTextField: UITextField!
     @IBOutlet weak var projectImage: UIButton!
     
+    var activeTextField: UITextField!
+    
     var parentView: MainViewController!
     
     override func awakeFromNib() {
         self.clipsToBounds = true
         self.layer.cornerRadius = 8
+        
+        startDateTextField.delegate = self
+        endDateTextField.delegate = self
+        
+        setupDatePicker()
     }
     
     func connectParentView(connectView: MainViewController) {
         parentView = connectView
     }
+    
+    func setupDatePicker() {
+        
+        activeTextField = projectTitleTextField
+        
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = UIDatePickerMode.date
+        datePicker.addTarget(self, action: #selector(NewProjectCreationView.datePickerValueChanged(sender:)), for: UIControlEvents.valueChanged)
+        
+        startDateTextField.inputView = datePicker
+        endDateTextField.inputView = datePicker
+        
+    }
+    
     
     @IBAction func addImageButtonPressed(_ sender: Any) {
     }
@@ -62,6 +83,21 @@ class NewProjectCreationView: UIView {
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
         parentView.cancelProjectCreate()
+    }
+    
+    @objc func datePickerValueChanged(sender: UIDatePicker) {
+        
+        let formatter = DateFormatter()
+        formatter.dateStyle = DateFormatter.Style.medium
+        formatter.timeStyle = DateFormatter.Style.none
+        activeTextField.text = formatter.string(from: sender.date)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField != startDateTextField && textField != endDateTextField {
+            self.endEditing(true)
+        }
+        self.activeTextField = textField
     }
     
     
