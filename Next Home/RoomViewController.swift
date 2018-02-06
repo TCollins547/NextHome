@@ -17,11 +17,38 @@ class RoomViewController: UIViewController {
     @IBOutlet weak var roomTableView: UITableView!
     @IBOutlet weak var detailScrollView: UIScrollView!
     
+    var projectID = String()
+    var viewProject: Project!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("ProjectID: " + projectID)
+        
+        for project in MainViewController.UserItems.userProjects {
+            if project.projectIdentifier == projectID {
+                print("Found project")
+                viewProject = project
+                break
+            }
+        }
+        
+        if viewProject != nil {
+            projectNameLabel.text = viewProject.projectName
+            projectAddressLabel.text = viewProject.projectAddress
+            projectTabLabel.text = "$" + viewProject.projectRunningTab
+        } else {
+            projectNameLabel.text = "Data not passed"
+        }
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        
     }
 
     override func didReceiveMemoryWarning() {

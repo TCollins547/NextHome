@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+struct userCreatedProjects {
+    var userProjects = [Project]()
+}
+
 class Project {
     
     var projectName: String
@@ -17,9 +21,9 @@ class Project {
     var projectBudget: String
     var projectImage: UIImage
     
-    var projectIdentifier: Int!
+    var projectIdentifier: String!
     
-    init(id: Int, name: String, address: String, budget: String, image: UIImage) {
+    init(id: String, name: String, address: String, budget: String, image: UIImage) {
         
         projectIdentifier = id
         
@@ -28,6 +32,21 @@ class Project {
         projectBudget = budget
         projectImage = image
         projectRunningTab = "0"
+        
+        formatNumbers()
+        
+    }
+    
+    
+    func formatNumbers() {
+        let budget = Int(projectBudget)
+        let tab = Int(projectRunningTab)
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = NumberFormatter.Style.decimal
+        
+        projectBudget = numberFormatter.string(from: NSNumber(value:budget!))!
+        projectRunningTab = numberFormatter.string(from: NSNumber(value:tab!))!
     }
     
 }

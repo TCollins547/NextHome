@@ -18,12 +18,18 @@ class ProjectTableViewCell: UITableViewCell {
     @IBOutlet weak var projectBudgetLabel: UILabel!
     @IBOutlet weak var projectImage: UIImageView!
     
+    var projectID: String!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         projectView.layer.cornerRadius = 8
         
         // Initialization code
+    }
+    
+    func setProjectID(proID: String) {
+        projectID = proID
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

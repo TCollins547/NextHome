@@ -18,8 +18,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var searchbar: UITextField!
     
     @IBOutlet weak var tableView: UITableView!
-    
-    var userProjects: [Project] = []
+    var selectedID = String()
     
     var blurEffectView: UIVisualEffectView!
     
@@ -29,13 +28,27 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var newProjectCreationView: NewProjectCreationView!
     
     
+    struct UserItems {
+        static var userProjects = [Project]()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let testProject = Project(id: UUID().uuidString, name: "West Hills", address: "10937 West Hills Rd", budget: "10000", image: #imageLiteral(resourceName: "Unique-Spanish-Style-House-Colors"))
+        UserItems.userProjects.insert(testProject, at: 0)
         
         //Used to call method that triggers when keyboard shows
         //NotificationCenter.default.addObserver(self, selector: #selector(keyboardShown), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,14 +58,14 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //Returns the amount rows in the project table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userProjects.count + 1
+        return UserItems.userProjects.count + 1
     }
     
     // Creates a cell for each table view row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //This places the create new project at the end of the table
-        if indexPath.row == userProjects.count {
+        if indexPath.row == UserItems.userProjects.count {
             
             //Creates a cell and a create project view
             let cell: CreateTableViewCell = (self.tableView.dequeueReusableCell(withIdentifier: "ProjectCellCreateReuseID") as! CreateTableViewCell?)!
@@ -68,10 +81,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let cell: ProjectTableViewCell = (self.tableView.dequeueReusableCell(withIdentifier: "ProjectCellReuseID") as! ProjectTableViewCell?)!
             
             //Fills info of project view
-            cell.projectTitleLabel.text = userProjects[indexPath.row].projectName
-            cell.projectAddressLabel.text = userProjects[indexPath.row].projectAddress
-            cell.projectBudgetLabel.text = "$" + userProjects[indexPath.row].projectRunningTab
-            cell.projectImage.image = userProjects[indexPath.row].projectImage
+            cell.projectTitleLabel.text = UserItems.userProjects[indexPath.row].projectName
+            cell.projectAddressLabel.text = UserItems.userProjects[indexPath.row].projectAddress
+            cell.projectBudgetLabel.text = "$" + UserItems.userProjects[indexPath.row].projectRunningTab
+            cell.projectImage.image = UserItems.userProjects[indexPath.row].projectImage
+            
+            cell.setProjectID(proID: UserItems.userProjects[indexPath.row].projectIdentifier)
             
             cell.selectionStyle = .none
             
@@ -85,7 +100,14 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if tableView.cellForRow(at: indexPath) is CreateTableViewCell {
             addButtonPressed((Any).self)
         } else {
-            performSegue(withIdentifier: "showProjectDetail", sender: self)
+            selectedID = ((tableView.cellForRow(at: indexPath) as? ProjectTableViewCell)?.projectID)!
+            performSegue(withIdentifier: "showRoomView", sender: (Any).self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? RoomViewController {
+            destination.projectID = selectedID
         }
     }
     
@@ -209,14 +231,18 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func addProject() {
         
-        let newProject = Project(id: userProjects.count, name: newProjectCreationView.projectTitleTextField.text!, address: newProjectCreationView.projectAddressTextField.text!, budget: newProjectCreationView.projectBudgetTextField.text!, image: newProjectCreationView.projectImage.currentBackgroundImage!)
-        userProjects.insert(newProject, at: 0)
+        let newProject = Project(id: UUID().uuidString, name: newProjectCreationView.projectTitleTextField.text!, address: newProjectCreationView.projectAddressTextField.text!, budget: newProjectCreationView.projectBudgetTextField.text!, image: newProjectCreationView.projectImage.currentBackgroundImage!)
+        UserItems.userProjects.insert(newProject, at: 0)
         
         cancelProjectCreate()
         
         tableView.reloadData()
         
     }
+    
+    @IBAction func undwindSegue(_ sender: UIStoryboardSegue) {}
+    
+    
     
     /*
     // MARK: - Navigation
