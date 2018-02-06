@@ -35,7 +35,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let testProject = Project(id: UUID().uuidString, name: "West Hills", address: "10937 West Hills Rd", budget: "10000", image: #imageLiteral(resourceName: "Unique-Spanish-Style-House-Colors"))
+        let testProject = Project(id: UUID().uuidString, name: "West Hills", address: "10937 West Hills Rd", budget: "10000", startDate: "March 1, 2017", image: #imageLiteral(resourceName: "Unique-Spanish-Style-House-Colors"))
         UserItems.userProjects.insert(testProject, at: 0)
         
         //Used to call method that triggers when keyboard shows
@@ -231,7 +231,15 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func addProject() {
         
-        let newProject = Project(id: UUID().uuidString, name: newProjectCreationView.projectTitleTextField.text!, address: newProjectCreationView.projectAddressTextField.text!, budget: newProjectCreationView.projectBudgetTextField.text!, image: newProjectCreationView.projectImage.currentBackgroundImage!)
+        let newProject = Project(id: UUID().uuidString, name: newProjectCreationView.projectTitleTextField.text!, address: newProjectCreationView.projectAddressTextField.text!, budget: newProjectCreationView.projectBudgetTextField.text!, startDate: newProjectCreationView.startDateTextField.text!, image: newProjectCreationView.projectImage.currentBackgroundImage!)
+        if newProjectCreationView.expectValueTextField.text != "" {
+            newProject.setExpectedValue(ev: newProjectCreationView.expectValueTextField.text!)
+        }
+        if newProjectCreationView.endDateTextField.text != "" {
+            newProject.setExpectedEndDate(ed: newProjectCreationView.endDateTextField.text!)
+        }
+        
+        
         UserItems.userProjects.insert(newProject, at: 0)
         
         cancelProjectCreate()

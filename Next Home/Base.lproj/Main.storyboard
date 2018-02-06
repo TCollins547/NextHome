@@ -356,13 +356,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Xg-R6-5wl">
-                                <rect key="frame" x="0.0" y="156" width="375" height="207"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="3Xg-R6-5wl" secondAttribute="height" multiplier="125:69" id="CdC-nz-N5n"/>
-                                </constraints>
-                            </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Budget" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hde-Wh-ihN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Budget" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="24" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hde-Wh-ihN">
                                 <rect key="frame" x="231" y="123" width="105" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="105" id="Mzi-Sp-qoQ"/>
@@ -372,27 +366,34 @@
                                 <color key="textColor" red="0.056094916350000003" green="0.5" blue="0.063538779810000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bwf-By-rVi">
+                                <rect key="frame" x="0.0" y="156" width="375" height="207"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="bwf-By-rVi" secondAttribute="height" multiplier="125:69" id="CJ9-xS-zMB"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="7lA-Hf-ATf" firstAttribute="leading" secondItem="iuD-41-wP2" secondAttribute="leading" id="578-jI-cfa"/>
                             <constraint firstItem="Hde-Wh-ihN" firstAttribute="leading" secondItem="deM-Ww-YzH" secondAttribute="trailing" constant="8" id="84c-si-AHw"/>
                             <constraint firstItem="36V-1Y-3SM" firstAttribute="bottom" secondItem="iuD-41-wP2" secondAttribute="bottom" id="8PT-NH-1cR"/>
-                            <constraint firstItem="3Xg-R6-5wl" firstAttribute="trailing" secondItem="iuD-41-wP2" secondAttribute="trailing" id="9dp-e0-o6K"/>
                             <constraint firstItem="Hde-Wh-ihN" firstAttribute="centerY" secondItem="deM-Ww-YzH" secondAttribute="centerY" id="ADz-2M-thS"/>
                             <constraint firstItem="jBn-O5-4WD" firstAttribute="leading" secondItem="hIq-0D-QMB" secondAttribute="trailing" constant="5" id="Cbw-z1-chm"/>
                             <constraint firstItem="36V-1Y-3SM" firstAttribute="trailing" secondItem="iuD-41-wP2" secondAttribute="trailing" id="EUL-HT-2mm"/>
                             <constraint firstItem="Dwg-7f-Tvw" firstAttribute="leading" secondItem="iuD-41-wP2" secondAttribute="leading" constant="5" id="GmL-yR-kIh"/>
-                            <constraint firstItem="3Xg-R6-5wl" firstAttribute="leading" secondItem="iuD-41-wP2" secondAttribute="leading" id="NrX-I2-gzI"/>
+                            <constraint firstItem="bwf-By-rVi" firstAttribute="top" secondItem="deM-Ww-YzH" secondAttribute="bottom" constant="8" id="IRL-Cl-Blx"/>
                             <constraint firstItem="36V-1Y-3SM" firstAttribute="leading" secondItem="iuD-41-wP2" secondAttribute="leading" id="OYP-J9-rAg"/>
+                            <constraint firstItem="bwf-By-rVi" firstAttribute="centerX" secondItem="rJV-6D-7sQ" secondAttribute="centerX" id="RIO-gW-end"/>
                             <constraint firstAttribute="bottom" secondItem="7lA-Hf-ATf" secondAttribute="bottom" id="S1g-lV-KO2"/>
+                            <constraint firstItem="bwf-By-rVi" firstAttribute="leading" secondItem="iuD-41-wP2" secondAttribute="leading" id="S6i-ct-ena"/>
                             <constraint firstItem="iuD-41-wP2" firstAttribute="trailing" secondItem="jBn-O5-4WD" secondAttribute="trailing" constant="5" id="Sw8-Jz-30M"/>
                             <constraint firstItem="deM-Ww-YzH" firstAttribute="leading" secondItem="Dwg-7f-Tvw" secondAttribute="trailing" constant="5" id="Z2g-ME-M8k"/>
+                            <constraint firstItem="bwf-By-rVi" firstAttribute="trailing" secondItem="iuD-41-wP2" secondAttribute="trailing" id="ZGk-Ow-muC"/>
+                            <constraint firstItem="36V-1Y-3SM" firstAttribute="top" secondItem="bwf-By-rVi" secondAttribute="bottom" constant="8" id="elI-h1-Fm4"/>
                             <constraint firstItem="deM-Ww-YzH" firstAttribute="top" secondItem="hIq-0D-QMB" secondAttribute="bottom" constant="3" id="gnK-Bh-pXs"/>
-                            <constraint firstItem="3Xg-R6-5wl" firstAttribute="top" secondItem="deM-Ww-YzH" secondAttribute="bottom" constant="8" id="hBc-eW-JRQ"/>
                             <constraint firstItem="7lA-Hf-ATf" firstAttribute="top" secondItem="rJV-6D-7sQ" secondAttribute="top" id="hSL-GX-iGb"/>
                             <constraint firstItem="7lA-Hf-ATf" firstAttribute="trailing" secondItem="iuD-41-wP2" secondAttribute="trailing" id="iMa-Gu-TLz"/>
-                            <constraint firstItem="36V-1Y-3SM" firstAttribute="top" secondItem="3Xg-R6-5wl" secondAttribute="bottom" constant="8" id="lY3-PI-02a"/>
                             <constraint firstItem="hIq-0D-QMB" firstAttribute="centerY" secondItem="Dwg-7f-Tvw" secondAttribute="centerY" id="nez-Nx-QYB"/>
                             <constraint firstItem="hIq-0D-QMB" firstAttribute="leading" secondItem="Dwg-7f-Tvw" secondAttribute="trailing" constant="5" id="qwl-rH-ZYt"/>
                             <constraint firstItem="jBn-O5-4WD" firstAttribute="leading" secondItem="Hde-Wh-ihN" secondAttribute="trailing" constant="-1" id="sdN-0U-ckZ"/>
@@ -403,7 +404,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ohN-Jr-hHD"/>
                     <connections>
-                        <outlet property="detailScrollView" destination="3Xg-R6-5wl" id="sZT-bs-ww3"/>
+                        <outlet property="detailScrollView" destination="bwf-By-rVi" id="CyJ-UB-NS1"/>
                         <outlet property="projectAddressLabel" destination="deM-Ww-YzH" id="OBV-AZ-Ayx"/>
                         <outlet property="projectNameLabel" destination="hIq-0D-QMB" id="eLR-FF-bcz"/>
                         <outlet property="projectTabLabel" destination="Hde-Wh-ihN" id="nQl-VF-6T0"/>

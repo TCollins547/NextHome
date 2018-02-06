@@ -12,6 +12,8 @@
 		C703205E2026B80100E57FCC /* NewProjectCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703205D2026B80100E57FCC /* NewProjectCreationView.swift */; };
 		C7405EBA20194F2300296870 /* NewProjectCreationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7405EB920194F2300296870 /* NewProjectCreationView.xib */; };
 		C761DA6C2027F6F2008408E4 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C761DA6B2027F6F2008408E4 /* RoomViewController.swift */; };
+		C78ED11D20292ECD004D35A8 /* ProjectDetailSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C78ED11C20292ECD004D35A8 /* ProjectDetailSubView.xib */; };
+		C78ED11F20293257004D35A8 /* ProjectDetailSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78ED11E20293257004D35A8 /* ProjectDetailSubView.swift */; };
 		C79A2B1720182B7A0006DFDC /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A2B1620182B7A0006DFDC /* Project.swift */; };
 		C7E59AF32016B59C007761D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E59AF22016B59C007761D3 /* AppDelegate.swift */; };
 		C7E59AF82016B59C007761D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7E59AF62016B59C007761D3 /* Main.storyboard */; };
@@ -27,6 +29,8 @@
 		C703205D2026B80100E57FCC /* NewProjectCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectCreationView.swift; sourceTree = "<group>"; };
 		C7405EB920194F2300296870 /* NewProjectCreationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewProjectCreationView.xib; sourceTree = "<group>"; };
 		C761DA6B2027F6F2008408E4 /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
+		C78ED11C20292ECD004D35A8 /* ProjectDetailSubView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectDetailSubView.xib; sourceTree = "<group>"; };
+		C78ED11E20293257004D35A8 /* ProjectDetailSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailSubView.swift; sourceTree = "<group>"; };
 		C79A2B1620182B7A0006DFDC /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		C7E59AEF2016B59C007761D3 /* Next Home.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Next Home.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7E59AF22016B59C007761D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +86,8 @@
 			children = (
 				C7E59AF22016B59C007761D3 /* AppDelegate.swift */,
 				C761DA6B2027F6F2008408E4 /* RoomViewController.swift */,
+				C78ED11C20292ECD004D35A8 /* ProjectDetailSubView.xib */,
+				C78ED11E20293257004D35A8 /* ProjectDetailSubView.swift */,
 				C761DA6A2027F2D6008408E4 /* Main View */,
 				C79A2B1620182B7A0006DFDC /* Project.swift */,
 				C7E59AF62016B59C007761D3 /* Main.storyboard */,
@@ -154,6 +160,7 @@
 			files = (
 				C7E59B002016B59C007761D3 /* LaunchScreen.storyboard in Resources */,
 				C7E59AFD2016B59C007761D3 /* Assets.xcassets in Resources */,
+				C78ED11D20292ECD004D35A8 /* ProjectDetailSubView.xib in Resources */,
 				C7E59AF82016B59C007761D3 /* Main.storyboard in Resources */,
 				C7405EBA20194F2300296870 /* NewProjectCreationView.xib in Resources */,
 			);
@@ -174,6 +181,7 @@
 				C7E59AF32016B59C007761D3 /* AppDelegate.swift in Sources */,
 				C79A2B1720182B7A0006DFDC /* Project.swift in Sources */,
 				C761DA6C2027F6F2008408E4 /* RoomViewController.swift in Sources */,
+				C78ED11F20293257004D35A8 /* ProjectDetailSubView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

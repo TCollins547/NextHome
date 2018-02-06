@@ -23,11 +23,8 @@ class RoomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("ProjectID: " + projectID)
-        
         for project in MainViewController.UserItems.userProjects {
             if project.projectIdentifier == projectID {
-                print("Found project")
                 viewProject = project
                 break
             }
@@ -38,8 +35,12 @@ class RoomViewController: UIViewController {
             projectAddressLabel.text = viewProject.projectAddress
             projectTabLabel.text = "$" + viewProject.projectRunningTab
         } else {
-            projectNameLabel.text = "Data not passed"
+            projectNameLabel.text = "Data error"
+            projectAddressLabel.text = "Data error"
+            projectTabLabel.text = "Data error"
         }
+        
+        setupScrollViews()
 
         // Do any additional setup after loading the view.
     }
@@ -48,6 +49,20 @@ class RoomViewController: UIViewController {
         super.viewWillAppear(animated)
         
         navigationController?.setNavigationBarHidden(true, animated: false)
+        
+    }
+    
+    func setupScrollViews() {
+        
+        let projectDetailsView = Bundle.main.loadNibNamed("ProjectDetailSubView", owner: self, options: nil)?.first as! ProjectDetailSubView
+        projectDetailsView.setupValues(project: viewProject)
+        projectDetailsView.frame = CGRect(x: detailScrollView.contentOffset.x + 10, y: detailScrollView.contentOffset.y + 10, width: detailScrollView.frame.width - 20, height: detailScrollView.frame.height - 20)
+        detailScrollView.addSubview(projectDetailsView)
+        
+        
+        
+        
+        
         
     }
 

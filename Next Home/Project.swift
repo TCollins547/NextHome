@@ -17,36 +17,50 @@ class Project {
     
     var projectName: String
     var projectAddress: String
-    var projectRunningTab: String
-    var projectBudget: String
+    var projectRunningTab = "0"
+    var projectBudget = "0"
+    var projectStartDate: String
     var projectImage: UIImage
+    
+    var projectRemainingBudget = "N/A"
+    var projectExpectedValue = "N/A"
+    var projectExpectedEndDate = "N/A"
     
     var projectIdentifier: String!
     
-    init(id: String, name: String, address: String, budget: String, image: UIImage) {
+    init(id: String, name: String, address: String, budget: String, startDate: String, image: UIImage) {
         
         projectIdentifier = id
         
         projectName = name
         projectAddress = address
-        projectBudget = budget
+        projectBudget = "0"
+        projectStartDate = startDate
         projectImage = image
-        projectRunningTab = "0"
+        projectRunningTab = formatNumbers(number: "0")
+        projectRemainingBudget = formatNumbers(number: budget)
         
-        formatNumbers()
+        projectBudget = formatNumbers(number: budget)
         
     }
     
+    func setExpectedValue(ev: String) {
+        projectExpectedValue = formatNumbers(number: ev)
+        
+    }
     
-    func formatNumbers() {
-        let budget = Int(projectBudget)
-        let tab = Int(projectRunningTab)
+    func setExpectedEndDate(ed: String) {
+        projectExpectedEndDate = formatNumbers(number: ed)
+    }
+    
+    
+    func formatNumbers(number: String) -> String {
+        let num = Int(number)
         
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = NumberFormatter.Style.decimal
         
-        projectBudget = numberFormatter.string(from: NSNumber(value:budget!))!
-        projectRunningTab = numberFormatter.string(from: NSNumber(value:tab!))!
+        return numberFormatter.string(from: NSNumber(value:num!))!
     }
     
 }
