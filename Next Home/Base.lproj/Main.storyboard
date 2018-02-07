@@ -366,7 +366,7 @@
                                 <color key="textColor" red="0.056094916350000003" green="0.5" blue="0.063538779810000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bwf-By-rVi">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwf-By-rVi">
                                 <rect key="frame" x="0.0" y="156" width="375" height="207"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bwf-By-rVi" secondAttribute="height" multiplier="125:69" id="CJ9-xS-zMB"/>

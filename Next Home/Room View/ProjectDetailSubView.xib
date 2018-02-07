@@ -22,6 +22,13 @@
             <rect key="frame" x="0.0" y="0.0" width="355" height="187"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubM-gW-tU4">
+                    <rect key="frame" x="0.0" y="94" width="355" height="93"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="ubM-gW-tU4" secondAttribute="height" multiplier="355:93" id="Hds-uk-8Kc"/>
+                    </constraints>
+                </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e5M-fv-E2k">
                     <rect key="frame" x="0.0" y="0.0" width="178" height="187"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -42,13 +49,13 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remaining in Budget:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJ7-jQ-Mco">
-                    <rect key="frame" x="5" y="72" width="156" height="21"/>
+                    <rect key="frame" x="5" y="73" width="156" height="21"/>
                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remain Budget Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5g-w0-i3e">
-                    <rect key="frame" x="15" y="94" width="155" height="21"/>
+                    <rect key="frame" x="15" y="95" width="155" height="21"/>
                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                     <color key="textColor" red="0.056094916350000003" green="0.5" blue="0.063538779810000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <nil key="highlightedColor"/>
@@ -78,32 +85,37 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expected End Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76a-l9-cSE">
-                    <rect key="frame" x="188" y="72" width="144" height="21"/>
+                    <rect key="frame" x="188" y="73" width="144" height="21"/>
                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remain Budget Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izs-wB-sJU">
-                    <rect key="frame" x="195" y="94" width="155" height="21"/>
+                    <rect key="frame" x="195" y="95" width="146" height="21"/>
                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubM-gW-tU4">
-                    <rect key="frame" x="0.0" y="93.5" width="355" height="93"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ObV-ee-vVt">
+                    <rect key="frame" x="193" y="124" width="150" height="45"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="ubM-gW-tU4" secondAttribute="height" multiplier="355:93" id="Hds-uk-8Kc"/>
+                        <constraint firstAttribute="height" constant="45" id="0yS-9i-W3N"/>
                     </constraints>
-                </view>
+                    <state key="normal" backgroundImage="Edit Info Button"/>
+                    <connections>
+                        <action selector="editInfoButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="vee-bd-VuK"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ObV-ee-vVt" secondAttribute="trailing" constant="12" id="3iE-9l-oPi"/>
                 <constraint firstItem="ubM-gW-tU4" firstAttribute="top" secondItem="76a-l9-cSE" secondAttribute="bottom" constant="0.5" id="6Uo-4h-dIT"/>
                 <constraint firstItem="9IB-xZ-fm0" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="7bh-5H-IlS"/>
                 <constraint firstItem="ubM-gW-tU4" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="FW2-zF-cJk"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ubM-gW-tU4" secondAttribute="bottom" id="Fai-1B-zam"/>
                 <constraint firstItem="Izs-wB-sJU" firstAttribute="leading" secondItem="e5M-fv-E2k" secondAttribute="trailing" constant="17" id="J3H-oe-7uf"/>
+                <constraint firstItem="ObV-ee-vVt" firstAttribute="leading" secondItem="e5M-fv-E2k" secondAttribute="trailing" constant="15" id="JZy-7P-zA6"/>
                 <constraint firstItem="8Ng-EY-kUc" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="KUb-hq-3E4"/>
                 <constraint firstItem="sqa-zF-K9j" firstAttribute="leading" secondItem="e5M-fv-E2k" secondAttribute="trailing" constant="10" id="LFw-LT-ukD"/>
                 <constraint firstItem="ubM-gW-tU4" firstAttribute="top" secondItem="NJ7-jQ-Mco" secondAttribute="bottom" constant="0.5" id="MSu-AP-Iad"/>
@@ -111,6 +123,8 @@
                 <constraint firstItem="z5g-w0-i3e" firstAttribute="top" secondItem="NJ7-jQ-Mco" secondAttribute="bottom" constant="1" id="RJf-N4-noL"/>
                 <constraint firstItem="e5M-fv-E2k" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="UJY-y7-jzF"/>
                 <constraint firstItem="kcY-V7-zYA" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="X8K-WE-w5g"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ObV-ee-vVt" secondAttribute="bottom" constant="18" id="XSs-Cr-bbJ"/>
+                <constraint firstItem="ObV-ee-vVt" firstAttribute="centerX" secondItem="Izs-wB-sJU" secondAttribute="centerX" id="ZjB-Zo-OfL"/>
                 <constraint firstItem="76a-l9-cSE" firstAttribute="leading" secondItem="e5M-fv-E2k" secondAttribute="trailing" constant="10" id="Zy1-1d-0wV"/>
                 <constraint firstItem="e5M-fv-E2k" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="c6Q-Od-usG"/>
                 <constraint firstItem="AzL-Bx-yWI" firstAttribute="top" secondItem="sqa-zF-K9j" secondAttribute="bottom" constant="1" id="gMQ-pt-L03"/>
@@ -129,6 +143,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="editInfoButton" destination="ObV-ee-vVt" id="dTO-1v-u5n"/>
                 <outlet property="projectBudgetLabel" destination="9IB-xZ-fm0" id="rse-6y-sgg"/>
                 <outlet property="projectEndDateLabel" destination="Izs-wB-sJU" id="IFE-xd-QJT"/>
                 <outlet property="projectRemainingBudgetLabel" destination="z5g-w0-i3e" id="DGE-ge-Q0P"/>
@@ -138,4 +153,7 @@
             <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="Edit Info Button" width="500" height="150"/>
+    </resources>
 </document>

@@ -84,7 +84,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             cell.projectTitleLabel.text = UserItems.userProjects[indexPath.row].projectName
             cell.projectAddressLabel.text = UserItems.userProjects[indexPath.row].projectAddress
             cell.projectBudgetLabel.text = "$" + UserItems.userProjects[indexPath.row].projectRunningTab
-            cell.projectImage.image = UserItems.userProjects[indexPath.row].projectImage
+            cell.projectImage.image = UserItems.userProjects[indexPath.row].projectHomeImage
             
             cell.setProjectID(proID: UserItems.userProjects[indexPath.row].projectIdentifier)
             
@@ -229,26 +229,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
-    func addProject() {
-        
-        let newProject = Project(id: UUID().uuidString, name: newProjectCreationView.projectTitleTextField.text!, address: newProjectCreationView.projectAddressTextField.text!, budget: newProjectCreationView.projectBudgetTextField.text!, startDate: newProjectCreationView.startDateTextField.text!, image: newProjectCreationView.projectImage.currentBackgroundImage!)
-        if newProjectCreationView.expectValueTextField.text != "" {
-            newProject.setExpectedValue(ev: newProjectCreationView.expectValueTextField.text!)
-        }
-        if newProjectCreationView.endDateTextField.text != "" {
-            newProject.setExpectedEndDate(ed: newProjectCreationView.endDateTextField.text!)
-        }
-        
-        
-        UserItems.userProjects.insert(newProject, at: 0)
-        
-        cancelProjectCreate()
-        
+    @IBAction func undwindSegue(_ sender: UIStoryboardSegue) {
         tableView.reloadData()
-        
     }
-    
-    @IBAction func undwindSegue(_ sender: UIStoryboardSegue) {}
     
     
     

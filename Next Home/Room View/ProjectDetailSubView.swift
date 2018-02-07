@@ -15,8 +15,12 @@ class ProjectDetailSubView: UIView {
     @IBOutlet weak var projectValueLabel: UILabel!
     @IBOutlet weak var projectStartDateLabel: UILabel!
     @IBOutlet weak var projectEndDateLabel: UILabel!
+    @IBOutlet weak var editInfoButton: UIButton!
+    
+    var parentView: RoomViewController!
     
     override func awakeFromNib() {
+        editInfoButton.layer.cornerRadius = 8
         self.layer.cornerRadius = 8
     }
     
@@ -27,6 +31,15 @@ class ProjectDetailSubView: UIView {
         projectStartDateLabel.text = project.projectStartDate
         projectEndDateLabel.text = project.projectExpectedEndDate
     }
+    
+    @IBAction func editInfoButtonPressed(_ sender: Any) {
+        parentView.editInfoButtonPressed()
+    }
+    
+    func connectParentView(pView: RoomViewController) {
+        parentView = pView
+    }
+    
     
     /*
     // Only override draw() if you perform custom drawing.

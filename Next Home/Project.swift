@@ -20,11 +20,13 @@ class Project {
     var projectRunningTab = "0"
     var projectBudget = "0"
     var projectStartDate: String
-    var projectImage: UIImage
+    var projectHomeImage: UIImage
     
     var projectRemainingBudget = "N/A"
     var projectExpectedValue = "N/A"
     var projectExpectedEndDate = "N/A"
+    
+    var projectImages: [UIImage] = []
     
     var projectIdentifier: String!
     
@@ -36,12 +38,23 @@ class Project {
         projectAddress = address
         projectBudget = "0"
         projectStartDate = startDate
-        projectImage = image
+        
+        projectHomeImage = image
+        addProjectImage(addedImage: image)
+        
         projectRunningTab = formatNumbers(number: "0")
         projectRemainingBudget = formatNumbers(number: budget)
         
         projectBudget = formatNumbers(number: budget)
         
+    }
+    
+    func addProjectImage(addedImage: UIImage) {
+        projectImages.append(addedImage)
+    }
+    
+    func getProjectImages() -> [UIImage] {
+        return projectImages
     }
     
     func setExpectedValue(ev: String) {
@@ -50,7 +63,7 @@ class Project {
     }
     
     func setExpectedEndDate(ed: String) {
-        projectExpectedEndDate = formatNumbers(number: ed)
+        projectExpectedEndDate = ed
     }
     
     

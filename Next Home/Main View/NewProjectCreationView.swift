@@ -20,7 +20,9 @@ class NewProjectCreationView: UIView, UITextFieldDelegate, UIImagePickerControll
     
     var activeTextField: UITextField!
     
-    var parentView: MainViewController!
+    var parentView: UIViewController!
+    
+    var viewProject: Project!
     
     override func awakeFromNib() {
         self.clipsToBounds = true
@@ -32,8 +34,36 @@ class NewProjectCreationView: UIView, UITextFieldDelegate, UIImagePickerControll
         setupDatePicker()
     }
     
-    func connectParentView(connectView: MainViewController) {
-        parentView = connectView
+    func connectParentView(connectView: UIViewController) {
+        if connectView is MainViewController {
+            parentView = connectView as! MainViewController
+        } else {
+            parentView = connectView as! RoomViewController
+        }
+    }
+    
+    func fillProjectInfo(project: Project) {
+        viewProject = project
+        projectTitleTextField.text = project.projectName
+        projectAddressTextField.text = project.projectAddress
+        projectBudgetTextField.text = project.projectBudget
+        startDateTextField.text = project.projectStartDate
+        projectImage.setBackgroundImage(project.projectHomeImage, for: .normal)
+        
+        if project.projectExpectedEndDate == "N/A" {
+            endDateTextField.text = ""
+        } else {
+            endDateTextField.text = project.projectExpectedEndDate
+        }
+        
+        if project.projectExpectedValue == "N/A" {
+            endDateTextField.text = ""
+        } else {
+            expectValueTextField.text = project.projectExpectedValue
+        }
+        
+        
+        
     }
     
     func setupDatePicker() {
@@ -102,12 +132,62 @@ class NewProjectCreationView: UIView, UITextFieldDelegate, UIImagePickerControll
             projectImage.tintColor = UIColor(red: 253/255, green: 129/255, blue: 138/255, alpha: 1)
         }
         
-        if canAddProject {parentView.addProject()}
+        if canAddProject {
+            if parentView is MainViewController {
+                createNewProject()
+            } else {
+                updateProject()
+            }
+            
+        }
+        
+    }
+    
+    func createNewProject() {
+        let newProject = Project(id: UUID().uuidString, name: projectTitleTextField.text!, address: projectAddressTextField.text!, budget: projectBudgetTextField.text!, startDate: startDateTextField.text!, image: projectImage.currentBackgroundImage!)
+        if expectValueTextField.text != "" {
+            newProject.setExpectedValue(ev: expectValueTextField.text!)
+        }
+        if endDateTextField.text != "" {
+            newProject.setExpectedEndDate(ed: endDateTextField.text!)
+        }
+        
+        MainViewController.UserItems.userProjects.insert(newProject, at: 0)
+        cancelButtonPressed(self)
+        (parentView as! MainViewController).tableView.reloadData()
+    }
+    
+    func updateProject() {
+        viewProject.projectName = projectTitleTextField.text!
+        viewProject.projectAddress = projectAddressTextField.text!
+        viewProject.projectBudget = projectBudgetTextField.text!
+        viewProject.projectStartDate = startDateTextField.text!
+        viewProject.projectHomeImage = projectImage.currentBackgroundImage!
+        viewProject.addProjectImage(addedImage: projectImage.currentBackgroundImage!)
+        
+        if expectValueTextField.text != "" {
+            print(expectValueTextField.text!)
+            viewProject.setExpectedValue(ev: expectValueTextField.text!)
+        }
+        
+        if endDateTextField.text != "" {
+            print(endDateTextField.text!)
+            viewProject.setExpectedEndDate(ed: endDateTextField.text!)
+        }
+        
+        cancelButtonPressed(self)
+        (parentView as! RoomViewController).refreshView()
+        
         
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        parentView.cancelProjectCreate()
+        
+        if parentView is MainViewController {
+            (parentView as! MainViewController).cancelProjectCreate()
+        } else {
+            (parentView as! RoomViewController).cancelProjectEdit()
+        }
     }
     
     @objc func datePickerValueChanged(sender: UIDatePicker) {
