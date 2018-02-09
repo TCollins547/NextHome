@@ -13,6 +13,11 @@ class PhotoCollectionViewController: UIViewController, UICollectionViewDelegate,
     @IBOutlet weak var projectNameLabel: UILabel!
     @IBOutlet weak var photoCollectionView: UICollectionView!
     
+    var zoomedImageView: UIImageView!
+    @IBOutlet var deletePhotoButton: UIButton!
+    @IBOutlet var closeZoomedViewButton: UIButton!
+    var blurEffectView: UIVisualEffectView!
+    
     var viewProject: Project!
     
     override func viewDidLoad() {
@@ -44,6 +49,61 @@ class PhotoCollectionViewController: UIViewController, UICollectionViewDelegate,
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        zoomedImageView = UIImageView()
+        zoomedImageView.contentMode = .scaleAspectFit
+        zoomedImageView.frame = CGRect(x: 16, y: self.view.frame.height * -1, width: self.view.frame.width - 32, height: self.view.frame.height - 50)
+        zoomedImageView.image = (photoCollectionView.cellForItem(at: indexPath) as! PhotoCollectionViewCell).cellImageView.image
+        zoomedImageView.isHidden = false
+        
+        
+        blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
+        blurEffectView.frame = self.view.bounds
+        blurEffectView.alpha = 0
+        
+        deletePhotoButton.alpha = 0
+        deletePhotoButton.isHidden = false
+        closeZoomedViewButton.alpha = 0
+        closeZoomedViewButton.isHidden = false
+        
+        self.view.addSubview(blurEffectView)
+        self.view.addSubview(zoomedImageView)
+        self.view.bringSubview(toFront: deletePhotoButton)
+        self.view.bringSubview(toFront: closeZoomedViewButton)
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            
+            self.blurEffectView.alpha = 1
+            self.zoomedImageView.frame.origin = CGPoint(x: 16, y: UIApplication.shared.statusBarFrame.height + 10)
+            self.deletePhotoButton.alpha = 1
+            self.closeZoomedViewButton.alpha = 1
+            
+        }, completion: nil)
+        
+    }
+    
+    @IBAction func closeZoomedViewButtonPressed(sender: UIButton!) {
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            
+            self.blurEffectView.alpha = 0
+            self.zoomedImageView.frame.origin = CGPoint(x: 16, y: self.view.frame.height * -1)
+            self.deletePhotoButton.alpha = 0
+            self.closeZoomedViewButton.alpha = 0
+            
+        }, completion: { finished in
+            self.blurEffectView.removeFromSuperview()
+            self.zoomedImageView.removeFromSuperview()
+            self.closeZoomedViewButton.isHidden = true
+            self.deletePhotoButton.isHidden = true
+        })
+        
+    }
+    
+    @IBAction func deletePhotoButtonPressed(sender: UIButton!) {
+        
+    }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewProject.projectImages.count
@@ -60,6 +120,7 @@ class PhotoCollectionViewController: UIViewController, UICollectionViewDelegate,
     @IBAction func returnButtonPressed(_ sender: Any) {
         
     }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             viewProject.addProjectImage(addedImage: image)

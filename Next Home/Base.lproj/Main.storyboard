@@ -497,13 +497,38 @@
                                     <outlet property="delegate" destination="enO-qr-LEi" id="EQV-Tc-BZC"/>
                                 </connections>
                             </collectionView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hL-Vo-TuL">
+                                <rect key="frame" x="16" y="740" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="7dN-z7-uUO"/>
+                                    <constraint firstAttribute="width" constant="30" id="Ldg-22-Xv4"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="icons8-waste_filled"/>
+                                <connections>
+                                    <action selector="deletePhotoButtonPressedWithSender:" destination="enO-qr-LEi" eventType="touchUpInside" id="HcW-NT-W36"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0mY-u4-WIA">
+                                <rect key="frame" x="329" y="740" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="U3A-5x-P56"/>
+                                    <constraint firstAttribute="height" constant="30" id="u67-8G-uhq"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="icons8-cancel_filled"/>
+                                <connections>
+                                    <action selector="closeZoomedViewButtonPressedWithSender:" destination="enO-qr-LEi" eventType="touchUpInside" id="MoT-Ka-sjK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="OOP-dT-NR5" firstAttribute="bottom" secondItem="0mY-u4-WIA" secondAttribute="bottom" constant="8" id="1W3-td-l04"/>
+                            <constraint firstItem="OOP-dT-NR5" firstAttribute="trailing" secondItem="0mY-u4-WIA" secondAttribute="trailing" constant="16" id="2BZ-fW-uQJ"/>
                             <constraint firstItem="zG6-S0-5sg" firstAttribute="trailing" secondItem="OOP-dT-NR5" secondAttribute="trailing" id="6xr-gP-i0X"/>
                             <constraint firstItem="OOP-dT-NR5" firstAttribute="trailing" secondItem="Vah-zn-vwV" secondAttribute="trailing" constant="5" id="By3-LN-5zt"/>
                             <constraint firstItem="AkM-GQ-DYi" firstAttribute="top" secondItem="YOa-ml-wsX" secondAttribute="top" id="JVT-h8-e7L"/>
                             <constraint firstAttribute="bottom" secondItem="AkM-GQ-DYi" secondAttribute="bottom" id="NeL-4t-fyv"/>
+                            <constraint firstItem="1hL-Vo-TuL" firstAttribute="leading" secondItem="OOP-dT-NR5" secondAttribute="leading" constant="16" id="Rcx-od-Buw"/>
                             <constraint firstItem="zG6-S0-5sg" firstAttribute="leading" secondItem="OOP-dT-NR5" secondAttribute="leading" id="U77-PD-wqs"/>
                             <constraint firstAttribute="bottom" secondItem="zG6-S0-5sg" secondAttribute="bottom" id="Z31-fM-jSu"/>
                             <constraint firstItem="zG6-S0-5sg" firstAttribute="top" secondItem="zuV-z5-aCu" secondAttribute="bottom" constant="11" id="a3X-aC-Qfg"/>
@@ -515,10 +540,13 @@
                             <constraint firstItem="Vah-zn-vwV" firstAttribute="leading" secondItem="zuV-z5-aCu" secondAttribute="trailing" constant="5" id="ggW-xy-ZCZ"/>
                             <constraint firstItem="9sw-gB-OPv" firstAttribute="top" secondItem="OOP-dT-NR5" secondAttribute="top" id="iTp-04-nfI"/>
                             <constraint firstItem="zuV-z5-aCu" firstAttribute="leading" secondItem="9sw-gB-OPv" secondAttribute="trailing" constant="5" id="qnf-TA-sMm"/>
+                            <constraint firstItem="OOP-dT-NR5" firstAttribute="bottom" secondItem="1hL-Vo-TuL" secondAttribute="bottom" constant="8" id="zes-Z2-WkA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OOP-dT-NR5"/>
                     </view>
                     <connections>
+                        <outlet property="closeZoomedViewButton" destination="0mY-u4-WIA" id="tY8-Xd-q1W"/>
+                        <outlet property="deletePhotoButton" destination="1hL-Vo-TuL" id="0dI-jF-F07"/>
                         <outlet property="photoCollectionView" destination="zG6-S0-5sg" id="gQe-W8-dnc"/>
                         <outlet property="projectNameLabel" destination="zuV-z5-aCu" id="7re-fJ-Rak"/>
                     </connections>
@@ -533,9 +561,11 @@
         <image name="ProjectBackground2" width="1080" height="1920"/>
         <image name="ProjectBackground2 copy" width="1080" height="253"/>
         <image name="icons8-add_filled" width="100" height="100"/>
+        <image name="icons8-cancel_filled" width="100" height="100"/>
         <image name="icons8-circled_chevron_left_filled" width="100" height="100"/>
         <image name="icons8-search_filled" width="100" height="100"/>
         <image name="icons8-star" width="100" height="100"/>
+        <image name="icons8-waste_filled" width="100" height="100"/>
         <image name="icons8-xbox_menu_filled" width="100" height="100"/>
     </resources>
 </document>
