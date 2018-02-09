@@ -10,19 +10,24 @@ import UIKit
 
 class ProjectPhotoCollectionSubView: UIView {
     
-    @IBOutlet weak var image0: UIImageView!
-    @IBOutlet weak var image1: UIImageView!
-    @IBOutlet weak var image2: UIImageView!
-    @IBOutlet weak var image3: UIImageView!
-    @IBOutlet weak var image4: UIImageView!
-    @IBOutlet weak var image5: UIImageView!
+    @IBOutlet weak var image0: UIButton!
+    @IBOutlet weak var image1: UIButton!
+    @IBOutlet weak var image2: UIButton!
+    @IBOutlet weak var image3: UIButton!
+    @IBOutlet weak var image4: UIButton!
+    @IBOutlet weak var image5: UIButton!
     
-    var images: [UIImageView] = []
+    var images: [UIButton] = []
     
+    var parentView: RoomViewController!
     
     override func awakeFromNib() {
         images = [image0, image1, image2, image3, image4, image5]
         self.layer.cornerRadius = 8
+    }
+    
+    func connectParentView(pView: RoomViewController) {
+        parentView = pView
     }
     
     func setupImages(project: Project) {
@@ -32,19 +37,27 @@ class ProjectPhotoCollectionSubView: UIView {
         }
         
         for image in images {
+            image.isHidden = false
+            image.layer.cornerRadius = 8
+            image.imageView!.contentMode = .scaleAspectFit
             if images.index(of: image)! < imageCount {
-                image.image = project.getProjectImages()[images.index(of: image)!]
+                image.setBackgroundImage(project.getProjectImages()[images.index(of: image)!], for: .normal)
             } else if images.index(of: image)! == imageCount {
-                image.image = #imageLiteral(resourceName: "icons8-connection_status_off_filled")
+                image.setBackgroundImage(#imageLiteral(resourceName: "ViewAll"), for: .normal)
             } else {
                 image.isHidden = true
             }
         }
         
-        
     }
     
-    
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        
+        if sender.currentBackgroundImage == #imageLiteral(resourceName: "ViewAll") {
+            parentView.performSegue(withIdentifier: "showPhotoCollectionView", sender: (Any).self)
+        }
+        print("Button 0 Pressed")
+    }
 
     /*
     // Only override draw() if you perform custom drawing.

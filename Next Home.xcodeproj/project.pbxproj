@@ -10,6 +10,7 @@
 		C703205A20269C9D00E57FCC /* ProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703205920269C9D00E57FCC /* ProjectTableViewCell.swift */; };
 		C703205C2026AB3100E57FCC /* CreateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703205B2026AB3100E57FCC /* CreateTableViewCell.swift */; };
 		C703205E2026B80100E57FCC /* NewProjectCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703205D2026B80100E57FCC /* NewProjectCreationView.swift */; };
+		C710DCDA202E407200CB8A46 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C710DCD9202E407200CB8A46 /* PhotoCollectionViewCell.swift */; };
 		C7405EBA20194F2300296870 /* NewProjectCreationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7405EB920194F2300296870 /* NewProjectCreationView.xib */; };
 		C761DA6C2027F6F2008408E4 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C761DA6B2027F6F2008408E4 /* RoomViewController.swift */; };
 		C78ED11D20292ECD004D35A8 /* ProjectDetailSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C78ED11C20292ECD004D35A8 /* ProjectDetailSubView.xib */; };
@@ -17,6 +18,7 @@
 		C79A2B1720182B7A0006DFDC /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A2B1620182B7A0006DFDC /* Project.swift */; };
 		C7B4339D202A805C00E1A2C7 /* ProjectPhotoCollectionSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7B4339C202A805C00E1A2C7 /* ProjectPhotoCollectionSubView.xib */; };
 		C7B4339F202A862800E1A2C7 /* ProjectPhotoCollectionSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B4339E202A862800E1A2C7 /* ProjectPhotoCollectionSubView.swift */; };
+		C7BA56B3202BCE8700E0215E /* PhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BA56B2202BCE8700E0215E /* PhotoCollectionViewController.swift */; };
 		C7E59AF32016B59C007761D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E59AF22016B59C007761D3 /* AppDelegate.swift */; };
 		C7E59AF82016B59C007761D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7E59AF62016B59C007761D3 /* Main.storyboard */; };
 		C7E59AFB2016B59C007761D3 /* Next_Home.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C7E59AF92016B59C007761D3 /* Next_Home.xcdatamodeld */; };
@@ -29,6 +31,7 @@
 		C703205920269C9D00E57FCC /* ProjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTableViewCell.swift; sourceTree = "<group>"; };
 		C703205B2026AB3100E57FCC /* CreateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTableViewCell.swift; sourceTree = "<group>"; };
 		C703205D2026B80100E57FCC /* NewProjectCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectCreationView.swift; sourceTree = "<group>"; };
+		C710DCD9202E407200CB8A46 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7405EB920194F2300296870 /* NewProjectCreationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewProjectCreationView.xib; sourceTree = "<group>"; };
 		C761DA6B2027F6F2008408E4 /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
 		C78ED11C20292ECD004D35A8 /* ProjectDetailSubView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectDetailSubView.xib; sourceTree = "<group>"; };
@@ -36,6 +39,7 @@
 		C79A2B1620182B7A0006DFDC /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		C7B4339C202A805C00E1A2C7 /* ProjectPhotoCollectionSubView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectPhotoCollectionSubView.xib; sourceTree = "<group>"; };
 		C7B4339E202A862800E1A2C7 /* ProjectPhotoCollectionSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPhotoCollectionSubView.swift; sourceTree = "<group>"; };
+		C7BA56B2202BCE8700E0215E /* PhotoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewController.swift; sourceTree = "<group>"; };
 		C7E59AEF2016B59C007761D3 /* Next Home.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Next Home.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7E59AF22016B59C007761D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7E59AF72016B59C007761D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				C7E59AF22016B59C007761D3 /* AppDelegate.swift */,
+				C7BA56B2202BCE8700E0215E /* PhotoCollectionViewController.swift */,
+				C710DCD9202E407200CB8A46 /* PhotoCollectionViewCell.swift */,
 				C7B433A0202A8E6400E1A2C7 /* Room View */,
 				C761DA6A2027F2D6008408E4 /* Main View */,
 				C79A2B1620182B7A0006DFDC /* Project.swift */,
@@ -193,9 +199,11 @@
 				C7E59B082016C1E8007761D3 /* MainViewController.swift in Sources */,
 				C7E59AFB2016B59C007761D3 /* Next_Home.xcdatamodeld in Sources */,
 				C703205C2026AB3100E57FCC /* CreateTableViewCell.swift in Sources */,
+				C710DCDA202E407200CB8A46 /* PhotoCollectionViewCell.swift in Sources */,
 				C7E59AF32016B59C007761D3 /* AppDelegate.swift in Sources */,
 				C79A2B1720182B7A0006DFDC /* Project.swift in Sources */,
 				C761DA6C2027F6F2008408E4 /* RoomViewController.swift in Sources */,
+				C7BA56B3202BCE8700E0215E /* PhotoCollectionViewController.swift in Sources */,
 				C7B4339F202A862800E1A2C7 /* ProjectPhotoCollectionSubView.swift in Sources */,
 				C78ED11F20293257004D35A8 /* ProjectDetailSubView.swift in Sources */,
 			);

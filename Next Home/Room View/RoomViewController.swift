@@ -20,6 +20,9 @@ class RoomViewController: UIViewController {
     var blurEffectView: UIVisualEffectView!
     var newProjectCreationView: NewProjectCreationView!
     
+    var projectImagesView: ProjectPhotoCollectionSubView!
+    var projectDetailsView: ProjectDetailSubView!
+    
     var projectID = String()
     var viewProject: Project!
 
@@ -63,12 +66,13 @@ class RoomViewController: UIViewController {
             subView.removeFromSuperview()
         }
         
-        let projectImagesView = Bundle.main.loadNibNamed("ProjectPhotoCollectionSubView", owner: self, options: nil)?.first as! ProjectPhotoCollectionSubView
+        projectImagesView = Bundle.main.loadNibNamed("ProjectPhotoCollectionSubView", owner: self, options: nil)?.first as! ProjectPhotoCollectionSubView
+        projectImagesView.connectParentView(pView: self)
         projectImagesView.setupImages(project: viewProject)
         projectImagesView.frame = CGRect(x: detailScrollView.contentOffset.x + 10 + self.view.frame.width, y: detailScrollView.contentOffset.y + 10, width: detailScrollView.frame.width - 20, height: detailScrollView.frame.height - 20)
         detailScrollView.addSubview(projectImagesView)
         
-        let projectDetailsView = Bundle.main.loadNibNamed("ProjectDetailSubView", owner: self, options: nil)?.first as! ProjectDetailSubView
+        projectDetailsView = Bundle.main.loadNibNamed("ProjectDetailSubView", owner: self, options: nil)?.first as! ProjectDetailSubView
         projectDetailsView.connectParentView(pView: self)
         projectDetailsView.setupValues(project: viewProject)
         projectDetailsView.frame = CGRect(x: detailScrollView.contentOffset.x + 10, y: detailScrollView.contentOffset.y + 10, width: detailScrollView.frame.width - 20, height: detailScrollView.frame.height - 20)
@@ -137,6 +141,17 @@ class RoomViewController: UIViewController {
         projectTabLabel.text = "$" + viewProject.projectRunningTab
         setupScrollViews()
     }
+    
+    @IBAction func undwindSegueToRoom(_ sender: UIStoryboardSegue) {
+        projectImagesView.setupImages(project: viewProject)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? PhotoCollectionViewController {
+            destination.viewProject = self.viewProject
+        }
+    }
+    
     
     /*
     // MARK: - Navigation

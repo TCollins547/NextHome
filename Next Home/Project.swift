@@ -44,13 +44,12 @@ class Project {
         
         projectRunningTab = formatNumbers(number: "0")
         projectRemainingBudget = formatNumbers(number: budget)
-        
         projectBudget = formatNumbers(number: budget)
         
     }
     
     func addProjectImage(addedImage: UIImage) {
-        projectImages.append(addedImage)
+        projectImages.insert(addedImage, at: 0)
     }
     
     func getProjectImages() -> [UIImage] {

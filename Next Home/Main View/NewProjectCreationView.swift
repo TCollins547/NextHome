@@ -46,7 +46,7 @@ class NewProjectCreationView: UIView, UITextFieldDelegate, UIImagePickerControll
         viewProject = project
         projectTitleTextField.text = project.projectName
         projectAddressTextField.text = project.projectAddress
-        projectBudgetTextField.text = project.projectBudget
+        projectBudgetTextField.text = project.projectBudget.replacingOccurrences(of: ",", with: "")
         startDateTextField.text = project.projectStartDate
         projectImage.setBackgroundImage(project.projectHomeImage, for: .normal)
         
@@ -59,7 +59,7 @@ class NewProjectCreationView: UIView, UITextFieldDelegate, UIImagePickerControll
         if project.projectExpectedValue == "N/A" {
             endDateTextField.text = ""
         } else {
-            expectValueTextField.text = project.projectExpectedValue
+            expectValueTextField.text = project.projectExpectedValue.replacingOccurrences(of: ",", with: "")
         }
         
         
@@ -160,10 +160,12 @@ class NewProjectCreationView: UIView, UITextFieldDelegate, UIImagePickerControll
     func updateProject() {
         viewProject.projectName = projectTitleTextField.text!
         viewProject.projectAddress = projectAddressTextField.text!
-        viewProject.projectBudget = projectBudgetTextField.text!
+        viewProject.projectBudget = viewProject.formatNumbers(number: projectBudgetTextField.text!)
         viewProject.projectStartDate = startDateTextField.text!
         viewProject.projectHomeImage = projectImage.currentBackgroundImage!
-        viewProject.addProjectImage(addedImage: projectImage.currentBackgroundImage!)
+        if projectImage.currentBackgroundImage! != viewProject.projectHomeImage {
+            viewProject.addProjectImage(addedImage: projectImage.currentBackgroundImage!)
+        }
         
         if expectValueTextField.text != "" {
             print(expectValueTextField.text!)
