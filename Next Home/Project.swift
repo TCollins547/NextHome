@@ -52,6 +52,14 @@ class Project {
         projectImages.insert(addedImage, at: 0)
     }
     
+    func removeProjectImage(removedImage: UIImage) {
+        for image in projectImages {
+            if removedImage == image {
+                projectImages.remove(at: projectImages.index(of: image)!)
+            }
+        }
+    }
+    
     func getProjectImages() -> [UIImage] {
         return projectImages
     }

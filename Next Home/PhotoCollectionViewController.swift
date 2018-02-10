@@ -103,6 +103,24 @@ class PhotoCollectionViewController: UIViewController, UICollectionViewDelegate,
     
     @IBAction func deletePhotoButtonPressed(sender: UIButton!) {
         
+        viewProject.removeProjectImage(removedImage: zoomedImageView.image!)
+        photoCollectionView.reloadData()
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            
+            self.blurEffectView.alpha = 0
+            self.zoomedImageView.alpha = 0
+            self.deletePhotoButton.alpha = 0
+            self.closeZoomedViewButton.alpha = 0
+            
+        }, completion: { finished in
+            self.blurEffectView.removeFromSuperview()
+            self.zoomedImageView.removeFromSuperview()
+            self.closeZoomedViewButton.isHidden = true
+            self.deletePhotoButton.isHidden = true
+        })
+        
+        
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
