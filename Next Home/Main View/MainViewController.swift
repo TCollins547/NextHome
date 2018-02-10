@@ -26,17 +26,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var menuEdgeConstraint: NSLayoutConstraint!
     
     var newProjectCreationView: NewProjectCreationView!
-    
-    
-    struct UserItems {
-        static var userProjects = [Project]()
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let testProject = Project(id: UUID().uuidString, name: "West Hills", address: "10937 West Hills Rd", budget: "10000", startDate: "March 1, 2017", image: #imageLiteral(resourceName: "Unique-Spanish-Style-House-Colors"))
-        UserItems.userProjects.insert(testProject, at: 0)
+        UserAppData.userItems.userProjects.insert(testProject, at: 0)
         
         //Used to call method that triggers when keyboard shows
         //NotificationCenter.default.addObserver(self, selector: #selector(keyboardShown), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
@@ -58,14 +54,14 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //Returns the amount rows in the project table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return UserItems.userProjects.count + 1
+        return UserAppData.userItems.userProjects.count + 1
     }
     
     // Creates a cell for each table view row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //This places the create new project at the end of the table
-        if indexPath.row == UserItems.userProjects.count {
+        if indexPath.row == UserAppData.userItems.userProjects.count {
             
             //Creates a cell and a create project view
             let cell: CreateTableViewCell = (self.tableView.dequeueReusableCell(withIdentifier: "ProjectCellCreateReuseID") as! CreateTableViewCell?)!
@@ -81,12 +77,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let cell: ProjectTableViewCell = (self.tableView.dequeueReusableCell(withIdentifier: "ProjectCellReuseID") as! ProjectTableViewCell?)!
             
             //Fills info of project view
-            cell.projectTitleLabel.text = UserItems.userProjects[indexPath.row].projectName
-            cell.projectAddressLabel.text = UserItems.userProjects[indexPath.row].projectAddress
-            cell.projectBudgetLabel.text = "$" + UserItems.userProjects[indexPath.row].projectRunningTab
-            cell.projectImage.image = UserItems.userProjects[indexPath.row].projectHomeImage
+            cell.projectTitleLabel.text = UserAppData.userItems.userProjects[indexPath.row].projectName
+            cell.projectAddressLabel.text = UserAppData.userItems.userProjects[indexPath.row].projectAddress
+            cell.projectBudgetLabel.text = "$" + UserAppData.userItems.userProjects[indexPath.row].projectRunningTab
+            cell.projectImage.image = UserAppData.userItems.userProjects[indexPath.row].projectHomeImage
             
-            cell.setProjectID(proID: UserItems.userProjects[indexPath.row].projectIdentifier)
+            cell.setProjectID(proID: UserAppData.userItems.userProjects[indexPath.row].projectIdentifier)
             
             cell.selectionStyle = .none
             

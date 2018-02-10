@@ -149,6 +149,7 @@ class PhotoCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         self.dismiss(animated: true, completion: nil)
         
+        
     }
     
     @IBAction func addPhotoButtonPressed(_ sender: Any) {

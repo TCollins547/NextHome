@@ -203,7 +203,7 @@
                 <outlet property="projectTitleTextField" destination="NsP-nI-rY7" id="zIx-1f-6Tx"/>
                 <outlet property="startDateTextField" destination="wfw-bf-dVr" id="2Js-kh-RQl"/>
             </connections>
-            <point key="canvasLocation" x="33.5" y="-91.5"/>
+            <point key="canvasLocation" x="52" y="-90"/>
         </view>
     </objects>
     <resources>

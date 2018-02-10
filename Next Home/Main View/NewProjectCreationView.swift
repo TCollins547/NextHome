@@ -152,7 +152,7 @@ class NewProjectCreationView: UIView, UITextFieldDelegate, UIImagePickerControll
             newProject.setExpectedEndDate(ed: endDateTextField.text!)
         }
         
-        MainViewController.UserItems.userProjects.insert(newProject, at: 0)
+        UserAppData.userItems.userProjects.insert(newProject, at: 0)
         cancelButtonPressed(self)
         (parentView as! MainViewController).tableView.reloadData()
     }
@@ -162,8 +162,9 @@ class NewProjectCreationView: UIView, UITextFieldDelegate, UIImagePickerControll
         viewProject.projectAddress = projectAddressTextField.text!
         viewProject.projectBudget = viewProject.formatNumbers(number: projectBudgetTextField.text!)
         viewProject.projectStartDate = startDateTextField.text!
-        viewProject.projectHomeImage = projectImage.currentBackgroundImage!
+        
         if projectImage.currentBackgroundImage! != viewProject.projectHomeImage {
+            viewProject.projectHomeImage = projectImage.currentBackgroundImage!
             viewProject.addProjectImage(addedImage: projectImage.currentBackgroundImage!)
         }
         

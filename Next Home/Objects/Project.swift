@@ -9,10 +9,6 @@
 import Foundation
 import UIKit
 
-struct userCreatedProjects {
-    var userProjects = [Project]()
-}
-
 class Project {
     
     var projectName: String
@@ -25,6 +21,8 @@ class Project {
     var projectRemainingBudget = "N/A"
     var projectExpectedValue = "N/A"
     var projectExpectedEndDate = "N/A"
+    
+    var rooms: [String:[Room]] = [:]
     
     var projectImages: [UIImage] = []
     
@@ -45,6 +43,18 @@ class Project {
         projectRunningTab = formatNumbers(number: "0")
         projectRemainingBudget = formatNumbers(number: budget)
         projectBudget = formatNumbers(number: budget)
+        
+    }
+    
+    func addRoom(newRoom: Room, section: String) {
+        print("Adding Room")
+        if rooms[section] == nil {
+            rooms[section] = [newRoom]
+        } else {
+            rooms[section]?.append(newRoom)
+        }
+        
+        UserAppData.userItems.userRooms.append(newRoom)
         
     }
     

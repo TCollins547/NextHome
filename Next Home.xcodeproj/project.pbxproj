@@ -13,6 +13,11 @@
 		C710DCDA202E407200CB8A46 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C710DCD9202E407200CB8A46 /* PhotoCollectionViewCell.swift */; };
 		C7405EBA20194F2300296870 /* NewProjectCreationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7405EB920194F2300296870 /* NewProjectCreationView.xib */; };
 		C761DA6C2027F6F2008408E4 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C761DA6B2027F6F2008408E4 /* RoomViewController.swift */; };
+		C76EC203202E782200579A85 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76EC202202E782200579A85 /* Room.swift */; };
+		C76EC207202E7B5300579A85 /* UserAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76EC206202E7B5300579A85 /* UserAppData.swift */; };
+		C76EC20B202E7C0100579A85 /* NewRoomCreationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C76EC20A202E7C0100579A85 /* NewRoomCreationView.xib */; };
+		C76EC20D202E7E2500579A85 /* NewRoomCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76EC20C202E7E2500579A85 /* NewRoomCreationView.swift */; };
+		C76EC20F202E8A9F00579A85 /* RoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76EC20E202E8A9F00579A85 /* RoomTableViewCell.swift */; };
 		C78ED11D20292ECD004D35A8 /* ProjectDetailSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C78ED11C20292ECD004D35A8 /* ProjectDetailSubView.xib */; };
 		C78ED11F20293257004D35A8 /* ProjectDetailSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78ED11E20293257004D35A8 /* ProjectDetailSubView.swift */; };
 		C79A2B1720182B7A0006DFDC /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A2B1620182B7A0006DFDC /* Project.swift */; };
@@ -34,6 +39,11 @@
 		C710DCD9202E407200CB8A46 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7405EB920194F2300296870 /* NewProjectCreationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewProjectCreationView.xib; sourceTree = "<group>"; };
 		C761DA6B2027F6F2008408E4 /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
+		C76EC202202E782200579A85 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		C76EC206202E7B5300579A85 /* UserAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAppData.swift; sourceTree = "<group>"; };
+		C76EC20A202E7C0100579A85 /* NewRoomCreationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewRoomCreationView.xib; sourceTree = "<group>"; };
+		C76EC20C202E7E2500579A85 /* NewRoomCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRoomCreationView.swift; sourceTree = "<group>"; };
+		C76EC20E202E8A9F00579A85 /* RoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTableViewCell.swift; sourceTree = "<group>"; };
 		C78ED11C20292ECD004D35A8 /* ProjectDetailSubView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectDetailSubView.xib; sourceTree = "<group>"; };
 		C78ED11E20293257004D35A8 /* ProjectDetailSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailSubView.swift; sourceTree = "<group>"; };
 		C79A2B1620182B7A0006DFDC /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
@@ -73,10 +83,32 @@
 			path = "Main View";
 			sourceTree = "<group>";
 		};
+		C76EC208202E7B6600579A85 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				C79A2B1620182B7A0006DFDC /* Project.swift */,
+				C76EC202202E782200579A85 /* Room.swift */,
+				C76EC206202E7B5300579A85 /* UserAppData.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		C76EC209202E7B9500579A85 /* Photo Collection View */ = {
+			isa = PBXGroup;
+			children = (
+				C7BA56B2202BCE8700E0215E /* PhotoCollectionViewController.swift */,
+				C710DCD9202E407200CB8A46 /* PhotoCollectionViewCell.swift */,
+			);
+			path = "Photo Collection View";
+			sourceTree = "<group>";
+		};
 		C7B433A0202A8E6400E1A2C7 /* Room View */ = {
 			isa = PBXGroup;
 			children = (
 				C761DA6B2027F6F2008408E4 /* RoomViewController.swift */,
+				C76EC20E202E8A9F00579A85 /* RoomTableViewCell.swift */,
+				C76EC20A202E7C0100579A85 /* NewRoomCreationView.xib */,
+				C76EC20C202E7E2500579A85 /* NewRoomCreationView.swift */,
 				C7B4339C202A805C00E1A2C7 /* ProjectPhotoCollectionSubView.xib */,
 				C7B4339E202A862800E1A2C7 /* ProjectPhotoCollectionSubView.swift */,
 				C78ED11C20292ECD004D35A8 /* ProjectDetailSubView.xib */,
@@ -105,11 +137,10 @@
 			isa = PBXGroup;
 			children = (
 				C7E59AF22016B59C007761D3 /* AppDelegate.swift */,
-				C7BA56B2202BCE8700E0215E /* PhotoCollectionViewController.swift */,
-				C710DCD9202E407200CB8A46 /* PhotoCollectionViewCell.swift */,
+				C76EC209202E7B9500579A85 /* Photo Collection View */,
 				C7B433A0202A8E6400E1A2C7 /* Room View */,
 				C761DA6A2027F2D6008408E4 /* Main View */,
-				C79A2B1620182B7A0006DFDC /* Project.swift */,
+				C76EC208202E7B6600579A85 /* Objects */,
 				C7E59AF62016B59C007761D3 /* Main.storyboard */,
 				C7E59AFC2016B59C007761D3 /* Assets.xcassets */,
 				C7E59AFE2016B59C007761D3 /* LaunchScreen.storyboard */,
@@ -184,6 +215,7 @@
 				C7E59AF82016B59C007761D3 /* Main.storyboard in Resources */,
 				C7405EBA20194F2300296870 /* NewProjectCreationView.xib in Resources */,
 				C7B4339D202A805C00E1A2C7 /* ProjectPhotoCollectionSubView.xib in Resources */,
+				C76EC20B202E7C0100579A85 /* NewRoomCreationView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,15 +228,19 @@
 			files = (
 				C703205E2026B80100E57FCC /* NewProjectCreationView.swift in Sources */,
 				C703205A20269C9D00E57FCC /* ProjectTableViewCell.swift in Sources */,
+				C76EC20F202E8A9F00579A85 /* RoomTableViewCell.swift in Sources */,
 				C7E59B082016C1E8007761D3 /* MainViewController.swift in Sources */,
 				C7E59AFB2016B59C007761D3 /* Next_Home.xcdatamodeld in Sources */,
 				C703205C2026AB3100E57FCC /* CreateTableViewCell.swift in Sources */,
 				C710DCDA202E407200CB8A46 /* PhotoCollectionViewCell.swift in Sources */,
+				C76EC207202E7B5300579A85 /* UserAppData.swift in Sources */,
+				C76EC203202E782200579A85 /* Room.swift in Sources */,
 				C7E59AF32016B59C007761D3 /* AppDelegate.swift in Sources */,
 				C79A2B1720182B7A0006DFDC /* Project.swift in Sources */,
 				C761DA6C2027F6F2008408E4 /* RoomViewController.swift in Sources */,
 				C7BA56B3202BCE8700E0215E /* PhotoCollectionViewController.swift in Sources */,
 				C7B4339F202A862800E1A2C7 /* ProjectPhotoCollectionSubView.swift in Sources */,
+				C76EC20D202E7E2500579A85 /* NewRoomCreationView.swift in Sources */,
 				C78ED11F20293257004D35A8 /* ProjectDetailSubView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

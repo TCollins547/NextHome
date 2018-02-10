@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RoomViewController: UIViewController {
+class RoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var projectNameLabel: UILabel!
     @IBOutlet weak var projectAddressLabel: UILabel!
@@ -23,15 +23,21 @@ class RoomViewController: UIViewController {
     var projectImagesView: ProjectPhotoCollectionSubView!
     var projectDetailsView: ProjectDetailSubView!
     
+    var newRoomCreationView: NewRoomCreationView!
+    
     var projectID = String()
     var viewProject: Project!
+    var projectAreas: [String]!
+    var projectRooms: [[Room]]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for project in MainViewController.UserItems.userProjects {
+        for project in UserAppData.userItems.userProjects {
             if project.projectIdentifier == projectID {
                 viewProject = project
+                projectAreas = Array(viewProject.rooms.keys)
+                projectRooms = Array(viewProject.rooms.values)
                 break
             }
         }
@@ -84,10 +90,42 @@ class RoomViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func addRoomButtonPressed(_ sender: Any) {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return projectAreas.count
     }
     
-    @IBAction func returnButtonPressed(_ sender: Any) {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return projectRooms[section].count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: RoomTableViewCell = (self.roomTableView.dequeueReusableCell(withIdentifier: "RoomCellReuseID") as! RoomTableViewCell?)!
+        cell.roomNameLabel.text = projectRooms[indexPath.section][indexPath.row].roomName
+        cell.roomBudgetLabel.text = "$" + projectRooms[indexPath.section][indexPath.row].roomBudget
+        return cell
+    }
+    
+    @IBAction func addRoomButtonPressed(_ sender: Any) {
+        
+        newRoomCreationView = Bundle.main.loadNibNamed("NewRoomCreationView", owner: self, options: nil)?.first as! NewRoomCreationView
+        newRoomCreationView.frame = CGRect(x: 10, y: self.view.frame.height * -1, width: self.view.frame.width - 20, height: newRoomCreationView.frame.height)
+        newRoomCreationView.connectParentView(pView: self, project: viewProject)
+        newRoomCreationView.roomAreaTextField.becomeFirstResponder()
+        
+        blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
+        blurEffectView.frame = self.view.bounds
+        blurEffectView.alpha = 0
+        
+        self.view.addSubview(blurEffectView)
+        self.view.addSubview(newRoomCreationView)
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            
+            self.blurEffectView.alpha = 1
+            self.newRoomCreationView.frame.origin = CGPoint(x: 10, y: UIApplication.shared.statusBarFrame.height + 10)
+            
+        }, completion: nil)
+        
     }
     
     func editInfoButtonPressed() {
@@ -150,6 +188,20 @@ class RoomViewController: UIViewController {
         if let destination = segue.destination as? PhotoCollectionViewController {
             destination.viewProject = self.viewProject
         }
+    }
+    
+    func cancelRoomCreate() {
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            
+            self.newRoomCreationView.frame.origin = CGPoint(x: self.newRoomCreationView.frame.origin.x, y: self.view.frame.height * -1)
+            self.blurEffectView.alpha = 0
+            
+        }, completion: { finished in
+            self.newRoomCreationView.isHidden = true
+            self.blurEffectView.isHidden = true
+        })
+        
     }
     
     
