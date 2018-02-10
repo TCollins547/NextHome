@@ -90,8 +90,7 @@
                     </constraints>
                     <state key="normal" backgroundImage="icons8-add_filled-1"/>
                     <connections>
-                        <action selector="addRoomButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="PJ2-Gm-Fcb"/>
-                        <action selector="createNewAreaButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="dHO-RI-FFR"/>
+                        <action selector="createNewAreaButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="q0l-Zg-Eh7"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ceg-j8-FRl">
@@ -137,11 +136,12 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="areaButton" destination="xtd-iv-Cc8" id="Mem-Hq-eRu"/>
                 <outlet property="roomAreaTextField" destination="E6J-8t-CVr" id="Bi6-FL-zhf"/>
                 <outlet property="roomBudgetTextField" destination="25n-L1-J4p" id="bSP-KU-d3Z"/>
                 <outlet property="roomNameTextField" destination="tTq-LA-uDn" id="vCs-ds-VM7"/>
             </connections>
-            <point key="canvasLocation" x="33.5" y="23.5"/>
+            <point key="canvasLocation" x="-99" y="26"/>
         </view>
     </objects>
     <resources>

@@ -14,6 +14,8 @@ class NewRoomCreationView: UIView, UIPickerViewDelegate, UIPickerViewDataSource 
     @IBOutlet weak var roomNameTextField: UITextField!
     @IBOutlet weak var roomBudgetTextField: UITextField!
     
+    @IBOutlet weak var areaButton: UIButton!
+    
     var parentView: RoomViewController!
     var viewProject: Project!
     
@@ -22,6 +24,8 @@ class NewRoomCreationView: UIView, UIPickerViewDelegate, UIPickerViewDataSource 
     override func awakeFromNib() {
         self.layer.cornerRadius = 8
         roomAreaTextField.inputView = pickerView
+        pickerView.dataSource = self
+        pickerView.delegate = self
     }
     
     
@@ -33,8 +37,10 @@ class NewRoomCreationView: UIView, UIPickerViewDelegate, UIPickerViewDataSource 
             roomAreaTextField.reloadInputViews()
         } else {
             roomAreaTextField.text = Array(parentView.viewProject.rooms.keys)[0]
+            pickerView.reloadAllComponents()
         }
     }
+    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -53,8 +59,17 @@ class NewRoomCreationView: UIView, UIPickerViewDelegate, UIPickerViewDataSource 
     }
     
     @IBAction func createNewAreaButtonPressed(_ sender: Any) {
-        roomAreaTextField.inputView = nil
-        roomAreaTextField.reloadInputViews()
+        if areaButton.currentBackgroundImage == #imageLiteral(resourceName: "icons8-add_filled-1") && parentView.viewProject.rooms.count > 0 {
+            areaButton.setBackgroundImage(#imageLiteral(resourceName: "icons8-xbox_menu_filled-1"), for: .normal)
+            roomAreaTextField.inputView = nil
+            roomAreaTextField.text = ""
+            roomAreaTextField.reloadInputViews()
+        } else if areaButton.currentBackgroundImage == #imageLiteral(resourceName: "icons8-xbox_menu_filled-1") {
+            areaButton.setBackgroundImage(#imageLiteral(resourceName: "icons8-add_filled-1"), for: .normal)
+            roomAreaTextField.inputView = pickerView
+            roomAreaTextField.text = Array(parentView.viewProject.rooms.keys)[0]
+            roomAreaTextField.reloadInputViews()
+        }
     }
     
     @IBAction func addRoomButtonPressed(_ sender: Any) {

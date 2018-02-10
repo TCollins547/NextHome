@@ -98,10 +98,16 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
         return projectRooms[section].count
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return projectAreas[section]
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: RoomTableViewCell = (self.roomTableView.dequeueReusableCell(withIdentifier: "RoomCellReuseID") as! RoomTableViewCell?)!
         cell.roomNameLabel.text = projectRooms[indexPath.section][indexPath.row].roomName
-        cell.roomBudgetLabel.text = "$" + projectRooms[indexPath.section][indexPath.row].roomBudget
+        cell.roomBudgetLabel.text = "$" + projectRooms[indexPath.section][indexPath.row].roomRunningTab
+        cell.frame.size = CGSize(width: self.view.frame.width, height: 75)
+        cell.selectionStyle = .none
         return cell
     }
     

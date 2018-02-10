@@ -244,11 +244,51 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdx-PU-ddn">
+                                <rect key="frame" x="42" y="120" width="145" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="XaF-vT-eaj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="31"/>
+                                <state key="normal" title="My Rooms">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="myRoomsButtonPressed:" destination="Kod-4M-ZHF" eventType="touchUpInside" id="y0X-3o-OrV"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="euh-9n-ywR">
+                                <rect key="frame" x="42" y="152" width="178" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="RUX-bR-lPz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="31"/>
+                                <state key="normal" title="My Materials">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="myMaterialsButtonPressed:" destination="Kod-4M-ZHF" eventType="touchUpInside" id="6wD-un-d9k"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aEv-Gu-g6R">
+                                <rect key="frame" x="42" y="190" width="113" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="kQW-rB-JeQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="31"/>
+                                <state key="normal" title="Settings">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="settingsButtonPressed:" destination="Kod-4M-ZHF" eventType="touchUpInside" id="6VP-ak-JLo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="htP-Qj-9uf" firstAttribute="trailing" secondItem="t10-Y4-87x" secondAttribute="trailing" id="1UX-iJ-ETa"/>
                             <constraint firstItem="m4n-xg-rO1" firstAttribute="bottom" secondItem="t10-Y4-87x" secondAttribute="bottom" id="2ia-Y4-lzI"/>
+                            <constraint firstItem="euh-9n-ywR" firstAttribute="leading" secondItem="Atg-OZ-h4e" secondAttribute="trailing" constant="2" id="6YQ-cZ-oYo"/>
                             <constraint firstItem="y5X-ir-VMp" firstAttribute="leading" secondItem="t10-Y4-87x" secondAttribute="leading" id="Dn0-7z-nzF"/>
                             <constraint firstItem="4ZH-Wo-DEY" firstAttribute="leading" secondItem="puL-RY-QMe" secondAttribute="trailing" constant="42" id="DvO-IC-dG1"/>
                             <constraint firstItem="1od-Ox-ZmO" firstAttribute="top" secondItem="t10-Y4-87x" secondAttribute="top" id="G4R-Xw-rpW"/>
@@ -256,17 +296,23 @@
                             <constraint firstItem="4ZH-Wo-DEY" firstAttribute="leading" secondItem="vpI-CE-Haj" secondAttribute="trailing" constant="5" id="MeJ-oe-GNA"/>
                             <constraint firstItem="vpI-CE-Haj" firstAttribute="leading" secondItem="Atg-OZ-h4e" secondAttribute="trailing" constant="2" id="Mk2-3M-I3p"/>
                             <constraint firstItem="puL-RY-QMe" firstAttribute="leading" secondItem="Atg-OZ-h4e" secondAttribute="trailing" constant="2" id="Nl7-my-ror"/>
+                            <constraint firstItem="kdx-PU-ddn" firstAttribute="top" secondItem="puL-RY-QMe" secondAttribute="bottom" constant="-5" id="OHb-W3-g20"/>
+                            <constraint firstItem="kdx-PU-ddn" firstAttribute="leading" secondItem="Atg-OZ-h4e" secondAttribute="trailing" constant="2" id="OSi-6D-hi8"/>
                             <constraint firstItem="puL-RY-QMe" firstAttribute="top" secondItem="t10-Y4-87x" secondAttribute="top" id="PJ5-uR-fwO"/>
                             <constraint firstItem="y5X-ir-VMp" firstAttribute="trailing" secondItem="t10-Y4-87x" secondAttribute="trailing" id="QO4-P0-VBG"/>
                             <constraint firstAttribute="bottom" secondItem="y5X-ir-VMp" secondAttribute="bottom" id="S7b-nL-5li"/>
+                            <constraint firstItem="aEv-Gu-g6R" firstAttribute="top" secondItem="euh-9n-ywR" secondAttribute="bottom" constant="1" id="WLo-G6-jeG"/>
                             <constraint firstItem="Atg-OZ-h4e" firstAttribute="top" secondItem="t10-Y4-87x" secondAttribute="top" id="ao1-Sv-77y"/>
                             <constraint firstItem="t10-Y4-87x" firstAttribute="trailing" secondItem="4ZH-Wo-DEY" secondAttribute="trailing" constant="5" id="az4-Bm-A9C"/>
                             <constraint firstItem="m4n-xg-rO1" firstAttribute="top" secondItem="htP-Qj-9uf" secondAttribute="bottom" constant="-1" id="f9B-Jg-Y4M"/>
+                            <constraint firstItem="aEv-Gu-g6R" firstAttribute="leading" secondItem="Atg-OZ-h4e" secondAttribute="trailing" constant="2" id="gTG-gi-9Ih"/>
                             <constraint firstItem="htP-Qj-9uf" firstAttribute="top" secondItem="aOO-M2-2Nt" secondAttribute="top" id="hSO-2B-vHX"/>
                             <constraint firstItem="Atg-OZ-h4e" firstAttribute="leading" secondItem="t10-Y4-87x" secondAttribute="leading" constant="5" id="l6k-TJ-h0X"/>
                             <constraint firstItem="htP-Qj-9uf" firstAttribute="leading" secondItem="t10-Y4-87x" secondAttribute="leading" id="lhg-Jc-4w0"/>
                             <constraint firstItem="4ZH-Wo-DEY" firstAttribute="top" secondItem="t10-Y4-87x" secondAttribute="top" id="nLX-nc-ltY"/>
+                            <constraint firstItem="aEv-Gu-g6R" firstAttribute="top" secondItem="euh-9n-ywR" secondAttribute="bottom" constant="1" id="nnr-kw-OUZ"/>
                             <constraint firstItem="vpI-CE-Haj" firstAttribute="centerY" secondItem="puL-RY-QMe" secondAttribute="centerY" id="sGx-xk-saE"/>
+                            <constraint firstItem="euh-9n-ywR" firstAttribute="top" secondItem="kdx-PU-ddn" secondAttribute="bottom" constant="-5" id="vi2-hS-b8L"/>
                             <constraint firstItem="m4n-xg-rO1" firstAttribute="leading" secondItem="t10-Y4-87x" secondAttribute="leading" id="vlE-g2-LkH"/>
                             <constraint firstItem="y5X-ir-VMp" firstAttribute="top" secondItem="aOO-M2-2Nt" secondAttribute="top" id="vor-t4-CW6"/>
                             <constraint firstItem="4ZH-Wo-DEY" firstAttribute="leading" secondItem="1od-Ox-ZmO" secondAttribute="trailing" constant="5" id="wdj-YO-67F"/>
@@ -279,9 +325,12 @@
                         <outlet property="addButton" destination="4ZH-Wo-DEY" id="ulF-i9-xcr"/>
                         <outlet property="menuButton" destination="Atg-OZ-h4e" id="FAo-AZ-Eff"/>
                         <outlet property="menuEdgeConstraint" destination="l6k-TJ-h0X" id="Iff-27-5n2"/>
+                        <outlet property="myMaterialsButton" destination="euh-9n-ywR" id="Sxn-b1-mAT"/>
+                        <outlet property="myRoomsButton" destination="kdx-PU-ddn" id="yW0-vW-Gv9"/>
                         <outlet property="searchAddConstraint" destination="wdj-YO-67F" id="gu5-w3-c18"/>
                         <outlet property="searchButton" destination="1od-Ox-ZmO" id="bou-5p-BQU"/>
                         <outlet property="searchbar" destination="vpI-CE-Haj" id="zgK-yB-kJj"/>
+                        <outlet property="settingsButton" destination="aEv-Gu-g6R" id="ukv-yA-srh"/>
                         <outlet property="tableView" destination="m4n-xg-rO1" id="EP5-Uv-a5y"/>
                         <outlet property="titleLabel" destination="puL-RY-QMe" id="YcZ-ey-VLp"/>
                         <segue destination="7RY-Sb-le1" kind="show" identifier="showRoomView" id="yK2-HV-OpF"/>
@@ -328,7 +377,7 @@
                                 </constraints>
                                 <state key="normal" backgroundImage="icons8-add_filled"/>
                                 <connections>
-                                    <action selector="addRoomButtonPressed:" destination="7RY-Sb-le1" eventType="touchUpInside" id="4me-aF-l5f"/>
+                                    <action selector="addRoomButtonPressed:" destination="7RY-Sb-le1" eventType="touchUpInside" id="2e4-iF-jru"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dwg-7f-Tvw">
@@ -339,7 +388,6 @@
                                 </constraints>
                                 <state key="normal" backgroundImage="icons8-circled_chevron_left_filled"/>
                                 <connections>
-                                    <action selector="returnButtonPressed:" destination="7RY-Sb-le1" eventType="touchUpInside" id="Z8B-Xb-2iX"/>
                                     <segue destination="rVP-AW-j2U" kind="unwind" unwindAction="undwindSegue:" id="2Ma-Fv-m2d"/>
                                 </connections>
                             </button>

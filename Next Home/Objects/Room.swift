@@ -13,13 +13,26 @@ class Room {
     
     var roomName: String!
     var roomBudget: String!
+    var roomRunningTab: String!
+    var roomRemainingBudget: String!
     
     var roomProject: Project!
     
     init(name: String, budget: String, project: Project) {
         roomName = name
-        roomBudget = budget
+        roomBudget = formatNumbers(number: budget)
+        roomRunningTab = "0"
+        roomRemainingBudget = budget
         roomProject = project
+    }
+    
+    func formatNumbers(number: String) -> String {
+        let num = Int(number)
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = NumberFormatter.Style.decimal
+        
+        return numberFormatter.string(from: NSNumber(value:num!))!
     }
     
 }

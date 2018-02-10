@@ -17,6 +17,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var searchbar: UITextField!
     
+    @IBOutlet weak var myRoomsButton: UIButton!
+    @IBOutlet weak var myMaterialsButton: UIButton!
+    @IBOutlet weak var settingsButton: UIButton!
+    
+    
     @IBOutlet weak var tableView: UITableView!
     var selectedID = String()
     
@@ -110,6 +115,59 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //Handles menu button tap
     @IBAction func menuButtonPressed(_ sender: Any) {
+        
+        if menuButton.currentBackgroundImage == #imageLiteral(resourceName: "icons8-cancel_filled-1") {
+            
+            menuButton.setBackgroundImage(#imageLiteral(resourceName: "icons8-xbox_menu_filled"), for: .normal)
+            
+            UIView.animate(withDuration: 0.25, animations: {
+                
+                self.blurEffectView.alpha = 0
+                self.myRoomsButton.alpha = 0
+                self.myMaterialsButton.alpha = 0
+                self.settingsButton.alpha = 0
+                
+            }, completion: { finished in
+                self.blurEffectView.isHidden = true
+                self.myRoomsButton.isHidden = true
+                self.myMaterialsButton.isHidden = true
+                self.settingsButton.isHidden = true
+            })
+            
+        } else {
+            
+            menuButton.setBackgroundImage(#imageLiteral(resourceName: "icons8-cancel_filled-1"), for: .normal)
+            
+            blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
+            blurEffectView.frame = self.view.bounds
+            blurEffectView.alpha = 0
+            self.view.addSubview(blurEffectView)
+            
+            self.view.bringSubview(toFront: titleLabel)
+            self.view.bringSubview(toFront: myRoomsButton)
+            self.view.bringSubview(toFront: myMaterialsButton)
+            self.view.bringSubview(toFront: settingsButton)
+            self.view.bringSubview(toFront: menuButton)
+            
+            myRoomsButton.alpha = 0
+            myMaterialsButton.alpha = 0
+            settingsButton.alpha = 0
+            
+            self.blurEffectView.isHidden = false
+            self.myRoomsButton.isHidden = false
+            self.myMaterialsButton.isHidden = false
+            self.settingsButton.isHidden = false
+            
+            UIView.animate(withDuration: 0.25, animations: {
+                
+                self.blurEffectView.alpha = 1
+                self.myRoomsButton.alpha = 1
+                self.myMaterialsButton.alpha = 1
+                self.settingsButton.alpha = 1
+                
+            }, completion: nil)
+        }
+    
     }
     
     //Handles add button press and also handles search cancel when applicable
@@ -229,6 +287,17 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.reloadData()
     }
     
+    @IBAction func myRoomsButtonPressed(_ sender: Any) {
+        
+    }
+    
+    @IBAction func myMaterialsButtonPressed(_ sender: Any) {
+        
+    }
+    
+    @IBAction func settingsButtonPressed(_ sender: Any) {
+        
+    }
     
     
     /*
