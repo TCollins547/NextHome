@@ -17,9 +17,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var searchbar: UITextField!
     
-    @IBOutlet weak var myRoomsButton: UIButton!
-    @IBOutlet weak var myMaterialsButton: UIButton!
-    @IBOutlet weak var settingsButton: UIButton!
+    var menuSelectButton0 = UIButton()
+    var menuSelectButton1 = UIButton()
+    var menuSelectButton2 = UIButton()
+    var menuSelectOptions = ["My Projects", "My Rooms", "My Materials", "Settings"]
+    var menuSelectButtons: [UIButton]!
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -35,6 +37,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupMenuButtons()
+        
         
         let testProject = Project(id: UUID().uuidString, name: "West Hills", address: "10937 West Hills Rd", budget: "10000", startDate: "March 1, 2017", image: #imageLiteral(resourceName: "Unique-Spanish-Style-House-Colors"))
         UserAppData.userItems.userProjects.insert(testProject, at: 0)
@@ -112,6 +117,26 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
+    func setupMenuButtons() {
+        
+        menuSelectButtons = [menuSelectButton0, menuSelectButton1, menuSelectButton2]
+        
+        for buttonOption in menuSelectButtons {
+            
+            buttonOption.addTarget(self, action: #selector(menuOptionSelected), for: .touchUpInside)
+            buttonOption.frame.size = titleLabel.frame.size
+            buttonOption.frame.origin = CGPoint(x: titleLabel.frame.origin.x, y: titleLabel.frame.origin.y + CGFloat(37 * menuSelectButtons.index(of: buttonOption)!))
+            buttonOption.setTitle(menuSelectOptions[menuSelectButtons.index(of: buttonOption)! + 1], for: .normal)
+            buttonOption.contentHorizontalAlignment = .left
+            buttonOption.titleLabel?.font = titleLabel.font
+            buttonOption.alpha = 0
+            buttonOption.isHidden = true
+            self.view.addSubview(buttonOption)
+            
+        }
+        
+    }
+    
     
     //Handles menu button tap
     @IBAction func menuButtonPressed(_ sender: Any) {
@@ -123,15 +148,15 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             UIView.animate(withDuration: 0.25, animations: {
                 
                 self.blurEffectView.alpha = 0
-                self.myRoomsButton.alpha = 0
-                self.myMaterialsButton.alpha = 0
-                self.settingsButton.alpha = 0
+                self.menuSelectButton0.alpha = 0
+                self.menuSelectButton1.alpha = 0
+                self.menuSelectButton2.alpha = 0
                 
             }, completion: { finished in
                 self.blurEffectView.isHidden = true
-                self.myRoomsButton.isHidden = true
-                self.myMaterialsButton.isHidden = true
-                self.settingsButton.isHidden = true
+                self.menuSelectButton0.isHidden = true
+                self.menuSelectButton1.isHidden = true
+                self.menuSelectButton2.isHidden = true
             })
             
         } else {
@@ -142,28 +167,22 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             blurEffectView.frame = self.view.bounds
             blurEffectView.alpha = 0
             self.view.addSubview(blurEffectView)
+
+            for menuOption in menuSelectButtons {
+                menuOption.isHidden = false
+                self.view.bringSubview(toFront: menuOption)
+            }
             
             self.view.bringSubview(toFront: titleLabel)
-            self.view.bringSubview(toFront: myRoomsButton)
-            self.view.bringSubview(toFront: myMaterialsButton)
-            self.view.bringSubview(toFront: settingsButton)
             self.view.bringSubview(toFront: menuButton)
             
-            myRoomsButton.alpha = 0
-            myMaterialsButton.alpha = 0
-            settingsButton.alpha = 0
-            
-            self.blurEffectView.isHidden = false
-            self.myRoomsButton.isHidden = false
-            self.myMaterialsButton.isHidden = false
-            self.settingsButton.isHidden = false
             
             UIView.animate(withDuration: 0.25, animations: {
                 
                 self.blurEffectView.alpha = 1
-                self.myRoomsButton.alpha = 1
-                self.myMaterialsButton.alpha = 1
-                self.settingsButton.alpha = 1
+                self.menuSelectButton0.alpha = 1
+                self.menuSelectButton1.alpha = 1
+                self.menuSelectButton2.alpha = 1
                 
             }, completion: nil)
         }
@@ -287,16 +306,18 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.reloadData()
     }
     
-    @IBAction func myRoomsButtonPressed(_ sender: Any) {
+    @objc func menuOptionSelected(sender: UIButton!) {
         
-    }
-    
-    @IBAction func myMaterialsButtonPressed(_ sender: Any) {
+        titleLabel.text = sender.titleLabel?.text
+        menuSelectOptions = ["My Projects", "My Rooms", "My Materials", "Settings"]
+        menuSelectOptions.remove(at: menuSelectOptions.index(of: titleLabel.text!)!)
+        menuSelectOptions.insert(titleLabel.text!, at: 0)
         
-    }
-    
-    @IBAction func settingsButtonPressed(_ sender: Any) {
+        for menuOption in menuSelectButtons {
+            menuOption.setTitle(menuSelectOptions[menuSelectButtons.index(of: menuOption)! + 1], for: .normal)
+        }
         
+        menuButtonPressed(self)
     }
     
     
