@@ -14,7 +14,11 @@ class CreateTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        //Adds corner radius and selection style
+        self.selectionStyle = .none
+        self.createView.layer.cornerRadius = 8
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

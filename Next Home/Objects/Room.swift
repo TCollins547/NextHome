@@ -15,14 +15,17 @@ class Room {
     var roomBudget: String!
     var roomRunningTab: String!
     var roomRemainingBudget: String!
+    var roomArea: String!
     
     var roomProject: Project!
     
-    init(name: String, budget: String, project: Project) {
+    init(name: String, budget: String, area: String, project: Project) {
         roomName = name
         roomBudget = formatNumbers(number: budget)
         roomRunningTab = "0"
         roomRemainingBudget = budget
+        roomArea = area
+        
         roomProject = project
     }
     

@@ -54,7 +54,7 @@ class Project {
             rooms[section]?.append(newRoom)
         }
         
-        UserAppData.userItems.userRooms.append(newRoom)
+        UserAppData.userItems.userRooms.insert(newRoom, at: 0)
         
     }
     

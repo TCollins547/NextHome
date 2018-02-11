@@ -25,24 +25,18 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var newRoomCreationView: NewRoomCreationView!
     
-    var projectID = String()
     var viewProject: Project!
     var projectAreas: [String]!
     var projectRooms: [[Room]]!
+    
+    var selectedRoom: Room!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for project in UserAppData.userItems.userProjects {
-            if project.projectIdentifier == projectID {
-                viewProject = project
-                projectAreas = Array(viewProject.rooms.keys)
-                projectRooms = Array(viewProject.rooms.values)
-                break
-            }
-        }
-        
         if viewProject != nil {
+            projectAreas = Array(viewProject.rooms.keys)
+            projectRooms = Array(viewProject.rooms.values)
             projectNameLabel.text = viewProject.projectName
             projectAddressLabel.text = viewProject.projectAddress
             projectTabLabel.text = "$" + viewProject.projectRunningTab
@@ -104,11 +98,15 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: RoomTableViewCell = (self.roomTableView.dequeueReusableCell(withIdentifier: "RoomCellReuseID") as! RoomTableViewCell?)!
-        cell.roomNameLabel.text = projectRooms[indexPath.section][indexPath.row].roomName
-        cell.roomBudgetLabel.text = "$" + projectRooms[indexPath.section][indexPath.row].roomRunningTab
+        cell.fillCellData(room: projectRooms[indexPath.section][indexPath.row])
         cell.frame.size = CGSize(width: self.view.frame.width, height: 75)
         cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedRoom = (tableView.cellForRow(at: indexPath) as! RoomTableViewCell).cellRoom
+        performSegue(withIdentifier: "roomToMaterialSegue", sender: self)
     }
     
     @IBAction func addRoomButtonPressed(_ sender: Any) {
@@ -193,6 +191,9 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? PhotoCollectionViewController {
             destination.viewProject = self.viewProject
+        } else if let destination = segue.destination as? MaterialViewController {
+            print("Here")
+            destination.viewRoom = self.selectedRoom
         }
     }
     

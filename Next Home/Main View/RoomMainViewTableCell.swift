@@ -1,33 +1,36 @@
 //
-//  RoomTableViewCell.swift
+//  RoomMainViewTableCell.swift
 //  Next Home
 //
-//  Created by Tyler Collins on 2/9/18.
+//  Created by Tyler Collins on 2/10/18.
 //  Copyright © 2018 Tyler Collins. All rights reserved.
 //
 
 import UIKit
 
-class RoomTableViewCell: UITableViewCell {
+class RoomMainViewTableCell: UITableViewCell {
     
     @IBOutlet weak var roomNameLabel: UILabel!
+    @IBOutlet weak var roomProjectLabel: UILabel!
     @IBOutlet weak var roomBudgetLabel: UILabel!
-    @IBOutlet weak var cellContentView: UIView!
     
-    var cellRoom: Room!
+    @IBOutlet weak var cellContentArea: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.cellContentView.layer.cornerRadius = 8
+        
+        contentView.backgroundColor = UIColor.clear
+        cellContentArea.layer.cornerRadius = 8
+        selectionStyle = .none
         
         // Initialization code
     }
     
     func fillCellData(room: Room) {
-        cellRoom = room
         
-        roomNameLabel.text = cellRoom.roomName
-        roomBudgetLabel.text = "$" + cellRoom.roomBudget
+        roomNameLabel.text = room.roomName
+        roomProjectLabel.text = room.roomProject.projectName + " - " + room.roomArea
+        roomBudgetLabel.text = "$" + room.roomRunningTab
         
     }
 
@@ -36,5 +39,5 @@ class RoomTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
 }

@@ -97,7 +97,7 @@ class NewRoomCreationView: UIView, UIPickerViewDelegate, UIPickerViewDataSource 
     }
     
     func addRoom() {
-        let newRoom = Room(name: roomNameTextField.text!, budget: roomBudgetTextField.text!, project: parentView.viewProject)
+        let newRoom = Room(name: roomNameTextField.text!, budget: roomBudgetTextField.text!, area: roomAreaTextField.text! , project: parentView.viewProject)
         viewProject.addRoom(newRoom: newRoom, section: roomAreaTextField.text!)
         parentView.projectAreas = Array(viewProject.rooms.keys)
         parentView.projectRooms = Array(viewProject.rooms.values)

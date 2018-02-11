@@ -13,7 +13,7 @@ class UserAppData {
     struct userItems {
         static var userProjects = [Project]()
         static var userRooms = [Room]()
-        static var userMaterials = [String]()
+        static var userMaterials = [Material]()
     }
     
 }

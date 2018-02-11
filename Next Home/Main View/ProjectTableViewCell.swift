@@ -18,18 +18,27 @@ class ProjectTableViewCell: UITableViewCell {
     @IBOutlet weak var projectBudgetLabel: UILabel!
     @IBOutlet weak var projectImage: UIImageView!
     
-    var projectID: String!
+    var cellProject: Project!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         projectView.layer.cornerRadius = 8
+        selectionStyle = .none
         
         // Initialization code
     }
     
-    func setProjectID(proID: String) {
-        projectID = proID
+    func filledCellData(project: Project) {
+        
+        //Fills info of project view
+        projectTitleLabel.text = project.projectName
+        projectAddressLabel.text = project.projectAddress
+        projectBudgetLabel.text = "$" + project.projectRunningTab
+        projectImage.image = project.projectHomeImage
+        
+        cellProject = project
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

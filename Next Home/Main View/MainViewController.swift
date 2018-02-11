@@ -20,12 +20,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var menuSelectButton0 = UIButton()
     var menuSelectButton1 = UIButton()
     var menuSelectButton2 = UIButton()
-    var menuSelectOptions = ["My Projects", "My Rooms", "My Materials", "Settings"]
     var menuSelectButtons: [UIButton]!
+    var menuSelectOptions = ["My Projects", "My Rooms", "My Materials", "Settings"]
     
     
     @IBOutlet weak var tableView: UITableView!
-    var selectedID = String()
+    var selectedProject: Project!
     
     var blurEffectView: UIVisualEffectView!
     
@@ -43,6 +43,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let testProject = Project(id: UUID().uuidString, name: "West Hills", address: "10937 West Hills Rd", budget: "10000", startDate: "March 1, 2017", image: #imageLiteral(resourceName: "Unique-Spanish-Style-House-Colors"))
         UserAppData.userItems.userProjects.insert(testProject, at: 0)
+        let testRoom = Room(name: "Bedroom", budget: "1200", area: "First Floor", project: testProject)
+        testProject.addRoom(newRoom: testRoom, section: "First Floor")
         
         //Used to call method that triggers when keyboard shows
         //NotificationCenter.default.addObserver(self, selector: #selector(keyboardShown), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
@@ -53,6 +55,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        //Removes navigation bar from top of view to have app full screen
         navigationController?.setNavigationBarHidden(true, animated: false)
         
     }
@@ -64,58 +67,88 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //Returns the amount rows in the project table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return UserAppData.userItems.userProjects.count + 1
+        //Retrieves number of projects user has and adds 1 for creation cell
+        
+        var tableCount = 0
+        
+        if titleLabel.text == "My Projects" {
+            tableCount = UserAppData.userItems.userProjects.count + 1
+        } else if titleLabel.text == "My Rooms" {
+            tableCount = UserAppData.userItems.userRooms.count
+        } else {
+            tableCount = UserAppData.userItems.userMaterials.count
+        }
+        
+        return tableCount
     }
     
     // Creates a cell for each table view row
+    //Returns created tableviewcell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        //This places the create new project at the end of the table
-        if indexPath.row == UserAppData.userItems.userProjects.count {
+        
+        if titleLabel.text == "My Projects" {
             
-            //Creates a cell and a create project view
-            let cell: CreateTableViewCell = (self.tableView.dequeueReusableCell(withIdentifier: "ProjectCellCreateReuseID") as! CreateTableViewCell?)!
+            //This places the create new project at the end of the table
+            if indexPath.row == UserAppData.userItems.userProjects.count {
+                
+                
+                //Creates a cell and a create project view
+                let cell: CreateTableViewCell = (self.tableView.dequeueReusableCell(withIdentifier: "ProjectCellCreateReuseID") as! CreateTableViewCell?)!
+                
+                return cell
+                
+                //Called if not last cell in the table
+                //Creates normal project view
+            } else {
+                
+                //Creates a cell and a project view
+                let cell: ProjectTableViewCell = (self.tableView.dequeueReusableCell(withIdentifier: "ProjectCellReuseID") as! ProjectTableViewCell?)!
+                cell.filledCellData(project: UserAppData.userItems.userProjects[indexPath.row])
+                
+                return cell
+                
+            }
             
-            cell.selectionStyle = .none
-            cell.createView.layer.cornerRadius = 8
+        } else if titleLabel.text == "My Rooms" {
+            //Setup Room Table view cells
+            
+            tableView.register(UINib(nibName: "RoomMainViewTableCell", bundle: nil), forCellReuseIdentifier: "roomMainViewReuseID")
+            
+            let cell: RoomMainViewTableCell = (self.tableView.dequeueReusableCell(withIdentifier: "roomMainViewReuseID") as! RoomMainViewTableCell?)!
+            cell.fillCellData(room: UserAppData.userItems.userRooms[indexPath.row])
             
             return cell
             
         } else {
-        
-            //Creates a cell and a project view
-            let cell: ProjectTableViewCell = (self.tableView.dequeueReusableCell(withIdentifier: "ProjectCellReuseID") as! ProjectTableViewCell?)!
-            
-            //Fills info of project view
-            cell.projectTitleLabel.text = UserAppData.userItems.userProjects[indexPath.row].projectName
-            cell.projectAddressLabel.text = UserAppData.userItems.userProjects[indexPath.row].projectAddress
-            cell.projectBudgetLabel.text = "$" + UserAppData.userItems.userProjects[indexPath.row].projectRunningTab
-            cell.projectImage.image = UserAppData.userItems.userProjects[indexPath.row].projectHomeImage
-            
-            cell.setProjectID(proID: UserAppData.userItems.userProjects[indexPath.row].projectIdentifier)
-            
-            cell.selectionStyle = .none
-            
-            return cell
+            //Setup Material Table view cells
         }
+        
+        return UITableViewCell()
         
     }
     
     // Method to run when table view cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //Handles creation view cells
         if tableView.cellForRow(at: indexPath) is CreateTableViewCell {
             addButtonPressed((Any).self)
-        } else {
-            selectedID = ((tableView.cellForRow(at: indexPath) as? ProjectTableViewCell)?.projectID)!
+            
+        //Handles segue to room view
+        } else if tableView.cellForRow(at: indexPath) is ProjectTableViewCell {
+            selectedProject = ((tableView.cellForRow(at: indexPath) as? ProjectTableViewCell)?.cellProject)!
             performSegue(withIdentifier: "showRoomView", sender: (Any).self)
         }
     }
     
+    //Handles segues to alternate view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? RoomViewController {
-            destination.projectID = selectedID
+            destination.viewProject = selectedProject
         }
     }
+    
     
     func setupMenuButtons() {
         
@@ -194,6 +227,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         //Triggers when the search is in use
         if !searchbar.isHidden {
+            
+            self.view.endEditing(true)
             
             //Animates the search button back and rotates itself back
             UIView.animate(withDuration: 0.25, animations: {
@@ -318,6 +353,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         menuButtonPressed(self)
+        tableView.reloadData()
     }
     
     

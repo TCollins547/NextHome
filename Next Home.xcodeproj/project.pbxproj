@@ -11,6 +11,10 @@
 		C703205C2026AB3100E57FCC /* CreateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703205B2026AB3100E57FCC /* CreateTableViewCell.swift */; };
 		C703205E2026B80100E57FCC /* NewProjectCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703205D2026B80100E57FCC /* NewProjectCreationView.swift */; };
 		C710DCDA202E407200CB8A46 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C710DCD9202E407200CB8A46 /* PhotoCollectionViewCell.swift */; };
+		C71F479C202F863300DC886F /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71F479B202F863300DC886F /* Material.swift */; };
+		C71F479F202FB62900DC886F /* RoomMainViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71F479D202FB62900DC886F /* RoomMainViewTableCell.swift */; };
+		C71F47A0202FB62900DC886F /* RoomMainViewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C71F479E202FB62900DC886F /* RoomMainViewTableCell.xib */; };
+		C721AF6F202FD09500F488D5 /* MaterialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C721AF6E202FD09500F488D5 /* MaterialViewController.swift */; };
 		C7405EBA20194F2300296870 /* NewProjectCreationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7405EB920194F2300296870 /* NewProjectCreationView.xib */; };
 		C761DA6C2027F6F2008408E4 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C761DA6B2027F6F2008408E4 /* RoomViewController.swift */; };
 		C76EC203202E782200579A85 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76EC202202E782200579A85 /* Room.swift */; };
@@ -37,6 +41,10 @@
 		C703205B2026AB3100E57FCC /* CreateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTableViewCell.swift; sourceTree = "<group>"; };
 		C703205D2026B80100E57FCC /* NewProjectCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectCreationView.swift; sourceTree = "<group>"; };
 		C710DCD9202E407200CB8A46 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		C71F479B202F863300DC886F /* Material.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Material.swift; sourceTree = "<group>"; };
+		C71F479D202FB62900DC886F /* RoomMainViewTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomMainViewTableCell.swift; sourceTree = "<group>"; };
+		C71F479E202FB62900DC886F /* RoomMainViewTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomMainViewTableCell.xib; sourceTree = "<group>"; };
+		C721AF6E202FD09500F488D5 /* MaterialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialViewController.swift; sourceTree = "<group>"; };
 		C7405EB920194F2300296870 /* NewProjectCreationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewProjectCreationView.xib; sourceTree = "<group>"; };
 		C761DA6B2027F6F2008408E4 /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
 		C76EC202202E782200579A85 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
@@ -77,6 +85,8 @@
 				C7E59B072016C1E8007761D3 /* MainViewController.swift */,
 				C7405EB920194F2300296870 /* NewProjectCreationView.xib */,
 				C703205D2026B80100E57FCC /* NewProjectCreationView.swift */,
+				C71F479E202FB62900DC886F /* RoomMainViewTableCell.xib */,
+				C71F479D202FB62900DC886F /* RoomMainViewTableCell.swift */,
 				C703205920269C9D00E57FCC /* ProjectTableViewCell.swift */,
 				C703205B2026AB3100E57FCC /* CreateTableViewCell.swift */,
 			);
@@ -88,6 +98,7 @@
 			children = (
 				C79A2B1620182B7A0006DFDC /* Project.swift */,
 				C76EC202202E782200579A85 /* Room.swift */,
+				C71F479B202F863300DC886F /* Material.swift */,
 				C76EC206202E7B5300579A85 /* UserAppData.swift */,
 			);
 			path = Objects;
@@ -137,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				C7E59AF22016B59C007761D3 /* AppDelegate.swift */,
+				C721AF6E202FD09500F488D5 /* MaterialViewController.swift */,
 				C76EC209202E7B9500579A85 /* Photo Collection View */,
 				C7B433A0202A8E6400E1A2C7 /* Room View */,
 				C761DA6A2027F2D6008408E4 /* Main View */,
@@ -216,6 +228,7 @@
 				C7405EBA20194F2300296870 /* NewProjectCreationView.xib in Resources */,
 				C7B4339D202A805C00E1A2C7 /* ProjectPhotoCollectionSubView.xib in Resources */,
 				C76EC20B202E7C0100579A85 /* NewRoomCreationView.xib in Resources */,
+				C71F47A0202FB62900DC886F /* RoomMainViewTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,8 +240,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C703205E2026B80100E57FCC /* NewProjectCreationView.swift in Sources */,
+				C71F479F202FB62900DC886F /* RoomMainViewTableCell.swift in Sources */,
 				C703205A20269C9D00E57FCC /* ProjectTableViewCell.swift in Sources */,
 				C76EC20F202E8A9F00579A85 /* RoomTableViewCell.swift in Sources */,
+				C721AF6F202FD09500F488D5 /* MaterialViewController.swift in Sources */,
 				C7E59B082016C1E8007761D3 /* MainViewController.swift in Sources */,
 				C7E59AFB2016B59C007761D3 /* Next_Home.xcdatamodeld in Sources */,
 				C703205C2026AB3100E57FCC /* CreateTableViewCell.swift in Sources */,
@@ -236,6 +251,7 @@
 				C76EC207202E7B5300579A85 /* UserAppData.swift in Sources */,
 				C76EC203202E782200579A85 /* Room.swift in Sources */,
 				C7E59AF32016B59C007761D3 /* AppDelegate.swift in Sources */,
+				C71F479C202F863300DC886F /* Material.swift in Sources */,
 				C79A2B1720182B7A0006DFDC /* Project.swift in Sources */,
 				C761DA6C2027F6F2008408E4 /* RoomViewController.swift in Sources */,
 				C7BA56B3202BCE8700E0215E /* PhotoCollectionViewController.swift in Sources */,
