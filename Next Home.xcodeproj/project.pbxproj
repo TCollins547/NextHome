@@ -172,6 +172,7 @@
 				C7E59AEB2016B59C007761D3 /* Sources */,
 				C7E59AEC2016B59C007761D3 /* Frameworks */,
 				C7E59AED2016B59C007761D3 /* Resources */,
+				C7068AE920368E490091A8CA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -233,6 +234,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C7068AE920368E490091A8CA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C7E59AEB2016B59C007761D3 /* Sources */ = {
@@ -401,10 +418,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Q2R256NHT6;
+				DEVELOPMENT_TEAM = XMHD352X3L;
 				INFOPLIST_FILE = "Next Home/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.TylerCollins.Next-Home";
+				PRODUCT_BUNDLE_IDENTIFIER = com.TylerCollins.NextHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -417,10 +434,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Q2R256NHT6;
+				DEVELOPMENT_TEAM = XMHD352X3L;
 				INFOPLIST_FILE = "Next Home/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.TylerCollins.Next-Home";
+				PRODUCT_BUNDLE_IDENTIFIER = com.TylerCollins.NextHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

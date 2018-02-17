@@ -144,7 +144,7 @@ class NewProjectCreationView: UIView, UITextFieldDelegate, UIImagePickerControll
     }
     
     func createNewProject() {
-        let newProject = Project(id: UUID().uuidString, name: projectTitleTextField.text!, address: projectAddressTextField.text!, budget: projectBudgetTextField.text!, startDate: startDateTextField.text!, image: projectImage.currentBackgroundImage!)
+        let newProject = Project(name: projectTitleTextField.text!, address: projectAddressTextField.text!, budget: projectBudgetTextField.text!, startDate: startDateTextField.text!, image: projectImage.currentBackgroundImage!)
         if expectValueTextField.text != "" {
             newProject.setExpectedValue(ev: expectValueTextField.text!)
         }

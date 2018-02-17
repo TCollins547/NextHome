@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Project {
+class Project: Equatable {
     
     var projectName: String
     var projectAddress: String
@@ -28,9 +28,9 @@ class Project {
     
     var projectIdentifier: String!
     
-    init(id: String, name: String, address: String, budget: String, startDate: String, image: UIImage) {
+    init(name: String, address: String, budget: String, startDate: String, image: UIImage) {
         
-        projectIdentifier = id
+        projectIdentifier = UUID().uuidString
         
         projectName = name
         projectAddress = address
@@ -47,7 +47,6 @@ class Project {
     }
     
     func addRoom(newRoom: Room, section: String) {
-        print("Adding Room")
         if rooms[section] == nil {
             rooms[section] = [newRoom]
         } else {
@@ -91,6 +90,10 @@ class Project {
         numberFormatter.numberStyle = NumberFormatter.Style.decimal
         
         return numberFormatter.string(from: NSNumber(value:num!))!
+    }
+    
+    static func == (lhs: Project,rhs: Project) -> Bool {
+        return lhs.projectIdentifier == rhs.projectIdentifier
     }
     
 }

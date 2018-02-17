@@ -21,7 +21,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var menuSelectButton1 = UIButton()
     var menuSelectButton2 = UIButton()
     var menuSelectButtons: [UIButton]!
-    var menuSelectOptions = ["My Projects", "My Rooms", "My Materials", "Settings"]
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -34,6 +33,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var newProjectCreationView: NewProjectCreationView!
 
+    /*
+    ——————————————— View Controller Methods ———————————————
+     Contains: viewDidLoad(), viewWillAppear(Bool), didRecieveMemoryWarning()
+     */
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,9 +44,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         setupMenuButtons()
         
         
-        let testProject = Project(id: UUID().uuidString, name: "West Hills", address: "10937 West Hills Rd", budget: "10000", startDate: "March 1, 2017", image: #imageLiteral(resourceName: "Unique-Spanish-Style-House-Colors"))
+        let testProject = Project(name: "West Hills", address: "10937 West Hills Rd", budget: "10000", startDate: "March 1, 2017", image: #imageLiteral(resourceName: "Unique-Spanish-Style-House-Colors"))
         UserAppData.userItems.userProjects.insert(testProject, at: 0)
-        let testRoom = Room(name: "Bedroom", budget: "1200", area: "First Floor", project: testProject)
+        let testRoom = Room(name: "Bedroom", budget: "1200", type: "Bedroom", project: testProject)
         testProject.addRoom(newRoom: testRoom, section: "First Floor")
         
         //Used to call method that triggers when keyboard shows
@@ -64,6 +67,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    /*
+    ——————————————— Table View Data and Setup ———————————————
+     Contains: tableView(numberOfRowsInSection0 -> Int, tableView(cellForRowAt) -> UITableViewCell, tableView(didSelectRowAt)
+    */
+    
     
     //Returns the amount rows in the project table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -142,16 +152,15 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    //Handles segues to alternate view
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? RoomViewController {
-            destination.viewProject = selectedProject
-        }
-    }
     
+    /*
+     ——————————————— Menu Button Handling and Setup ———————————————
+     Contains: setupMenuButtons(), menuButtonPressed(Any), menuOptionSelected(UIButton)
+     */
     
     func setupMenuButtons() {
         
+        var menuSelectOptions = ["My Projects", "My Rooms", "My Materials", "Settings"]
         menuSelectButtons = [menuSelectButton0, menuSelectButton1, menuSelectButton2]
         
         for buttonOption in menuSelectButtons {
@@ -222,6 +231,29 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     }
     
+    @objc func menuOptionSelected(sender: UIButton!) {
+        
+        var menuSelectOptions = ["My Projects", "My Rooms", "My Materials", "Settings"]
+        
+        titleLabel.text = sender.titleLabel?.text
+        menuSelectOptions = ["My Projects", "My Rooms", "My Materials", "Settings"]
+        menuSelectOptions.remove(at: menuSelectOptions.index(of: titleLabel.text!)!)
+        menuSelectOptions.insert(titleLabel.text!, at: 0)
+        
+        for menuOption in menuSelectButtons {
+            menuOption.setTitle(menuSelectOptions[menuSelectButtons.index(of: menuOption)! + 1], for: .normal)
+        }
+        
+        menuButtonPressed(self)
+        tableView.reloadData()
+    }
+    
+    
+    /*
+     ——————————————— Project Addition Handling ———————————————
+     Contains: addButtonPressed(Any), cancelProjectCreate()
+     */
+    
     //Handles add button press and also handles search cancel when applicable
     @IBAction func addButtonPressed(_ sender: Any) {
         
@@ -277,6 +309,28 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
+    func cancelProjectCreate() {
+        
+        self.view.endEditing(true)
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            
+            self.newProjectCreationView.frame.origin = CGPoint(x: self.newProjectCreationView.frame.origin.x, y: self.newProjectCreationView.frame.height * -1)
+            self.blurEffectView.alpha = 0
+            
+        }, completion: { finished in
+            self.newProjectCreationView.isHidden = true
+            self.blurEffectView.isHidden = true
+        })
+        
+    }
+    
+    
+    /*
+     ——————————————— Search Button Setup and Handling ———————————————
+     Contains: searchButtonPressed(Any)
+     */
+    
     //Handles search button press
     @IBAction func searchButtonPressed(_ sender: Any) {
         
@@ -312,49 +366,23 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
-//    //Called when keyboard is shown
-//    @objc func keyboardShown(notification: NSNotification) {
-//        let value = notification.userInfo![UIKeyboardFrameEndUserInfoKey]! as AnyObject
-//        let rawFrame = value.cgRectValue
-//        let keyboardFrame = view.convert(rawFrame!, from: nil)
-//
-//
-//    }
     
-    func cancelProjectCreate() {
-        
-        self.view.endEditing(true)
-        
-        UIView.animate(withDuration: 0.5, animations: {
-            
-            self.newProjectCreationView.frame.origin = CGPoint(x: self.newProjectCreationView.frame.origin.x, y: self.newProjectCreationView.frame.height * -1)
-            self.blurEffectView.alpha = 0
-            
-        }, completion: { finished in
-            self.newProjectCreationView.isHidden = true
-            self.blurEffectView.isHidden = true
-        })
-        
+    /*
+     ——————————————— Segue Handling ———————————————
+     Contains: prepare(for segue, sender), undwindSegue(sender)
+     */
+    
+    //Handles segues to alternate view
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? RoomViewController {
+            destination.viewProject = selectedProject
+        }
     }
     
     @IBAction func undwindSegue(_ sender: UIStoryboardSegue) {
         tableView.reloadData()
     }
     
-    @objc func menuOptionSelected(sender: UIButton!) {
-        
-        titleLabel.text = sender.titleLabel?.text
-        menuSelectOptions = ["My Projects", "My Rooms", "My Materials", "Settings"]
-        menuSelectOptions.remove(at: menuSelectOptions.index(of: titleLabel.text!)!)
-        menuSelectOptions.insert(titleLabel.text!, at: 0)
-        
-        for menuOption in menuSelectButtons {
-            menuOption.setTitle(menuSelectOptions[menuSelectButtons.index(of: menuOption)! + 1], for: .normal)
-        }
-        
-        menuButtonPressed(self)
-        tableView.reloadData()
-    }
     
     
     /*

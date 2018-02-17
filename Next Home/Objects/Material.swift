@@ -8,13 +8,19 @@
 
 import Foundation
 
-class Material {
+class Material: Equatable {
+    
+    var materialIdentifier: String!
     
     var materialName: String!
     
     init(name: String) {
+        materialIdentifier = UUID().uuidString
         materialName = name
     }
     
+    static func == (lhs: Material,rhs: Material) -> Bool {
+        return lhs.materialIdentifier == rhs.materialIdentifier
+    }
     
 }

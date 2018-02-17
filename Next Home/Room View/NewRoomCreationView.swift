@@ -16,6 +16,8 @@ class NewRoomCreationView: UIView, UIPickerViewDelegate, UIPickerViewDataSource 
     
     @IBOutlet weak var areaButton: UIButton!
     
+    var roomTypes = ["Bedroom", "Bathroom", "Living Room", "Master Bathroom", "Master Bedroom"]
+    
     var parentView: RoomViewController!
     var viewProject: Project!
     
@@ -97,7 +99,7 @@ class NewRoomCreationView: UIView, UIPickerViewDelegate, UIPickerViewDataSource 
     }
     
     func addRoom() {
-        let newRoom = Room(name: roomNameTextField.text!, budget: roomBudgetTextField.text!, area: roomAreaTextField.text! , project: parentView.viewProject)
+        let newRoom = Room(name: roomNameTextField.text!, budget: roomBudgetTextField.text!, type: roomAreaTextField.text! , project: parentView.viewProject)
         viewProject.addRoom(newRoom: newRoom, section: roomAreaTextField.text!)
         parentView.projectAreas = Array(viewProject.rooms.keys)
         parentView.projectRooms = Array(viewProject.rooms.values)

@@ -27,13 +27,13 @@ class RoomTableViewCell: UITableViewCell {
         cellRoom = room
         
         roomNameLabel.text = cellRoom.roomName
-        roomBudgetLabel.text = "$" + cellRoom.roomBudget
+        roomBudgetLabel.text = "$" + cellRoom.roomRunningTab
         
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
 

@@ -9,22 +9,27 @@
 import Foundation
 import UIKit
 
-class Room {
+class Room: Equatable {
+    
+    var roomIdentifier: String!
     
     var roomName: String!
     var roomBudget: String!
     var roomRunningTab: String!
     var roomRemainingBudget: String!
-    var roomArea: String!
+    var roomType: RoomType!
     
     var roomProject: Project!
     
-    init(name: String, budget: String, area: String, project: Project) {
+    init(name: String, budget: String, type: String, project: Project) {
+        
+        roomIdentifier = UUID().uuidString
+        
         roomName = name
         roomBudget = formatNumbers(number: budget)
         roomRunningTab = "0"
         roomRemainingBudget = budget
-        roomArea = area
+        //roomArea = area
         
         roomProject = project
     }
@@ -38,4 +43,15 @@ class Room {
         return numberFormatter.string(from: NSNumber(value:num!))!
     }
     
+    static func == (lhs: Room,rhs: Room) -> Bool {
+        return lhs.roomIdentifier == rhs.roomIdentifier
+    }
+    
+}
+
+public enum RoomType {
+    case Bedroom
+    case Bathroom
+    case LivingRoom
+    case other(String)
 }
