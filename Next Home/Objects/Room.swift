@@ -9,29 +9,84 @@
 import Foundation
 import UIKit
 
-class Room: Equatable {
+class Room: NSObject, NSCoding {
     
     var roomIdentifier: String!
     
     var roomName: String!
-    var roomBudget: String!
-    var roomRunningTab: String!
-    var roomRemainingBudget: String!
-    var roomType: RoomType!
+    var roomBudget = 0
+    var roomRunningTab = 0
+    var roomRemainingBudget = 0
+    var roomType: String!
     
     var roomProject: Project!
+    var roomMaterials: [Material] = []
+    
+    
+    struct Keys {
+        static let id = "roomID"
+        static let name = "roomName"
+        static let budget = "roomBudget"
+        static let type = "roomType"
+        static let project = "roomParent"
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init()
+        if let roomIDObj = aDecoder.decodeObject(forKey: Keys.id) as? String { roomIdentifier = String(roomIDObj) }
+        if let roomNameObj = aDecoder.decodeObject(forKey: Keys.name) as? String { roomName = String(roomNameObj) }
+        if let roomBudgetObj = aDecoder.decodeObject(forKey: Keys.budget) as? Int { roomBudget = Int(roomBudgetObj) }
+        if let roomTypeObj = aDecoder.decodeObject(forKey: Keys.type) as? String { roomType = String(roomTypeObj) }
+        if let roomProjectObj = aDecoder.decodeObject(forKey: Keys.project) as? Project { roomProject = roomProjectObj }
+        
+        calcValues()
+        
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(roomIdentifier, forKey: Keys.id)
+        aCoder.encode(roomName, forKey: Keys.name)
+        aCoder.encode(roomBudget, forKey: Keys.budget)
+        aCoder.encode(roomType, forKey: Keys.type)
+        aCoder.encode(roomProject, forKey: Keys.project)
+    }
+    
     
     init(name: String, budget: String, type: String, project: Project) {
+        super.init()
         
         roomIdentifier = UUID().uuidString
         
         roomName = name
-        roomBudget = formatNumbers(number: budget)
-        roomRunningTab = "0"
-        roomRemainingBudget = budget
-        //roomArea = area
+        roomBudget = Int(budget)!
+        roomRunningTab = 0
+        roomRemainingBudget = Int(budget)!
         
         roomProject = project
+    }
+    
+    func getRoomBudget() -> String {
+        return formatNumbers(number: String(roomBudget))
+    }
+    
+    func getRoomTab() -> String {
+        return formatNumbers(number: String(roomRunningTab))
+    }
+    
+    func getRoomRemaining() -> String {
+        return formatNumbers(number: String(roomRemainingBudget))
+    }
+    
+    func calcValues() {
+        
+        var total = 0
+        for mat in roomMaterials {
+            total += Int(mat.materialCost)
+        }
+        roomRunningTab = total
+        
+        roomRemainingBudget = roomBudget - roomRunningTab
+        
     }
     
     func formatNumbers(number: String) -> String {
@@ -47,11 +102,4 @@ class Room: Equatable {
         return lhs.roomIdentifier == rhs.roomIdentifier
     }
     
-}
-
-public enum RoomType {
-    case Bedroom
-    case Bathroom
-    case LivingRoom
-    case other(String)
 }

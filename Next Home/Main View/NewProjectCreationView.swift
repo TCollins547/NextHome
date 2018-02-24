@@ -46,7 +46,7 @@ class NewProjectCreationView: UIView, UITextFieldDelegate, UIImagePickerControll
         viewProject = project
         projectTitleTextField.text = project.projectName
         projectAddressTextField.text = project.projectAddress
-        projectBudgetTextField.text = project.projectBudget.replacingOccurrences(of: ",", with: "")
+        projectBudgetTextField.text = project.getBudget().replacingOccurrences(of: ",", with: "")
         startDateTextField.text = project.projectStartDate
         projectImage.setBackgroundImage(project.projectHomeImage, for: .normal)
         
@@ -152,7 +152,7 @@ class NewProjectCreationView: UIView, UITextFieldDelegate, UIImagePickerControll
             newProject.setExpectedEndDate(ed: endDateTextField.text!)
         }
         
-        UserAppData.userItems.userProjects.insert(newProject, at: 0)
+        appData.addToList(newProject)
         cancelButtonPressed(self)
         (parentView as! MainViewController).tableView.reloadData()
     }
@@ -160,7 +160,7 @@ class NewProjectCreationView: UIView, UITextFieldDelegate, UIImagePickerControll
     func updateProject() {
         viewProject.projectName = projectTitleTextField.text!
         viewProject.projectAddress = projectAddressTextField.text!
-        viewProject.projectBudget = viewProject.formatNumbers(number: projectBudgetTextField.text!)
+        viewProject.projectBudget = Int(projectBudgetTextField.text!)!
         viewProject.projectStartDate = startDateTextField.text!
         
         if projectImage.currentBackgroundImage! != viewProject.projectHomeImage {

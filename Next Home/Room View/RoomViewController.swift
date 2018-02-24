@@ -26,8 +26,7 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
     var newRoomCreationView: NewRoomCreationView!
     
     var viewProject: Project!
-    var projectAreas: [String]!
-    var projectRooms: [[Room]]!
+    var projectRooms: [Room]!
     
     var selectedRoom: Room!
 
@@ -35,11 +34,10 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         
         if viewProject != nil {
-            projectAreas = Array(viewProject.rooms.keys)
-            projectRooms = Array(viewProject.rooms.values)
+            projectRooms = viewProject.rooms
             projectNameLabel.text = viewProject.projectName
             projectAddressLabel.text = viewProject.projectAddress
-            projectTabLabel.text = "$" + viewProject.projectRunningTab
+            projectTabLabel.text = "$" + viewProject.getRunningTab()
         } else {
             projectNameLabel.text = "Data error"
             projectAddressLabel.text = "Data error"
@@ -85,20 +83,16 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return projectAreas.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return projectRooms[section].count
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return projectAreas[section]
+        return viewProject.rooms.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: RoomTableViewCell = (self.roomTableView.dequeueReusableCell(withIdentifier: "RoomCellReuseID") as! RoomTableViewCell?)!
-        cell.fillCellData(room: projectRooms[indexPath.section][indexPath.row])
+        cell.fillCellData(room: viewProject.rooms[indexPath.row])
         cell.frame.size = CGSize(width: self.view.frame.width, height: 75)
         cell.selectionStyle = .none
         return cell
@@ -180,7 +174,7 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
     func refreshView() {
         projectNameLabel.text = viewProject.projectName
         projectAddressLabel.text = viewProject.projectAddress
-        projectTabLabel.text = "$" + viewProject.projectRunningTab
+        projectTabLabel.text = "$" + viewProject.getRunningTab()
         setupScrollViews()
     }
     

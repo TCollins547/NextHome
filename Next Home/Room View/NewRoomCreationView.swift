@@ -38,7 +38,7 @@ class NewRoomCreationView: UIView, UIPickerViewDelegate, UIPickerViewDataSource 
             roomAreaTextField.inputView = nil
             roomAreaTextField.reloadInputViews()
         } else {
-            roomAreaTextField.text = Array(parentView.viewProject.rooms.keys)[0]
+            //roomAreaTextField.text = Array(parentView.viewProject.rooms.keys)[0]
             pickerView.reloadAllComponents()
         }
     }
@@ -49,15 +49,15 @@ class NewRoomCreationView: UIView, UIPickerViewDelegate, UIPickerViewDataSource 
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return viewProject.rooms.count
+        return 1//viewProject.rooms.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return Array(viewProject.rooms.keys)[row]
+        return "In Development"//Array(viewProject.rooms.keys)[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        roomAreaTextField.text = Array(viewProject.rooms.keys)[row]
+        roomAreaTextField.text = "In Development"//Array(viewProject.rooms.keys)[row]
     }
     
     @IBAction func createNewAreaButtonPressed(_ sender: Any) {
@@ -69,7 +69,7 @@ class NewRoomCreationView: UIView, UIPickerViewDelegate, UIPickerViewDataSource 
         } else if areaButton.currentBackgroundImage == #imageLiteral(resourceName: "icons8-xbox_menu_filled-1") {
             areaButton.setBackgroundImage(#imageLiteral(resourceName: "icons8-add_filled-1"), for: .normal)
             roomAreaTextField.inputView = pickerView
-            roomAreaTextField.text = Array(parentView.viewProject.rooms.keys)[0]
+            roomAreaTextField.text = "In Development"//Array(parentView.viewProject.rooms.keys)[0]
             roomAreaTextField.reloadInputViews()
         }
     }
@@ -100,9 +100,7 @@ class NewRoomCreationView: UIView, UIPickerViewDelegate, UIPickerViewDataSource 
     
     func addRoom() {
         let newRoom = Room(name: roomNameTextField.text!, budget: roomBudgetTextField.text!, type: roomAreaTextField.text! , project: parentView.viewProject)
-        viewProject.addRoom(newRoom: newRoom, section: roomAreaTextField.text!)
-        parentView.projectAreas = Array(viewProject.rooms.keys)
-        parentView.projectRooms = Array(viewProject.rooms.values)
+        viewProject.addRoom(newRoom: newRoom)
         parentView.roomTableView.reloadData()
         cancelButtonPressed(self)
     }

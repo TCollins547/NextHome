@@ -21,8 +21,8 @@ class MaterialViewController: UIViewController {
         
         if viewRoom != nil {
             roomNameLabel.text = viewRoom.roomName
-            areaNameLabel.text = viewRoom.roomArea
-            budgetLabel.text = "$" + viewRoom.roomRunningTab
+            areaNameLabel.text = viewRoom.roomType
+            budgetLabel.text = "$" + viewRoom.getRoomTab()
         }
 
         // Do any additional setup after loading the view.

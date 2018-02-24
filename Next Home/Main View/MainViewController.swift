@@ -8,6 +8,8 @@
 
 import UIKit
 
+var appData = UserAppData()
+
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -43,15 +45,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         setupMenuButtons()
         
-        
-        let testProject = Project(name: "West Hills", address: "10937 West Hills Rd", budget: "10000", startDate: "March 1, 2017", image: #imageLiteral(resourceName: "Unique-Spanish-Style-House-Colors"))
-        UserAppData.userItems.userProjects.insert(testProject, at: 0)
-        let testRoom = Room(name: "Bedroom", budget: "1200", type: "Bedroom", project: testProject)
-        testProject.addRoom(newRoom: testRoom, section: "First Floor")
-        
-        //Used to call method that triggers when keyboard shows
-        //NotificationCenter.default.addObserver(self, selector: #selector(keyboardShown), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
-        
         // Do any additional setup after loading the view.
     }
     
@@ -82,11 +75,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         var tableCount = 0
         
         if titleLabel.text == "My Projects" {
-            tableCount = UserAppData.userItems.userProjects.count + 1
+            tableCount = appData.getList("project").count + 1
         } else if titleLabel.text == "My Rooms" {
-            tableCount = UserAppData.userItems.userRooms.count
+            tableCount = appData.getList("room").count
         } else {
-            tableCount = UserAppData.userItems.userMaterials.count
+            tableCount = appData.getList("material").count
         }
         
         return tableCount
@@ -100,7 +93,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if titleLabel.text == "My Projects" {
             
             //This places the create new project at the end of the table
-            if indexPath.row == UserAppData.userItems.userProjects.count {
+            if indexPath.row == appData.getList("project").count {
                 
                 
                 //Creates a cell and a create project view
@@ -114,7 +107,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 
                 //Creates a cell and a project view
                 let cell: ProjectTableViewCell = (self.tableView.dequeueReusableCell(withIdentifier: "ProjectCellReuseID") as! ProjectTableViewCell?)!
-                cell.filledCellData(project: UserAppData.userItems.userProjects[indexPath.row])
+                cell.filledCellData(project: appData.getList("project")[indexPath.row] as! Project)
                 
                 return cell
                 
@@ -126,7 +119,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             tableView.register(UINib(nibName: "RoomMainViewTableCell", bundle: nil), forCellReuseIdentifier: "roomMainViewReuseID")
             
             let cell: RoomMainViewTableCell = (self.tableView.dequeueReusableCell(withIdentifier: "roomMainViewReuseID") as! RoomMainViewTableCell?)!
-            cell.fillCellData(room: UserAppData.userItems.userRooms[indexPath.row])
+            cell.fillCellData(room: appData.getList("room")[indexPath.row] as! Room)
             
             return cell
             

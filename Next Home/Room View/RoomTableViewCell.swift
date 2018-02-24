@@ -27,7 +27,7 @@ class RoomTableViewCell: UITableViewCell {
         cellRoom = room
         
         roomNameLabel.text = cellRoom.roomName
-        roomBudgetLabel.text = "$" + cellRoom.roomRunningTab
+        roomBudgetLabel.text = "$" + cellRoom.getRoomTab()
         
     }
 
