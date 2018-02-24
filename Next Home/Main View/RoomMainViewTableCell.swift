@@ -29,7 +29,7 @@ class RoomMainViewTableCell: UITableViewCell {
     func fillCellData(room: Room) {
         
         roomNameLabel.text = room.roomName
-        roomProjectLabel.text = room.roomProject.projectName + " - " + room.roomType
+        roomProjectLabel.text = room.roomProject.projectName //+ " - " + room.roomType
         roomBudgetLabel.text = "$" + room.getRoomTab()
         
     }

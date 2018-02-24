@@ -17,7 +17,7 @@ class Project: NSObject, NSCoding {
     var projectHomeImage: UIImage!
     
     var projectRunningTab = 0
-    var projectBudget = 0
+    var projectBudget: Int!
     var projectRemainingBudget = 0
     var projectExpectedValue = "N/A"
     var projectExpectedEndDate = "N/A"

@@ -50,12 +50,33 @@ class UserAppData {
     
     func loadInData() {
         if let projectData = NSKeyedUnarchiver.unarchiveObject(withFile: projectFilePath) as? [Project] { projects = projectData }
-        //if let roomData = NSKeyedUnarchiver.unarchiveObject(withFile: roomFilePath) as? [Room] { rooms = roomData }
-        //if let materialData = NSKeyedUnarchiver.unarchiveObject(withFile: materialFilePath) as? [Material] { materials = materialData }
+        
+        loadRoomsToArray()
+        loadMaterialsToArray()
         
         print("Projects: " + String(projects.count))
         print("Rooms: " + String(rooms.count))
         print("Materials: " + String(materials.count))
+    }
+    
+    func loadRoomsToArray() {
+        
+        for pro in projects {
+            rooms = rooms + pro.rooms
+        }
+        
+        //Add Sort Algorithm
+        
+    }
+    
+    func loadMaterialsToArray() {
+        
+        for room in rooms {
+            materials = materials + room.roomMaterials
+        }
+        
+        //Add Sort Algorithm
+        
     }
     
     init() {
