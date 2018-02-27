@@ -37,7 +37,7 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
             projectRooms = viewProject.rooms
             projectNameLabel.text = viewProject.projectName
             projectAddressLabel.text = viewProject.projectAddress
-            projectTabLabel.text = "$" + viewProject.getRunningTab()
+            projectTabLabel.text = viewProject.getRunningTab()
         } else {
             projectNameLabel.text = "Data error"
             projectAddressLabel.text = "Data error"
@@ -127,32 +127,9 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func editInfoButtonPressed() {
-        //Creates a create new project view
-        newProjectCreationView = Bundle.main.loadNibNamed("NewProjectCreationView", owner: self, options: nil)?.first as! NewProjectCreationView
-        newProjectCreationView.connectParentView(connectView: self)
-        newProjectCreationView.fillProjectInfo(project: viewProject)
         
-        //Summons keyboard when view is added
-        newProjectCreationView.frame.size = CGSize(width: self.view.frame.width - 20, height: newProjectCreationView.frame.height)
-        newProjectCreationView.frame.origin = CGPoint(x: 10, y: newProjectCreationView.frame.height * -1)
-        newProjectCreationView.projectTitleTextField.becomeFirstResponder()
+        performSegue(withIdentifier: "showCreationView", sender: self)
         
-        //Generates and sizes blur view
-        blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
-        blurEffectView.frame = self.view.bounds
-        blurEffectView.alpha = 0
-        
-        //Adds blur and view
-        self.view.addSubview(blurEffectView)
-        self.view.addSubview(newProjectCreationView)
-        
-        //Animates view and blur coming in
-        UIView.animate(withDuration: 0.5, animations: {
-            
-            self.blurEffectView.alpha = 1
-            self.newProjectCreationView.frame.origin = CGPoint(x: 10, y: UIApplication.shared.statusBarFrame.height + 10)
-            
-        }, completion: nil)
     }
     
     func cancelProjectEdit() {
@@ -174,11 +151,12 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
     func refreshView() {
         projectNameLabel.text = viewProject.projectName
         projectAddressLabel.text = viewProject.projectAddress
-        projectTabLabel.text = "$" + viewProject.getRunningTab()
+        projectTabLabel.text = viewProject.getRunningTab()
         setupScrollViews()
     }
     
-    @IBAction func undwindSegueToRoom(_ sender: UIStoryboardSegue) {
+    @IBAction func undwindToRoom(_ sender: UIStoryboardSegue) {
+        self.viewDidLoad()
         projectImagesView.setupImages(project: viewProject)
     }
     
@@ -186,8 +164,9 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let destination = segue.destination as? PhotoCollectionViewController {
             destination.viewProject = self.viewProject
         } else if let destination = segue.destination as? MaterialViewController {
-            print("Here")
             destination.viewRoom = self.selectedRoom
+        } else if let destination = segue.destination as? ProjectCreationViewController {
+            destination.viewProject = self.viewProject
         }
     }
     

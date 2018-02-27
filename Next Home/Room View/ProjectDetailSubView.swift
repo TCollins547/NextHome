@@ -25,9 +25,9 @@ class ProjectDetailSubView: UIView {
     }
     
     func setupValues(project: Project) {
-        projectBudgetLabel.text = "$" + project.getBudget()
-        projectRemainingBudgetLabel.text = "$" + project.getRemainingBudget()
-        projectValueLabel.text = "$" + project.projectExpectedValue
+        projectBudgetLabel.text = project.getBudget()
+        projectRemainingBudgetLabel.text = project.getRemainingBudget()
+        projectValueLabel.text = project.projectExpectedValue
         projectStartDateLabel.text = project.projectStartDate
         projectEndDateLabel.text = project.projectExpectedEndDate
     }

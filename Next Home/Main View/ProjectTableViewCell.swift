@@ -34,7 +34,7 @@ class ProjectTableViewCell: UITableViewCell {
         //Fills info of project view
         projectTitleLabel.text = project.projectName
         projectAddressLabel.text = project.projectAddress
-        projectBudgetLabel.text = "$" + project.getRunningTab()
+        projectBudgetLabel.text = project.getRunningTab()
         projectImage.image = project.projectHomeImage
         
         cellProject = project

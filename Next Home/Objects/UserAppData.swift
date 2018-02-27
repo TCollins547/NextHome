@@ -99,18 +99,18 @@ class UserAppData {
         }
     }
     
-    func addToList(_ sender: Any) {
-        switch sender {
+    func addToList(_ item: Any) {
+        switch item {
         case is Project:
             print("Adding Project")
-            projects.insert(sender as! Project, at: 0)
-            saveData(sender)
+            projects.insert(item as! Project, at: 0)
+            saveData(item)
         case is Room:
-            rooms.insert(sender as! Room, at: 0)
-            saveData(sender)
+            rooms.insert(item as! Room, at: 0)
+            saveData(item)
         case is Material:
-            materials.insert(sender as! Material, at: 0)
-            saveData(sender)
+            materials.insert(item as! Material, at: 0)
+            saveData(item)
         default:
             print("Error adding item")
         }
@@ -118,22 +118,22 @@ class UserAppData {
     }
     
     
-    func removeFromList(_ sender: Any) {
-        switch sender {
+    func removeFromList(_ item: Any) {
+        switch item {
         case is Project:
-            if let projectIndex = projects.index(of: sender as! Project) {
+            if let projectIndex = projects.index(of: item as! Project) {
                 projects.remove(at: projectIndex)
-                saveData(sender)
+                saveData(item)
             }
         case is Room:
-            if let roomIndex = rooms.index(of: sender as! Room) {
+            if let roomIndex = rooms.index(of: item as! Room) {
                 rooms.remove(at: roomIndex)
-                saveData(sender)
+                saveData(item)
             }
         case is Material:
-            if let materialIndex = materials.index(of: sender as! Material) {
+            if let materialIndex = materials.index(of: item as! Material) {
                 materials.remove(at: materialIndex)
-                saveData(sender)
+                saveData(item)
             }
         default:
             print("Error removing item")

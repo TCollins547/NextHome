@@ -84,8 +84,29 @@ class Project: NSObject, NSCoding {
         projectHomeImage = image
         addProjectImage(addedImage: image)
         
-        projectRemainingBudget = Int(budget)!
-        projectBudget = Int(budget)!
+        var budgetInt = budget.replacingOccurrences(of: "$", with: "")
+        budgetInt = budgetInt.replacingOccurrences(of: ",", with: "")
+        
+        projectRemainingBudget = Int(budgetInt)!
+        projectBudget = Int(budgetInt)!
+    }
+    
+    func updateValues(name: String, address: String, budget: String, startDate: String, image: UIImage) {
+        projectName = name
+        projectAddress = address
+        projectStartDate = startDate
+        
+        projectHomeImage = image
+        addProjectImage(addedImage: image)
+        
+        var budgetInt = budget.replacingOccurrences(of: "$", with: "")
+        budgetInt = budgetInt.replacingOccurrences(of: ",", with: "")
+        
+        projectRemainingBudget = Int(budgetInt)!
+        projectBudget = Int(budgetInt)!
+        
+        appData.saveData(self)
+        
     }
     
     func calcValues() {
@@ -125,6 +146,12 @@ class Project: NSObject, NSCoding {
         return formatNumbers(number: String(self.projectBudget))
     }
     
+    func setBudget(_ value: String) {
+        var intValue = value.replacingOccurrences(of: "$", with: "")
+        intValue = intValue.replacingOccurrences(of: ",", with: "")
+        projectBudget = Int(intValue)!
+    }
+    
     func getRemainingBudget() -> String {
         return formatNumbers(number: String(self.projectRemainingBudget))
     }
@@ -138,7 +165,7 @@ class Project: NSObject, NSCoding {
     }
     
     func setExpectedValue(ev: String) {
-        projectExpectedValue = formatNumbers(number: ev)
+        projectExpectedValue = ev
         appData.saveData(self)
     }
     
@@ -154,7 +181,7 @@ class Project: NSObject, NSCoding {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = NumberFormatter.Style.decimal
         
-        return numberFormatter.string(from: NSNumber(value:num!))!
+        return "$" + numberFormatter.string(from: NSNumber(value:num!))!
     }
     
     static func == (lhs: Project,rhs: Project) -> Bool {

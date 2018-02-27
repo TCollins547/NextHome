@@ -136,7 +136,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         //Handles creation view cells
         if tableView.cellForRow(at: indexPath) is CreateTableViewCell {
-            addButtonPressed((Any).self)
+            performSegue(withIdentifier: "showCreationView", sender: (Any).self)
             
         //Handles segue to room view
         } else if tableView.cellForRow(at: indexPath) is ProjectTableViewCell {
@@ -271,33 +271,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.searchButton.isEnabled = true
             
         } else {
-            
-            //Creates a create new project view
-            newProjectCreationView = Bundle.main.loadNibNamed("NewProjectCreationView", owner: self, options: nil)?.first as! NewProjectCreationView
-            newProjectCreationView.connectParentView(connectView: self)
-
-            //Summons keyboard when view is added
-            newProjectCreationView.frame.size = CGSize(width: self.view.frame.width - 20, height: newProjectCreationView.frame.height)
-            newProjectCreationView.frame.origin = CGPoint(x: 10, y: newProjectCreationView.frame.height * -1)
-            newProjectCreationView.projectTitleTextField.becomeFirstResponder()
-            
-            //Generates and sizes blur view
-            blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
-            blurEffectView.frame = self.view.bounds
-            blurEffectView.alpha = 0
-            
-            //Adds blur and view
-            self.view.addSubview(blurEffectView)
-            self.view.addSubview(newProjectCreationView)
-            
-            //Animates view and blur coming in
-            UIView.animate(withDuration: 0.5, animations: {
-                
-                self.blurEffectView.alpha = 1
-                self.newProjectCreationView.frame.origin = CGPoint(x: 10, y: UIApplication.shared.statusBarFrame.height + 10)
-                
-            }, completion: nil)
-            
+            performSegue(withIdentifier: "showCreationView", sender: self)
         }
         
     }
@@ -372,7 +346,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    @IBAction func undwindSegue(_ sender: UIStoryboardSegue) {
+    @IBAction func undwindToMain(_ sender: UIStoryboardSegue) {
         tableView.reloadData()
     }
     
