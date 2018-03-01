@@ -32,8 +32,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var searchAddConstraint: NSLayoutConstraint!
     @IBOutlet weak var menuEdgeConstraint: NSLayoutConstraint!
-    
-    var newProjectCreationView: NewProjectCreationView!
 
     /*
     ——————————————— View Controller Methods ———————————————
@@ -273,22 +271,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         } else {
             performSegue(withIdentifier: "showCreationView", sender: self)
         }
-        
-    }
-    
-    func cancelProjectCreate() {
-        
-        self.view.endEditing(true)
-        
-        UIView.animate(withDuration: 0.5, animations: {
-            
-            self.newProjectCreationView.frame.origin = CGPoint(x: self.newProjectCreationView.frame.origin.x, y: self.newProjectCreationView.frame.height * -1)
-            self.blurEffectView.alpha = 0
-            
-        }, completion: { finished in
-            self.newProjectCreationView.isHidden = true
-            self.blurEffectView.isHidden = true
-        })
         
     }
     

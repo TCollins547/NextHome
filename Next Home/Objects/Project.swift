@@ -96,8 +96,10 @@ class Project: NSObject, NSCoding {
         projectAddress = address
         projectStartDate = startDate
         
-        projectHomeImage = image
-        addProjectImage(addedImage: image)
+        if image != projectHomeImage {
+            projectHomeImage = image
+            addProjectImage(addedImage: image)
+        }
         
         var budgetInt = budget.replacingOccurrences(of: "$", with: "")
         budgetInt = budgetInt.replacingOccurrences(of: ",", with: "")
@@ -125,6 +127,12 @@ class Project: NSObject, NSCoding {
     func addRoom(newRoom: Room) {
         rooms.append(newRoom)
         appData.addToList(newRoom)
+        appData.saveData(self)
+    }
+    
+    func removeRoom(_ removedRoom: Room) {
+        rooms.remove(at: rooms.index(of: removedRoom)!)
+        appData.removeFromList(removedRoom)
         appData.saveData(self)
     }
     

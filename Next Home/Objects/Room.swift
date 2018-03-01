@@ -58,9 +58,12 @@ class Room: NSObject, NSCoding {
         roomIdentifier = UUID().uuidString
         
         roomName = name
-        roomBudget = Int(budget)!
+        
+        var budgetInt = budget.replacingOccurrences(of: "$", with: "")
+        budgetInt = budgetInt.replacingOccurrences(of: ",", with: "")
+        roomBudget = Int(budgetInt)!
+        roomRemainingBudget = Int(budgetInt)!
         roomRunningTab = 0
-        roomRemainingBudget = Int(budget)!
         
         roomProject = project
     }

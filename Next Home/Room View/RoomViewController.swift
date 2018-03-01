@@ -18,12 +18,9 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var detailScrollView: UIScrollView!
     
     var blurEffectView: UIVisualEffectView!
-    var newProjectCreationView: NewProjectCreationView!
     
     var projectImagesView: ProjectPhotoCollectionSubView!
     var projectDetailsView: ProjectDetailSubView!
-    
-    var newRoomCreationView: NewRoomCreationView!
     
     var viewProject: Project!
     var projectRooms: [Room]!
@@ -103,48 +100,9 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
         performSegue(withIdentifier: "roomToMaterialSegue", sender: self)
     }
     
-    @IBAction func addRoomButtonPressed(_ sender: Any) {
-        
-        newRoomCreationView = Bundle.main.loadNibNamed("NewRoomCreationView", owner: self, options: nil)?.first as! NewRoomCreationView
-        newRoomCreationView.frame = CGRect(x: 10, y: self.view.frame.height * -1, width: self.view.frame.width - 20, height: newRoomCreationView.frame.height)
-        newRoomCreationView.connectParentView(pView: self, project: viewProject)
-        newRoomCreationView.roomAreaTextField.becomeFirstResponder()
-        
-        blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
-        blurEffectView.frame = self.view.bounds
-        blurEffectView.alpha = 0
-        
-        self.view.addSubview(blurEffectView)
-        self.view.addSubview(newRoomCreationView)
-        
-        UIView.animate(withDuration: 0.5, animations: {
-            
-            self.blurEffectView.alpha = 1
-            self.newRoomCreationView.frame.origin = CGPoint(x: 10, y: UIApplication.shared.statusBarFrame.height + 10)
-            
-        }, completion: nil)
-        
-    }
-    
     func editInfoButtonPressed() {
         
         performSegue(withIdentifier: "showCreationView", sender: self)
-        
-    }
-    
-    func cancelProjectEdit() {
-        
-        self.view.endEditing(true)
-        
-        UIView.animate(withDuration: 0.5, animations: {
-            
-            self.newProjectCreationView.frame.origin = CGPoint(x: self.newProjectCreationView.frame.origin.x, y: self.newProjectCreationView.frame.height * -1)
-            self.blurEffectView.alpha = 0
-            
-        }, completion: { finished in
-            self.newProjectCreationView.isHidden = true
-            self.blurEffectView.isHidden = true
-        })
         
     }
     
@@ -156,8 +114,14 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func undwindToRoom(_ sender: UIStoryboardSegue) {
-        self.viewDidLoad()
-        projectImagesView.setupImages(project: viewProject)
+        if sender.source is RoomCreationView {
+            roomTableView.reloadData()
+        } else if sender.source is ProjectCreationView {
+            projectDetailsView.setupValues(project: viewProject)
+        } else if sender.source is PhotoCollectionViewController {
+            print("Setting new images")
+            projectImagesView.setupImages(project: viewProject)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -165,23 +129,11 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
             destination.viewProject = self.viewProject
         } else if let destination = segue.destination as? MaterialViewController {
             destination.viewRoom = self.selectedRoom
-        } else if let destination = segue.destination as? ProjectCreationViewController {
+        } else if let destination = segue.destination as? ProjectCreationView {
             destination.viewProject = self.viewProject
+        } else if let desination = segue.destination as? RoomCreationView {
+            desination.viewProject = self.viewProject
         }
-    }
-    
-    func cancelRoomCreate() {
-        
-        UIView.animate(withDuration: 0.5, animations: {
-            
-            self.newRoomCreationView.frame.origin = CGPoint(x: self.newRoomCreationView.frame.origin.x, y: self.view.frame.height * -1)
-            self.blurEffectView.alpha = 0
-            
-        }, completion: { finished in
-            self.newRoomCreationView.isHidden = true
-            self.blurEffectView.isHidden = true
-        })
-        
     }
     
     
