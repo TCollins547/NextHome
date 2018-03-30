@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RoomCreationView: UIViewController, UITextFieldDelegate {
+class RoomCreationView: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var containerScrollView: UIScrollView!
 
@@ -19,6 +19,8 @@ class RoomCreationView: UIViewController, UITextFieldDelegate {
     
     var typeTextField = UITextField()
     var typeLabel = UILabel()
+    var typePickerView = UIPickerView()
+    var addTypeButton = UIButton()
     
     var budgetTextField = UITextField()
     var budgetLabel = UILabel()
@@ -35,15 +37,15 @@ class RoomCreationView: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         containerScrollView.contentSize = CGSize(width: self.view.frame.width, height: containerScrollView.frame.height)
+        containerScrollView.delegate = self
         
         activeTextField = nameTextField
         
         setupTextFields()
         setupButtons()
         
-        if viewRoom != nil {
-            fillInfo()
-        }
+        if viewRoom != nil { fillInfo() }
+        if viewProject != nil && viewRoom != nil { viewRoom.roomProject = viewProject }
 
         // Do any additional setup after loading the view.
     }
@@ -66,7 +68,11 @@ class RoomCreationView: UIViewController, UITextFieldDelegate {
         
     }
     
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.x != 0 {
+            scrollView.contentOffset.x = 0
+        }
+    }
     
     func setupTextFields() {
         
@@ -105,9 +111,13 @@ class RoomCreationView: UIViewController, UITextFieldDelegate {
         nameLabel.text = "Room Name"
         
         
+        typePickerView.delegate = self
+        typePickerView.dataSource = self
+        
         typeTextField.frame.origin = CGPoint(x: 20, y: Int(nameTextField.frame.origin.y) + 90)
         typeTextField.placeholder = "Room Type"
         typeTextField.autocapitalizationType = .words
+        typeTextField.inputView = typePickerView
         
         typeLabel.frame.origin = CGPoint(x: 20, y: Int(nameTextField.frame.origin.y) + 70)
         typeLabel.text = "Room Type"
@@ -116,13 +126,19 @@ class RoomCreationView: UIViewController, UITextFieldDelegate {
         budgetTextField.frame.origin = CGPoint(x: 20, y: Int(typeTextField.frame.origin.y) + 90)
         budgetTextField.placeholder = "Room Budget"
         budgetTextField.keyboardType = .numberPad
-        budgetTextField.addTarget(self, action: #selector(textFieldChanged(textfield:)), for: UIControlEvents.editingChanged)
+        budgetTextField.addTarget(self, action: #selector(self.textFieldChangedForDollars(textfield:)), for: UIControlEvents.editingChanged)
         
         budgetLabel.frame.origin = CGPoint(x: 20, y: Int(typeTextField.frame.origin.y) + 70)
         budgetLabel.text = "Room Budget"
         
     }
     
+    
+    @objc func textFieldChangedForDollars(textfield: UITextField) {
+        
+        textfield.text = ProjectCreationView.formatDollars(textfield.text!)
+        
+    }
     
     func setupButtons() {
         
@@ -143,6 +159,13 @@ class RoomCreationView: UIViewController, UITextFieldDelegate {
         deleteRoomButton.addTarget(self, action: #selector(self.deleteRoomButtonTapped), for: .touchUpInside)
         deleteRoomButton.isHidden = true
         containerScrollView.addSubview(deleteRoomButton)
+        
+        
+        addTypeButton.frame = CGRect(x: Int(typeTextField.frame.origin.x + typeTextField.frame.width) - 40, y: Int(typeTextField.frame.origin.y) + 10, width: 30, height: 30)
+        addTypeButton.setBackgroundImage(#imageLiteral(resourceName: "icons8-add_filled-1"), for: .normal)
+        addTypeButton.addTarget(self, action: #selector(self.addTypeButtonPressed), for: .touchUpInside)
+        containerScrollView.addSubview(addTypeButton)
+        
         
     }
     
@@ -173,7 +196,9 @@ class RoomCreationView: UIViewController, UITextFieldDelegate {
         
         if canCreate() && viewRoom == nil {
             let newRoom = Room(name: nameTextField.text!, budget: budgetTextField.text!, type: typeTextField.text!, project: viewProject)
+            userData.saveRoom(newRoom)
             viewProject.addRoom(newRoom: newRoom)
+            userData.saveProject(viewProject)
             self.view.endEditing(true)
             performSegue(withIdentifier: "undwindToRoom", sender: self)
         } else if canCreate() {
@@ -183,41 +208,61 @@ class RoomCreationView: UIViewController, UITextFieldDelegate {
     }
     
     @objc func deleteRoomButtonTapped() {
-        let alert = UIAlertController(title: "Are you sure you want to delete this room?", message: "You cannot undo this action", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Are you sure you want to delete this room?", message: "All expenses in this room will also be delete. This action can not be undone.", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
         
         alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { action in
-            appData.removeFromList(self.viewRoom)
+            self.viewRoom.roomProject.removeRoom(self.viewRoom)
+            userData.deleteRoom(self.viewRoom)
+            self.view.endEditing(true)
             self.performSegue(withIdentifier: "undwindToRoom", sender: self)
         }))
         
         self.present(alert, animated: true)
     }
     
-    
-    @objc func textFieldChanged(textfield: UITextField) {
-        
-        var textFieldValue = textfield.text?.replacingOccurrences(of: ",", with: "")
-        textFieldValue = textFieldValue?.replacingOccurrences(of: "$", with: "")
-        
-        guard let num = Int(textFieldValue!) else {
-            textfield.text = "$"
-            return
+    @objc func addTypeButtonPressed() {
+        if addTypeButton.backgroundImage(for: .normal) == #imageLiteral(resourceName: "icons8-add_filled-1") {
+            addTypeButton.setBackgroundImage(#imageLiteral(resourceName: "icons8-cancel_filled"), for: .normal)
+            typeTextField.inputView = nil
+            typeTextField.reloadInputViews()
+        } else {
+            addTypeButton.setBackgroundImage(#imageLiteral(resourceName: "icons8-add_filled-1"), for: .normal)
+            typeTextField.inputView = typePickerView
+            typeTextField.reloadInputViews()
         }
-        
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = NumberFormatter.Style.decimal
-        
-        textfield.text = "$" + numberFormatter.string(from: NSNumber(value: num))!
-        
+    }
+    
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return userData.roomTypes.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return userData.roomTypes[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        typeTextField.text = userData.roomTypes[row]
     }
     
     
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
+        
         self.view.endEditing(true)
-        performSegue(withIdentifier: "undwindToRoom", sender: self)
+        
+        if viewRoom != nil {
+            performSegue(withIdentifier: "undwindToMaterial", sender: self)
+        } else {
+            performSegue(withIdentifier: "undwindToRoom", sender: self)
+        }
+        
     }
     
     /*

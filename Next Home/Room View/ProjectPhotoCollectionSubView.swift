@@ -35,11 +35,11 @@ class ProjectPhotoCollectionSubView: UIView {
         
         var imageCount = project.getProjectImages().count
         if imageCount > 5 {
-            imageCount = 6
+            imageCount = 5
         }
         
         if imageCount == 0 {
-            image0.setBackgroundImage(#imageLiteral(resourceName: "ViewAll"), for: .normal)
+            image0.setBackgroundImage(#imageLiteral(resourceName: "ViewAllHD"), for: .normal)
             return
         }
         
@@ -49,10 +49,10 @@ class ProjectPhotoCollectionSubView: UIView {
             image.layer.cornerRadius = 8
             image.imageView!.contentMode = .scaleAspectFit
             
-            if images.index(of: image)! < imageCount - 1 {
+            if images.index(of: image)! < imageCount {
                 image.setBackgroundImage(project.getProjectImages()[images.index(of: image)!], for: .normal)
-            } else if images.index(of: image)! == imageCount - 1 {
-                image.setBackgroundImage(#imageLiteral(resourceName: "ViewAll"), for: .normal)
+            } else if images.index(of: image)! == imageCount {
+                image.setBackgroundImage(#imageLiteral(resourceName: "ViewAllHD"), for: .normal)
             } else {
                 image.isHidden = true
             }
@@ -62,7 +62,7 @@ class ProjectPhotoCollectionSubView: UIView {
     
     @IBAction func buttonPressed(_ sender: UIButton) {
         
-        if sender.currentBackgroundImage == #imageLiteral(resourceName: "ViewAll") {
+        if sender.currentBackgroundImage == #imageLiteral(resourceName: "ViewAllHD") {
             parentView.performSegue(withIdentifier: "showPhotoCollectionView", sender: (Any).self)
         }
     }

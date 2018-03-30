@@ -8,7 +8,7 @@
 
 import UIKit
 
-var appData = UserAppData()
+var userData = UserData()
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -32,6 +32,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var searchAddConstraint: NSLayoutConstraint!
     @IBOutlet weak var menuEdgeConstraint: NSLayoutConstraint!
+    
+    
+    var projects: [Project] = []
+    var projectIDs: [String] = []
+    let projectIDDefaults = UserDefaults.standard
+    
 
     /*
     ——————————————— View Controller Methods ———————————————
@@ -41,7 +47,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+        
         setupMenuButtons()
+        userData.loadInProjects()
         
         // Do any additional setup after loading the view.
     }
@@ -50,7 +59,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewWillAppear(animated)
         
         //Removes navigation bar from top of view to have app full screen
+        //appData = UserAppData()
         navigationController?.setNavigationBarHidden(true, animated: false)
+        
         
     }
 
@@ -60,9 +71,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
+    
     /*
     ——————————————— Table View Data and Setup ———————————————
-     Contains: tableView(numberOfRowsInSection0 -> Int, tableView(cellForRowAt) -> UITableViewCell, tableView(didSelectRowAt)
+     Contains: tableView(numberOfRowsInSection) -> Int, tableView(cellForRowAt) -> UITableViewCell, tableView(didSelectRowAt)
     */
     
     
@@ -73,11 +85,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         var tableCount = 0
         
         if titleLabel.text == "My Projects" {
-            tableCount = appData.getList("project").count + 1
+            tableCount = userData.projects.count + 1
         } else if titleLabel.text == "My Rooms" {
-            tableCount = appData.getList("room").count
+            //tableCount = appData.getList("room").count
         } else {
-            tableCount = appData.getList("material").count
+            //tableCount = appData.getList("expense").count
         }
         
         return tableCount
@@ -91,7 +103,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if titleLabel.text == "My Projects" {
             
             //This places the create new project at the end of the table
-            if indexPath.row == appData.getList("project").count {
+            if indexPath.row == userData.projects.count {
                 
                 
                 //Creates a cell and a create project view
@@ -105,7 +117,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 
                 //Creates a cell and a project view
                 let cell: ProjectTableViewCell = (self.tableView.dequeueReusableCell(withIdentifier: "ProjectCellReuseID") as! ProjectTableViewCell?)!
-                cell.filledCellData(project: appData.getList("project")[indexPath.row] as! Project)
+                cell.filledCellData(project: userData.projects[indexPath.row])
                 
                 return cell
                 
@@ -117,12 +129,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             tableView.register(UINib(nibName: "RoomMainViewTableCell", bundle: nil), forCellReuseIdentifier: "roomMainViewReuseID")
             
             let cell: RoomMainViewTableCell = (self.tableView.dequeueReusableCell(withIdentifier: "roomMainViewReuseID") as! RoomMainViewTableCell?)!
-            cell.fillCellData(room: appData.getList("room")[indexPath.row] as! Room)
+            //cell.fillCellData(room: appData.getList("room")[indexPath.row] as! Room)
             
             return cell
             
         } else {
-            //Setup Material Table view cells
+            //Setup Expense Table view cells
         }
         
         return UITableViewCell()
@@ -139,7 +151,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //Handles segue to room view
         } else if tableView.cellForRow(at: indexPath) is ProjectTableViewCell {
             selectedProject = ((tableView.cellForRow(at: indexPath) as? ProjectTableViewCell)?.cellProject)!
-            performSegue(withIdentifier: "showRoomView", sender: (Any).self)
+            performSegue(withIdentifier: "showRoomView", sender: self)
         }
     }
     
@@ -151,7 +163,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func setupMenuButtons() {
         
-        var menuSelectOptions = ["My Projects", "My Rooms", "My Materials", "Settings"]
+        var menuSelectOptions = ["My Projects", "My Rooms", "My Expenses", "Settings"]
         menuSelectButtons = [menuSelectButton0, menuSelectButton1, menuSelectButton2]
         
         for buttonOption in menuSelectButtons {
@@ -224,10 +236,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @objc func menuOptionSelected(sender: UIButton!) {
         
-        var menuSelectOptions = ["My Projects", "My Rooms", "My Materials", "Settings"]
+        var menuSelectOptions = ["My Projects", "My Rooms", "My Expenses", "Settings"]
         
         titleLabel.text = sender.titleLabel?.text
-        menuSelectOptions = ["My Projects", "My Rooms", "My Materials", "Settings"]
+        menuSelectOptions = ["My Projects", "My Rooms", "My Expenses", "Settings"]
         menuSelectOptions.remove(at: menuSelectOptions.index(of: titleLabel.text!)!)
         menuSelectOptions.insert(titleLabel.text!, at: 0)
         

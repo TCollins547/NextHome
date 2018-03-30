@@ -11,44 +11,65 @@ import UIKit
 
 class Room: NSObject, NSCoding {
     
-    var roomIdentifier: String!
+    var roomIdentifier: String = String()
     
-    var roomName: String!
-    var roomBudget = 0
-    var roomRunningTab = 0
-    var roomRemainingBudget = 0
-    var roomType: String!
+    var roomName: String = String()
+    var roomBudget: Int!
+    var roomRunningTab: Int!
+    var roomRemainingBudget: Int!
+    var roomType: String = String()
+    
+    var materialCount = 0
+    var serviceCount = 0
     
     var roomProject: Project!
-    var roomMaterials: [Material] = []
+    var roomProjectID: String!
+    var roomExpenses: [Expense] = []
+    var roomExpensesID: [String] = []
     
     
-    struct Keys {
+    struct roomKeys {
         static let id = "roomID"
         static let name = "roomName"
         static let budget = "roomBudget"
         static let type = "roomType"
         static let project = "roomParent"
+        static let expenses = "roomExpenses"
+        static let tab = "roomRunningTab"
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init()
-        if let roomIDObj = aDecoder.decodeObject(forKey: Keys.id) as? String { roomIdentifier = String(roomIDObj) }
-        if let roomNameObj = aDecoder.decodeObject(forKey: Keys.name) as? String { roomName = String(roomNameObj) }
-        if let roomBudgetObj = aDecoder.decodeObject(forKey: Keys.budget) as? Int { roomBudget = Int(roomBudgetObj) }
-        if let roomTypeObj = aDecoder.decodeObject(forKey: Keys.type) as? String { roomType = String(roomTypeObj) }
-        if let roomProjectObj = aDecoder.decodeObject(forKey: Keys.project) as? Project { roomProject = roomProjectObj }
         
-        calcValues()
+        if let roomIDObj = aDecoder.decodeObject(forKey: roomKeys.id) as? String { roomIdentifier = String(roomIDObj) }
+        if let roomNameObj = aDecoder.decodeObject(forKey: roomKeys.name) as? String { roomName = String(roomNameObj) }
+        if let roomBudgetObj = aDecoder.decodeObject(forKey: roomKeys.budget) as? Int { roomBudget = Int(roomBudgetObj)
+        }
+        if let roomTabObj = aDecoder.decodeObject(forKey: roomKeys.tab) as? Int { roomRunningTab = roomTabObj }
+        if let roomTypeObj = aDecoder.decodeObject(forKey: roomKeys.type) as? String { roomType = String(roomTypeObj) }
+        if let roomProjectObj = aDecoder.decodeObject(forKey: roomKeys.project) as? String { roomProjectID = roomProjectObj }
+        if let expensesObj = aDecoder.decodeObject(forKey: roomKeys.expenses) as? [String] { roomExpensesID = expensesObj }
+        
+        roomRemainingBudget = roomBudget - roomRunningTab
         
     }
     
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(roomIdentifier, forKey: Keys.id)
-        aCoder.encode(roomName, forKey: Keys.name)
-        aCoder.encode(roomBudget, forKey: Keys.budget)
-        aCoder.encode(roomType, forKey: Keys.type)
-        aCoder.encode(roomProject, forKey: Keys.project)
+        aCoder.encode(roomIdentifier, forKey: roomKeys.id)
+        aCoder.encode(roomName, forKey: roomKeys.name)
+        aCoder.encode(roomBudget, forKey: roomKeys.budget)
+        aCoder.encode(roomRunningTab, forKey: roomKeys.tab)
+        aCoder.encode(roomType, forKey: roomKeys.type)
+        aCoder.encode(roomProjectID, forKey: roomKeys.project)
+        aCoder.encode(roomExpensesID, forKey: roomKeys.expenses)
+    }
+    
+    func loadInExpenses() {
+        
+        roomExpenses = userData.loadInExpenses(forExpenseIDs: roomExpensesID)
+        
+        calcValues()
+        
     }
     
     
@@ -61,44 +82,98 @@ class Room: NSObject, NSCoding {
         
         var budgetInt = budget.replacingOccurrences(of: "$", with: "")
         budgetInt = budgetInt.replacingOccurrences(of: ",", with: "")
-        roomBudget = Int(budgetInt)!
-        roomRemainingBudget = Int(budgetInt)!
+        
+        if let setBudget = Int(budgetInt) {
+            print(setBudget)
+            roomBudget = setBudget; roomRemainingBudget = setBudget
+            print("roomBudget set to \(roomBudget)")
+        } else {
+            print("Problem converting value to int")
+            roomBudget = 0; roomRemainingBudget = 0
+        }
+        
         roomRunningTab = 0
         
         roomProject = project
+        roomProjectID = project.projectIdentifier
+    }
+    
+    func addExpense(_ expense: Expense) {
+        roomExpenses.insert(expense, at: 0)
+        roomExpensesID.insert(expense.identifier, at: 0)
+        userData.saveRoom(self)
+        
+        if expense is Service { serviceCount += 1 }
+        else { materialCount += 1 }
+        
+        calcValues()
+    }
+    
+    func removeExpense(_ expense: Expense) {
+        roomExpenses.remove(at: roomExpenses.index(where: { $0.identifier == expense.identifier} )!)
+        roomExpensesID.remove(at: roomExpensesID.index(of: expense.identifier)!)
+        if expense is Service { serviceCount -= 1 }
+        else { materialCount -= 1 }
+        calcValues()
+    }
+    
+    func setType(_ type: String) {
+        roomType = type
+        //appData.addToUserRooms(type)
     }
     
     func getRoomBudget() -> String {
-        return formatNumbers(number: String(roomBudget))
+        return UserData.formatDollars(roomBudget)
     }
     
     func getRoomTab() -> String {
-        return formatNumbers(number: String(roomRunningTab))
+        return UserData.formatDollars(roomRunningTab)
     }
     
     func getRoomRemaining() -> String {
-        return formatNumbers(number: String(roomRemainingBudget))
+        return UserData.formatDollars(roomRemainingBudget)
+    }
+    
+    func getExpenseCount() -> Int {
+        return roomExpenses.count
+    }
+    
+    func getMaterialCount() -> Int {
+        var count = 0
+        for ex in roomExpenses {
+            if ex is Material {
+                count += 1
+            }
+        }
+        return count
+    }
+    
+    func getServiceCount() -> Int {
+        var count = 0
+        for ex in roomExpenses {
+            if ex is Service {
+                count += 1
+            }
+        }
+        return count
     }
     
     func calcValues() {
         
-        var total = 0
-        for mat in roomMaterials {
-            total += Int(mat.materialCost)
+        var runTab: Int {
+            var total = 0.0
+            for e in roomExpensesID {
+                total += userData.loadInSingleExpense(id: e).totalCost
+            }
+            return Int(total)
         }
-        roomRunningTab = total
+        
+        roomRunningTab = Int(runTab)
         
         roomRemainingBudget = roomBudget - roomRunningTab
         
-    }
-    
-    func formatNumbers(number: String) -> String {
-        let num = Int(number)
+        //roomProject.calcValues()
         
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = NumberFormatter.Style.decimal
-        
-        return numberFormatter.string(from: NSNumber(value:num!))!
     }
     
     static func == (lhs: Room,rhs: Room) -> Bool {

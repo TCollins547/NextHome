@@ -149,7 +149,7 @@ class ProjectCreationView: UIViewController, UITextFieldDelegate, UIImagePickerC
         budgetTextField.frame.origin = CGPoint(x: Int(self.view.frame.width) + 20, y: Int(viewHeaderLabel.frame.origin.y) + 40)
         budgetTextField.placeholder = "Project Budget"
         budgetTextField.keyboardType = .numberPad
-        budgetTextField.addTarget(self, action: #selector(textFieldChanged(textfield:)), for: UIControlEvents.editingChanged)
+        budgetTextField.addTarget(self, action: #selector(ProjectCreationView.textFieldChangedForDollars(textfield:)), for: UIControlEvents.editingChanged)
         
         budgetLabel.frame.origin = CGPoint(x: Int(self.view.frame.width) + 20, y: Int(viewHeaderLabel.frame.origin.y) + 20)
         budgetLabel.text = "Project Budget"
@@ -158,7 +158,7 @@ class ProjectCreationView: UIViewController, UITextFieldDelegate, UIImagePickerC
         expectValueTextField.frame.origin = CGPoint(x: Int(self.view.frame.width) + 20, y: Int(nameTextField.frame.origin.y) + 110)
         expectValueTextField.placeholder = "Project Expect Value (Optional)"
         expectValueTextField.keyboardType = .numberPad
-        expectValueTextField.addTarget(self, action: #selector(textFieldChanged(textfield:)), for: UIControlEvents.editingChanged)
+        expectValueTextField.addTarget(self, action: #selector(ProjectCreationView.textFieldChangedForDollars(textfield:)), for: UIControlEvents.editingChanged)
         
         expectValueLabel.frame.origin = CGPoint(x: Int(self.view.frame.width) + 20, y: Int(nameTextField.frame.origin.y) + 90)
         expectValueLabel.text = "Project Expected Value (ARV)"
@@ -206,20 +206,22 @@ class ProjectCreationView: UIViewController, UITextFieldDelegate, UIImagePickerC
         self.activeTextField = textField
     }
     
-    @objc func textFieldChanged(textfield: UITextField) {
+    static func formatDollars(_ stringValue: String) -> String {
+        let textFieldValue = stringValue.replacingOccurrences(of: ",", with: "").replacingOccurrences(of: "$", with: "")
         
-        var textFieldValue = textfield.text?.replacingOccurrences(of: ",", with: "")
-        textFieldValue = textFieldValue?.replacingOccurrences(of: "$", with: "")
-        
-        guard let num = Int(textFieldValue!) else {
-            textfield.text = "$"
-            return
+        guard let num = Double(textFieldValue) else {
+            return "$"
         }
         
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = NumberFormatter.Style.decimal
+
+        return "$" + numberFormatter.string(from: NSNumber(value: num))!
+    }
+    
+    @objc func textFieldChangedForDollars(textfield: UITextField) {
         
-        textfield.text = "$" + numberFormatter.string(from: NSNumber(value: num))!
+        textfield.text = ProjectCreationView.formatDollars(textfield.text!)
         
     }
     
@@ -416,7 +418,7 @@ class ProjectCreationView: UIViewController, UITextFieldDelegate, UIImagePickerC
                 newProject.setExpectedValue(ev: value)
             }
             
-            appData.addToList(newProject)
+            userData.saveProject(newProject)
             
             performSegue(withIdentifier: "unwindToMain", sender: nil)
             
@@ -447,7 +449,7 @@ class ProjectCreationView: UIViewController, UITextFieldDelegate, UIImagePickerC
         alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
         
         alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { action in
-            appData.removeFromList(self.viewProject)
+            userData.deleteProject(self.viewProject!)
             self.performSegue(withIdentifier: "unwindToMain", sender: nil)
         }))
         
@@ -502,6 +504,8 @@ class ProjectCreationView: UIViewController, UITextFieldDelegate, UIImagePickerC
             performSegue(withIdentifier: "undwindToRoom", sender: nil)
         }
     }
+    
+    
     
 
     /*

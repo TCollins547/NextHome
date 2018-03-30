@@ -16,20 +16,21 @@ class Project: NSObject, NSCoding {
     var projectStartDate: String!
     var projectHomeImage: UIImage!
     
-    var projectRunningTab = 0
+    var projectRunningTab: Int!
     var projectBudget: Int!
-    var projectRemainingBudget = 0
+    var projectRemainingBudget: Int!
     var projectExpectedValue = "N/A"
     var projectExpectedEndDate = "N/A"
     
     var rooms: [Room] = []
+    var roomsID: [String] = []
     
     var projectImages: [UIImage] = []
     
     var projectIdentifier: String!
     
     
-    struct Keys {
+    struct projectKeys {
         static let name = "projectName"
         static let address = "projectAddress"
         static let start = "projectStart"
@@ -37,6 +38,7 @@ class Project: NSObject, NSCoding {
         static let image = "projectImage"
         static let value = "projectEV"
         static let budget = "projectBudget"
+        static let tab = "projectRunningtab"
         static let rooms = "projectRooms"
         static let id = "projectID"
         static let allImages = "allProjectImages"
@@ -44,51 +46,69 @@ class Project: NSObject, NSCoding {
     
     required init(coder aDecoder: NSCoder) {
         super.init()
-        if let projectNameObj = aDecoder.decodeObject(forKey: Keys.name) as? String { projectName = String(projectNameObj) }
-        if let projectAddressObj = aDecoder.decodeObject(forKey: Keys.address) as? String { projectAddress = String(projectAddressObj) }
-        if let projectStartObj = aDecoder.decodeObject(forKey: Keys.start) as? String { projectStartDate = String(projectStartObj) }
-        if let projectEndObj = aDecoder.decodeObject(forKey: Keys.end) as? String { projectExpectedEndDate = String(projectEndObj) }
-        if let projectImageObj = aDecoder.decodeObject(forKey: Keys.image) as? UIImage { projectHomeImage = projectImageObj }
-        if let projectValueObj = aDecoder.decodeObject(forKey: Keys.value) as? String { projectExpectedValue = String(projectValueObj) }
-        if let projectBudgetObj = aDecoder.decodeObject(forKey: Keys.budget) as? Int { projectBudget = Int(projectBudgetObj) }
-        if let projectRooms = aDecoder.decodeObject(forKey: Keys.rooms) as? [Room] { rooms = projectRooms }
-        if let projectIDObj = aDecoder.decodeObject(forKey: Keys.id) as? String { projectIdentifier = String(projectIDObj) }
-        if let projectAllImagesObj = aDecoder.decodeObject(forKey: Keys.allImages) as? [UIImage] { projectImages = projectAllImagesObj }
+        if let projectNameObj = aDecoder.decodeObject(forKey: projectKeys.name) as? String { projectName = String(projectNameObj) }
+        if let projectAddressObj = aDecoder.decodeObject(forKey: projectKeys.address) as? String { projectAddress = String(projectAddressObj) }
+        if let projectStartObj = aDecoder.decodeObject(forKey: projectKeys.start) as? String { projectStartDate = String(projectStartObj) }
+        if let projectEndObj = aDecoder.decodeObject(forKey: projectKeys.end) as? String { projectExpectedEndDate = String(projectEndObj) }
+        if let projectImageObj = aDecoder.decodeObject(forKey: projectKeys.image) as? UIImage { projectHomeImage = projectImageObj }
+        if let projectValueObj = aDecoder.decodeObject(forKey: projectKeys.value) as? String { projectExpectedValue = String(projectValueObj) }
+        if let projectBudgetObj = aDecoder.decodeObject(forKey: projectKeys.budget) as? Int { projectBudget = Int(projectBudgetObj) }
+        if let projectTabObj = aDecoder.decodeObject(forKey: projectKeys.tab) as? Int { projectRunningTab = projectTabObj }
+        if let projectRooms = aDecoder.decodeObject(forKey: projectKeys.rooms) as? [String] { roomsID = projectRooms }
+        if let projectIDObj = aDecoder.decodeObject(forKey: projectKeys.id) as? String { projectIdentifier = String(projectIDObj) }
+        if let projectAllImagesObj = aDecoder.decodeObject(forKey: projectKeys.allImages) as? [UIImage] { projectImages = projectAllImagesObj }
         
-        calcValues()
+        projectRemainingBudget = projectBudget - projectRunningTab
         
     }
     
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(projectName, forKey: Keys.name)
-        aCoder.encode(projectAddress, forKey: Keys.address)
-        aCoder.encode(projectStartDate, forKey: Keys.start)
-        aCoder.encode(projectExpectedEndDate, forKey: Keys.end)
-        aCoder.encode(projectHomeImage, forKey: Keys.image)
-        aCoder.encode(projectExpectedValue, forKey: Keys.value)
-        aCoder.encode(projectBudget, forKey: Keys.budget)
-        aCoder.encode(rooms, forKey: Keys.rooms)
-        aCoder.encode(projectIdentifier, forKey: Keys.id)
-        aCoder.encode(projectImages, forKey: Keys.allImages)
+        aCoder.encode(projectName, forKey: projectKeys.name)
+        aCoder.encode(projectAddress, forKey: projectKeys.address)
+        aCoder.encode(projectStartDate, forKey: projectKeys.start)
+        aCoder.encode(projectExpectedEndDate, forKey: projectKeys.end)
+        aCoder.encode(projectHomeImage, forKey: projectKeys.image)
+        aCoder.encode(projectExpectedValue, forKey: projectKeys.value)
+        aCoder.encode(projectBudget, forKey: projectKeys.budget)
+        aCoder.encode(projectRunningTab, forKey: projectKeys.tab)
+        aCoder.encode(roomsID, forKey: projectKeys.rooms)
+        aCoder.encode(projectIdentifier, forKey: projectKeys.id)
+        aCoder.encode(projectImages, forKey: projectKeys.allImages)
     }
     
     
     init(name: String, address: String, budget: String, startDate: String, image: UIImage) {
         super.init()
         projectIdentifier = UUID().uuidString
-        
+        print("Here")
         projectName = name
         projectAddress = address
         projectStartDate = startDate
         
         projectHomeImage = image
-        addProjectImage(addedImage: image)
+        projectImages.insert(image, at: 0)
         
         var budgetInt = budget.replacingOccurrences(of: "$", with: "")
         budgetInt = budgetInt.replacingOccurrences(of: ",", with: "")
         
-        projectRemainingBudget = Int(budgetInt)!
-        projectBudget = Int(budgetInt)!
+        if let setBudget = Int(budgetInt) {
+            print(setBudget)
+            projectBudget = setBudget; projectRemainingBudget = setBudget
+            print("roomBudget set to \(projectBudget)")
+        } else {
+            print("Problem converting value to int")
+            projectBudget = 0; projectRemainingBudget = 0
+        }
+        
+        projectRunningTab = 0
+    }
+    
+    func loadInRooms() {
+        
+        rooms = userData.loadInRooms(forRoomIDs: roomsID)
+        
+        calcValues()
+        
     }
     
     func updateValues(name: String, address: String, budget: String, startDate: String, image: UIImage) {
@@ -107,18 +127,21 @@ class Project: NSObject, NSCoding {
         projectRemainingBudget = Int(budgetInt)!
         projectBudget = Int(budgetInt)!
         
-        appData.saveData(self)
+        userData.saveProject(self)
         
     }
     
     func calcValues() {
         
-        var total = 0
-        for room in rooms {
-            total += room.roomRunningTab
+        var runTab: Int {
+            var total = 0
+            for r in roomsID {
+                total += userData.loadInSingleRoom(id: r).roomRunningTab
+            }
+            return total
         }
         
-        projectRunningTab = total
+        projectRunningTab = runTab
         
         projectRemainingBudget = projectBudget - projectRunningTab
         
@@ -126,32 +149,35 @@ class Project: NSObject, NSCoding {
     
     func addRoom(newRoom: Room) {
         rooms.append(newRoom)
-        appData.addToList(newRoom)
-        appData.saveData(self)
+        roomsID.append(newRoom.roomIdentifier)
+        calcValues()
+        userData.saveProject(self)
     }
     
     func removeRoom(_ removedRoom: Room) {
-        rooms.remove(at: rooms.index(of: removedRoom)!)
-        appData.removeFromList(removedRoom)
-        appData.saveData(self)
+        rooms.remove(at: rooms.index(where: { $0.roomIdentifier == removedRoom.roomIdentifier} )!)
+        roomsID.remove(at: roomsID.index(of: removedRoom.roomIdentifier)!)
+        userData.deleteRoom(removedRoom)
+        calcValues()
+        userData.saveProject(self)
     }
     
     func addProjectImage(addedImage: UIImage) {
         projectImages.insert(addedImage, at: 0)
-        appData.saveData(self)
+        userData.saveProject(self)
     }
     
     func removeProjectImage(removedImage: UIImage) {
         for image in projectImages {
             if removedImage == image {
                 projectImages.remove(at: projectImages.index(of: image)!)
-                appData.saveData(self)
+                userData.saveProject(self)
             }
         }
     }
     
     func getBudget() -> String {
-        return formatNumbers(number: String(self.projectBudget))
+        return UserData.formatDollars(projectBudget)
     }
     
     func setBudget(_ value: String) {
@@ -161,11 +187,11 @@ class Project: NSObject, NSCoding {
     }
     
     func getRemainingBudget() -> String {
-        return formatNumbers(number: String(self.projectRemainingBudget))
+        return UserData.formatDollars(projectBudget - projectRunningTab)
     }
     
     func getRunningTab() -> String {
-        return formatNumbers(number: String(self.projectRunningTab))
+        return UserData.formatDollars(projectRunningTab)
     }
     
     func getProjectImages() -> [UIImage] {
@@ -174,16 +200,16 @@ class Project: NSObject, NSCoding {
     
     func setExpectedValue(ev: String) {
         projectExpectedValue = ev
-        appData.saveData(self)
+        userData.saveProject(self)
     }
     
     func setExpectedEndDate(ed: String) {
         projectExpectedEndDate = ed
-        appData.saveData(self)
+        userData.saveProject(self)
     }
     
     
-    func formatNumbers(number: String) -> String {
+    func formatNumbersToDollars(number: String) -> String {
         let num = Int(number)
         
         let numberFormatter = NumberFormatter()

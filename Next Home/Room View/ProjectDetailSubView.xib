@@ -101,7 +101,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="0yS-9i-W3N"/>
                     </constraints>
-                    <state key="normal" backgroundImage="Edit Info Button"/>
+                    <state key="normal" backgroundImage="EditInfoHD"/>
                     <connections>
                         <action selector="editInfoButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="vee-bd-VuK"/>
                     </connections>
@@ -154,6 +154,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Edit Info Button" width="500" height="150"/>
+        <image name="EditInfoHD" width="1500" height="450"/>
     </resources>
 </document>

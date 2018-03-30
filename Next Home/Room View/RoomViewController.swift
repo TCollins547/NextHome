@@ -31,7 +31,8 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         
         if viewProject != nil {
-            projectRooms = viewProject.rooms
+            projectRooms = userData.loadInRooms(forRoomIDs: viewProject.roomsID)
+            viewProject.rooms = projectRooms
             projectNameLabel.text = viewProject.projectName
             projectAddressLabel.text = viewProject.projectAddress
             projectTabLabel.text = viewProject.getRunningTab()
@@ -84,12 +85,12 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewProject.rooms.count
+        return projectRooms.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: RoomTableViewCell = (self.roomTableView.dequeueReusableCell(withIdentifier: "RoomCellReuseID") as! RoomTableViewCell?)!
-        cell.fillCellData(room: viewProject.rooms[indexPath.row])
+        cell.fillCellData(room: projectRooms[indexPath.row])
         cell.frame.size = CGSize(width: self.view.frame.width, height: 75)
         cell.selectionStyle = .none
         return cell
@@ -97,7 +98,7 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedRoom = (tableView.cellForRow(at: indexPath) as! RoomTableViewCell).cellRoom
-        performSegue(withIdentifier: "roomToMaterialSegue", sender: self)
+        performSegue(withIdentifier: "roomToExpenseSegue", sender: self)
     }
     
     func editInfoButtonPressed() {
@@ -115,20 +116,26 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func undwindToRoom(_ sender: UIStoryboardSegue) {
         if sender.source is RoomCreationView {
+            projectRooms = userData.loadInRooms(forRoomIDs: viewProject.roomsID)
             roomTableView.reloadData()
         } else if sender.source is ProjectCreationView {
             projectDetailsView.setupValues(project: viewProject)
         } else if sender.source is PhotoCollectionViewController {
             print("Setting new images")
             projectImagesView.setupImages(project: viewProject)
+        } else if sender.source is ExpenseViewController {
+            viewProject.calcValues()
+            refreshView()
+            roomTableView.reloadData()
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? PhotoCollectionViewController {
             destination.viewProject = self.viewProject
-        } else if let destination = segue.destination as? MaterialViewController {
+        } else if let destination = segue.destination as? ExpenseViewController {
             destination.viewRoom = self.selectedRoom
+            selectedRoom.roomProject = viewProject
         } else if let destination = segue.destination as? ProjectCreationView {
             destination.viewProject = self.viewProject
         } else if let desination = segue.destination as? RoomCreationView {
